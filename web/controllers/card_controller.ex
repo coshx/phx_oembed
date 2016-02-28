@@ -5,8 +5,8 @@ defmodule PhxOembed.CardController do
 
   plug :scrub_params, "card" when action in [:create, :update]
 
-  def show(conn, %{"id" => id}) do
-    card = Repo.get!(Card, id)
+  def show(conn, %{"url" => url}) do
+    card = Repo.get_by!(Card, url: url)
     render(conn, "show.json", card: card)
   end
 end
