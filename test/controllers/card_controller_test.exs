@@ -13,7 +13,7 @@ defmodule PhxOembed.CardControllerTest do
     url = "http://example.com/cats"
     card = Repo.insert! %Card{url: url, card_type: "twitter"}
     conn = get conn, "/?url=" <> url
-    assert json_response(conn, 200)["data"] == %{"id" => card.id}
+    assert json_response(conn, 200)["url"] == card.url
   end
 
   test "throws an error when card is nonexistent", %{conn: conn} do
