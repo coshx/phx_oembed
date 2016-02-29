@@ -21,10 +21,7 @@ defmodule PhxOembed.Card do
                       cache_age thumbnail_url thumbnail_width thumbnail_height)
 
   @doc """
-  Creates a changeset based on the `model` and `params`.
-
-  If no params are provided, an invalid changeset is returned
-  with no validation performed.
+  Card changeset. Fields 'url' and 'card_type required'
   """
   def changeset(model, params \\ :empty) do
     model
