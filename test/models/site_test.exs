@@ -19,11 +19,14 @@ defmodule PhxOembed.SiteTest do
 
   test "cards relationship" do
     site = Repo.insert! %Site{domain: "example.com", protocol: "https"}
-    card1 = Repo.insert! %Card{url: "cats", card_type: "twitter"}
-    card2 = Repo.insert! %Card{url: "dogs", card_type: "twitter"}
+    Repo.insert! %Card{url: "cats", card_type: "twitter", site_id: site.id}
+    Repo.insert! %Card{url: "dogs", card_type: "twitter", site_id: site.id}
+    Repo.insert! %Card{url: "mice", card_type: "facebook"}
 
-    site = Repo.get Site, site.id
-    cards = [card1, card2]
-    assert cards = site.cards
+    site = Site
+    |> Repo.get(site.id)
+    |> Repo.preload(:cards)
+
+    assert Enum.count(site.cards) == 2
   end
 end

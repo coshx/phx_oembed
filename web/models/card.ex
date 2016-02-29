@@ -2,6 +2,7 @@ defmodule PhxOembed.Card do
   use PhxOembed.Web, :model
 
   schema "cards" do
+    belongs_to :site, PhxOembed.Site
     field :url,               :string, null: false
     field :card_type,         :string, null: false
     field :title,             :string, default: ""
