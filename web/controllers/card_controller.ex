@@ -3,9 +3,9 @@ defmodule PhxOembed.CardController do
 
   alias PhxOembed.Card
 
-  plug :scrub_params, "card" when action in [:create, :update]
+  #plug :scrub_params, "card" when action in [:create, :update]
 
-  def show(conn, %{"url" => url}) do
+  def index(conn, %{"url" => url}) do
     card = Repo.get_by!(Card, url: url)
     render(conn, "show.json", card: card)
   end

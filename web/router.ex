@@ -8,6 +8,9 @@ defmodule PhxOembed.Router do
   scope "/", PhxOembed do
     pipe_through :api
 
-    get "/", CardController, :show
+    #get "/", CardController, :show
+    resources "/sites", SiteController, only: [] do
+      resources "/cards", CardController, only: [:index]
+    end
   end
 end
