@@ -12,8 +12,10 @@ defmodule PhxOembed.CardControllerTest do
 
   test "shows the right card", %{conn: conn} do
     url = "https://example.com/cats"
+    #TODO: use factories
     site = Repo.insert! %Site{domain: "example.com", protocol: "https"}
     card = Repo.insert! %Card{url: url, card_type: "twitter", site_id: site.id}
+    #TODO: use route helpers
     conn = get conn, "/sites/" <> Integer.to_string(site.id) <> "/cards?url=" <> url
     assert json_response(conn, 200)["url"] == card.url
   end
