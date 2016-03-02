@@ -1,8 +1,8 @@
 defmodule PhxOembed.CardTest do
   use PhxOembed.ModelCase
+  import PhxOembed.Factory
 
   alias PhxOembed.Card
-  alias PhxOembed.Site
 
   @valid_attrs %{url: "http://example.com/cats", card_type: "twitter"}
   @invalid_attrs %{}
@@ -18,8 +18,8 @@ defmodule PhxOembed.CardTest do
   end
 
   test "site relationship" do
-    site = Repo.insert! %Site{domain: "example.com", protocol: "https"}
-    card = Repo.insert! %Card{url: "cats", card_type: "twitter", site_id: site.id}
+    site = create(:site)
+    card = create(:card, site: site)
 
     card = Card
     |> Repo.get(card.id)

@@ -29,6 +29,8 @@ defmodule PhxOembed.ConnCase do
 
       # The default endpoint for testing
       @endpoint PhxOembed.Endpoint
+
+      import PhxOembed.Factory
     end
   end
 

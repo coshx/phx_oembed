@@ -1,7 +1,6 @@
 defmodule PhxOembed.CardControllerTest do
   use PhxOembed.ConnCase
 
-  alias PhxOembed.Card
   alias PhxOembed.Site
   @valid_attrs %{}
   @invalid_attrs %{}
@@ -12,9 +11,8 @@ defmodule PhxOembed.CardControllerTest do
 
   test "shows the right card", %{conn: conn} do
     url = "https://example.com/cats"
-    #TODO: use factories
-    site = Repo.insert! %Site{domain: "example.com", protocol: "https"}
-    card = Repo.insert! %Card{url: url, card_type: "twitter", site_id: site.id}
+    site = create(:site)
+    card = create(:card, site: site)
     #TODO: use route helpers
     conn = get conn, "/sites/" <> Integer.to_string(site.id) <> "/cards?url=" <> url
     assert json_response(conn, 200)["url"] == card.url
