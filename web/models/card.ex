@@ -28,18 +28,4 @@ defmodule PhxOembed.Card do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
-
-  @doc """
-  custom JSON serialization to avoid serializing meta keys
-  https://github.com/elixir-lang/ecto/issues/840
-  """
-  defimpl Poison.Encoder, for: PhxOembed.Card do
-    def encode(model, opts) do
-      model
-        |> Map.take([:path, :card_type, :title, :author_name, :author_url, 
-                     :provider_name, :provider_url, :cache_age, :thumbnail_url,
-                     :thumbnail_width, :thumbnail_height])
-        |>Poison.Encoder.encode(opts)
-    end
-  end
 end
