@@ -19,9 +19,9 @@ defmodule PhxOembed.SiteTest do
 
   test "cards relationship" do
     site = Repo.insert! %Site{domain: "example.com", protocol: "https"}
-    Repo.insert! %Card{url: "cats", card_type: "twitter", site_id: site.id}
-    Repo.insert! %Card{url: "dogs", card_type: "twitter", site_id: site.id}
-    Repo.insert! %Card{url: "mice", card_type: "facebook"}
+    Repo.insert! %Card{path: "cats", card_type: "twitter", site_id: site.id}
+    Repo.insert! %Card{path: "dogs", card_type: "twitter", site_id: site.id}
+    Repo.insert! %Card{path: "mice", card_type: "facebook"}
 
     site = Site
     |> Repo.get(site.id)

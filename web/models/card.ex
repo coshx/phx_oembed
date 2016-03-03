@@ -3,7 +3,7 @@ defmodule PhxOembed.Card do
 
   schema "cards" do
     belongs_to :site, PhxOembed.Site
-    field :url,               :string, null: false
+    field :path,              :string, null: false
     field :card_type,         :string, null: false
     field :title,             :string, default: ""
     field :author_name,       :string, default: ""
@@ -17,7 +17,7 @@ defmodule PhxOembed.Card do
     timestamps
   end
 
-  @required_fields ~w(url card_type)
+  @required_fields ~w(path card_type)
   @optional_fields ~w(title author_name author_url provider_name provider_url
                       cache_age thumbnail_url thumbnail_width thumbnail_height)
 
@@ -36,7 +36,7 @@ defmodule PhxOembed.Card do
   defimpl Poison.Encoder, for: PhxOembed.Card do
     def encode(model, opts) do
       model
-        |> Map.take([:url, :card_type, :title, :author_name, :author_url, 
+        |> Map.take([:path, :card_type, :title, :author_name, :author_url, 
                      :provider_name, :provider_url, :cache_age, :thumbnail_url,
                      :thumbnail_width, :thumbnail_height])
         |>Poison.Encoder.encode(opts)

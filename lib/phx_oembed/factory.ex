@@ -9,7 +9,7 @@ defmodule PhxOembed.Factory do
   end
 
   def factory(:card) do
-    %Card{url: "https://example.com/cats",
+    %Card{path: "https://example.com/cats",
           card_type: "twitter",
           site: build(:site)}
   end
