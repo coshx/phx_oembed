@@ -4,7 +4,7 @@ defmodule PhxOembed.Site do
   schema "sites" do
     has_many :cards, PhxOembed.Card
     field :domain,        :string, null: false
-    field :protocol,      :string, null: false
+    field :protocol,      :string, null: false, default: "http"
     timestamps
   end
 

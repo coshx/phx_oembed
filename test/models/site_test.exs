@@ -1,5 +1,6 @@
 defmodule PhxOembed.SiteTest do
   use PhxOembed.ModelCase
+  import PhxOembed.Factory
 
   alias PhxOembed.Site
   alias PhxOembed.Card
@@ -17,11 +18,17 @@ defmodule PhxOembed.SiteTest do
     refute changeset.valid?
   end
 
+  test "protocol default values" do
+    site = Repo.insert! %Site{domain: "example.com"}
+    site = Repo.get Site, site.id
+    assert site.protocol == "http"
+  end
+
   test "cards relationship" do
-    site = Repo.insert! %Site{domain: "example.com", protocol: "https"}
-    Repo.insert! %Card{path: "cats", card_type: "twitter", site_id: site.id}
-    Repo.insert! %Card{path: "dogs", card_type: "twitter", site_id: site.id}
-    Repo.insert! %Card{path: "mice", card_type: "facebook"}
+    site = create(:site)
+    create(:card, site: site)
+    create(:card, site: site)
+    create(:card)
 
     site = Site
     |> Repo.get(site.id)
