@@ -5,11 +5,11 @@ defmodule PhxOembed.Factory do
   alias PhxOembed.Site
 
   def factory(:site) do
-    %Site{domain: "example.com", protocol: "https"}
+    %Site{domain: "example.com"}
   end
 
   def factory(:card) do
-    %Card{path: "https://example.com/cats",
+    %Card{path: "cats",
           card_type: "twitter",
           site: build(:site)}
   end
