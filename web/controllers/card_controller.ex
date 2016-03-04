@@ -1,7 +1,6 @@
 defmodule PhxOembed.CardController do
   use PhxOembed.Web, :controller
   alias PhxOembed.Site
-  alias PhxOembed.Card
 
   #plug :scrub_params, "card" when action in [:create, :update]
 
