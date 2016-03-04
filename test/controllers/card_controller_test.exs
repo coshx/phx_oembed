@@ -1,7 +1,6 @@
 defmodule PhxOembed.CardControllerTest do
   use PhxOembed.ConnCase
 
-  alias PhxOembed.Site
   alias PhxOembed.Endpoint
 
   setup %{conn: conn} do
@@ -9,18 +8,41 @@ defmodule PhxOembed.CardControllerTest do
   end
 
   test "shows the right card", %{conn: conn} do
-    path = "https://example.com/cats"
     site = create(:site)
-    card = create(:card, path: path, site: site)
-    conn = get(conn, site_card_path(Endpoint, :show, site.id, path: path))
-    assert json_response(conn, 200)["path"] == card.path
+    card = create(:card, site: site, title: "test card")
+    url = site.protocol <> "://" <> site.domain <> "/" <> card.path
+    conn = get(conn, site_card_path(Endpoint, :show, site.id, url: url))
+    resp = json_response(conn, 200)
+    assert resp["title"] == card.title
+    assert resp["url"] == url
+  end
+
+
+  test "throws an error when the site id does not match the card's site" do
+    site = create(:site)
+    site2 = create(:site)
+    card = create(:card, site: site)
+    url = site.protocol <> "://" <> site.domain <> "/" <> card.path
+    assert_error_sent 404, fn ->
+      get(conn, site_card_path(Endpoint, :show, site2.id, url: url))
+    end
+  end
+
+  test "throws an error when the domain in the url doesn't match the site domain" do
+    site = create(:site)
+    card = create(:card, site: site)
+    url = site.protocol <> "://" <> "fakedomain.com" <> "/" <> card.path
+    assert_error_sent 404, fn ->
+      get(conn, site_card_path(Endpoint, :show, site.id, url: url))
+    end
   end
 
   test "throws an error when card does not exist", %{conn: conn} do
-    site = Repo.insert! %Site{domain: "example.com", protocol: "https"}
-    fake_path = "http://example.com/dogs"
+    site = create(:site)
+    card = create(:card, site: site, path: "fake_path")
+    url = site.protocol <> "://" <> site.domain <> "/" <> card.path
     assert_error_sent 404, fn ->
-      get(conn, site_card_path(Endpoint, :show, site.id, path: fake_path))
+      get(conn, site_card_path(Endpoint, :show, site.id, url: url))
     end
   end
 end

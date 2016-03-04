@@ -1,9 +1,13 @@
 defmodule PhxOembed.CardView do
   use PhxOembed.Web, :view
+  alias PhxOembed.Repo
 
   def render("show.json", %{card: card}) do
+    card = Repo.preload(card, :site)
+    site = card.site
+    url = site.protocol <> "://" <> site.domain <> "/" <> card.path
     %{
-      path:               card.path,
+      url:                url,
       card_type:          card.card_type,
       title:              card.title,
       author_name:        card.author_name,
