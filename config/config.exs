@@ -10,7 +10,7 @@ config :phx_oembed, PhxOembed.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "2K9ZEowEF7aqXs5Qye6xedEx6Tzy5uLK/tk6O2ETVZoHhURQFvSx+QHJITCZKqKR",
-  render_errors: [accepts: ~w(html json)],
+  render_errors: [accepts: ~w(json)],
   pubsub: [name: PhxOembed.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
