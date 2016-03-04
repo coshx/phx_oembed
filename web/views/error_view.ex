@@ -1,12 +1,11 @@
 defmodule PhxOembed.ErrorView do
   use PhxOembed.Web, :view
 
-  def render("404.html", _assigns) do
-    "Page not found"
+  def render("404.json", _assigns) do
   end
 
+  #TODO: Figure out why the file won't compile with this set to json
   def render("500.html", _assigns) do
-    "Server internal error"
   end
 
   # In case no render clause matches or no
