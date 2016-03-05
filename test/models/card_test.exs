@@ -6,6 +6,7 @@ defmodule PhxOembed.CardTest do
 
   @valid_attrs %{path: "cats", card_type: "twitter"}
   @invalid_attrs %{path: "", card_type: "", version: ""}
+  @valid_version %{path: "cats", card_type: "twitter", version: "1.0"}
   @invalid_version %{path: "cats", card_type: "twitter", version: "2.0"}
   @missing_attrs %{}
 
@@ -24,7 +25,11 @@ defmodule PhxOembed.CardTest do
     refute changeset.valid?
   end
 
-  @tag :skip
+  test "changeset with valid version" do
+    changeset = Card.changeset(%Card{}, @valid_version)
+    assert changeset.valid?
+  end
+
   test "changeset with invalid version" do
     changeset = Card.changeset(%Card{}, @invalid_version)
     refute changeset.valid?

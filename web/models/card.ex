@@ -34,5 +34,13 @@ defmodule PhxOembed.Card do
     |> cast(params, @required_fields, @optional_fields)
     |> validate_length(:path, min: 1)
     |> validate_length(:card_type, min: 1)
+    |> validate_version(:version)
+  end
+
+  defp validate_version(changeset, field) do
+    validate_change changeset, field, fn
+      :version, "1.0" -> []
+      :version, _     -> [version: "is invalid"]
+    end
   end
 end
