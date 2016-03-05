@@ -17,32 +17,29 @@ defmodule PhxOembed.CardControllerTest do
     assert resp["url"] == url
   end
 
-
   test "throws an error when the site id does not match the card's site" do
     site = create(:site)
     site2 = create(:site)
     card = create(:card, site: site)
     url = site.protocol <> "://" <> site.domain <> "/" <> card.path
-    assert_error_sent 404, fn ->
-      get(conn, site_card_path(Endpoint, :show, site2.id, url: url))
-    end
+    conn = get(conn, site_card_path(Endpoint, :show, site2.id, url: url))
+    assert json_response(conn, 404) == nil
   end
 
   test "throws an error when the domain in the url doesn't match the site domain" do
     site = create(:site)
     card = create(:card, site: site)
     url = site.protocol <> "://" <> "fakedomain.com" <> "/" <> card.path
-    assert_error_sent 404, fn ->
-      get(conn, site_card_path(Endpoint, :show, site.id, url: url))
-    end
+    conn = get(conn, site_card_path(Endpoint, :show, site.id, url: url))
+    assert json_response(conn, 404) == nil
   end
 
+  @tag :wip
   test "throws an error when card does not exist", %{conn: conn} do
     site = create(:site)
-    card = create(:card, site: site, path: "fake_path")
-    url = site.protocol <> "://" <> site.domain <> "/" <> card.path
-    assert_error_sent 404, fn ->
-      get(conn, site_card_path(Endpoint, :show, site.id, url: url))
-    end
+    card = create(:card, site: site)
+    url = site.protocol <> "://" <> site.domain <> "/" <> "doesnotexist"
+    conn = get(conn, site_card_path(Endpoint, :show, site.id, url: url))
+    assert json_response(conn, 404) == nil
   end
 end
