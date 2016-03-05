@@ -2,7 +2,9 @@
 [![Circle CI](https://circleci.com/gh/coshx/phx_oembed.svg?style=svg)](https://circleci.com/gh/coshx/phx_oembed)
 
 This is an [oEmbed](http://oembed.com/) server built with the Phoenix web
-framework. It supports multiple sites or domains, and returns JSON responses.
+framework. It supports multiple sites or domains, and returns responses in JSON
+or xml. The default is JSON, but requests take an optional format parameter to
+specify xml
 
 ## Site
 Sites have domain and protocol attributes, the protocol defaults to "http". A

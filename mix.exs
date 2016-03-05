@@ -37,7 +37,8 @@ defmodule PhxOembed.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
-     {:ex_machina, "~> 0.6.1"}]
+     {:ex_machina, "~> 0.6.1"},
+     {:xml_builder, "~> 0.0.6"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
