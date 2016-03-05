@@ -16,7 +16,7 @@ belongs to a Site.
 
 ## Paths
 Requests for a card should be in the form of a GET request to
-sites/:site_id/card?url="https://example.com/cats"
+`sites/:site_id/card?url="https://example.com/cats"`
 
 This maps to request for a Card belonging to a Site with id `site_id`. The
 matching Card's path attribute would be "cats".
