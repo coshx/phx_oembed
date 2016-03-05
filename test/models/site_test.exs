@@ -5,7 +5,8 @@ defmodule PhxOembed.SiteTest do
   alias PhxOembed.Site
 
   @valid_attrs %{domain: "example.com", protocol: "https"}
-  @invalid_attrs %{}
+  @invalid_attrs %{domain: "", protocol: ""}
+  @missing_attrs %{}
 
   test "changeset with valid attributes" do
     changeset = Site.changeset %Site{}, @valid_attrs
@@ -14,6 +15,11 @@ defmodule PhxOembed.SiteTest do
 
   test "changeset with invalid attributes" do
     changeset = Site.changeset %Site{}, @invalid_attrs
+    refute changeset.valid?
+  end
+
+  test "changeset with missing attributes" do
+    changeset = Site.changeset %Site{}, @missing_attrs
     refute changeset.valid?
   end
 

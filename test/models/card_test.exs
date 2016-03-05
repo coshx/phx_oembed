@@ -5,7 +5,8 @@ defmodule PhxOembed.CardTest do
   alias PhxOembed.Card
 
   @valid_attrs %{path: "http://example.com/cats", card_type: "twitter"}
-  @invalid_attrs %{}
+  @invalid_attrs %{path: "", card_type: ""}
+  @missing_attrs %{}
 
   test "changeset with valid attributes" do
     changeset = Card.changeset(%Card{}, @valid_attrs)
@@ -14,6 +15,11 @@ defmodule PhxOembed.CardTest do
 
   test "changeset with invalid attributes" do
     changeset = Card.changeset(%Card{}, @invalid_attrs)
+    refute changeset.valid?
+  end
+
+  test "changeset with missing attributes" do
+    changeset = Card.changeset(%Card{}, @missing_attrs)
     refute changeset.valid?
   end
 

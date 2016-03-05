@@ -17,5 +17,7 @@ defmodule PhxOembed.Site do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> validate_length(:domain, min: 1)
+    |> validate_length(:protocol, min: 1)
   end
 end

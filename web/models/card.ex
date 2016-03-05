@@ -27,5 +27,7 @@ defmodule PhxOembed.Card do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> validate_length(:path, min: 1)
+    |> validate_length(:card_type, min: 1)
   end
 end
