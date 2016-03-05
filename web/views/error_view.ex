@@ -6,4 +6,8 @@ defmodule PhxOembed.ErrorView do
 
   def render("500.json", _assigns) do
   end
+
+  def template_not_found(_template, assigns) do
+    render "500.json", assigns
+  end
 end
