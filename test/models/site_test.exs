@@ -17,9 +17,8 @@ defmodule PhxOembed.SiteTest do
     refute changeset.valid?
   end
 
-  test "protocol default values" do
-    site = Repo.insert! %Site{domain: "example.com"}
-    site = Repo.get Site, site.id
+  test "default protocol" do
+    site = create(:site)
     assert site.protocol == "http"
   end
 
