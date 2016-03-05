@@ -1,3 +1,4 @@
+require IEx
 defmodule PhxOembed.CardControllerTest do
   use PhxOembed.ConnCase
 
@@ -16,12 +17,14 @@ defmodule PhxOembed.CardControllerTest do
     assert resp["url"] == url
   end
 
+  @tag :wip
   test "returns xml when requested", %{conn: conn} do
     site = create(:site)
     card = create(:card, site: site, title: "test card")
     url = make_url(site.protocol, site.domain, card.path)
     resp = get(conn, site_card_path(Endpoint, :show, site.id, url: url, format: "xml"))
     assert resp.status == 200
+    assert {"content-type", "text/xml; charset=utf-8"} = List.first(resp.resp_headers)
   end
 
   test "returns 404 when the site id != the card's site", %{conn: conn} do
