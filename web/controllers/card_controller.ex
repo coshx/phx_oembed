@@ -9,8 +9,7 @@ defmodule PhxOembed.CardController do
     uri = URI.parse(url)
     path = String.lstrip(uri.path, ?/)
     site = Repo.get(Site, site_id)
-    card = Site
-    |> Repo.get!(site_id)
+    card = site
     |> assoc(:cards)
     |> Repo.get_by(path: path)
 
