@@ -1,8 +1,8 @@
 require IEx
 defmodule PhxOembed.CardControllerTest do
   use PhxOembed.ConnCase
-
   alias PhxOembed.Endpoint
+
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
@@ -51,7 +51,7 @@ defmodule PhxOembed.CardControllerTest do
     assert json_response(conn, 404) == nil
   end
 
-  def make_url(protocol, domain, path) do
+  defp make_url(protocol, domain, path) do
     protocol <> "://" <> domain <> "/" <> path
   end
 end
