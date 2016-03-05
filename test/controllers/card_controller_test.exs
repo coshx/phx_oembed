@@ -17,7 +17,7 @@ defmodule PhxOembed.CardControllerTest do
     assert resp["url"] == url
   end
 
-  test "throws an error when the site id does not match the card's site" do
+  test "returns 404 when the site id does not match the card's site" do
     site = create(:site)
     site2 = create(:site)
     card = create(:card, site: site)
@@ -26,7 +26,7 @@ defmodule PhxOembed.CardControllerTest do
     assert json_response(conn, 404) == nil
   end
 
-  test "throws an error when the domain in the url doesn't match the site domain" do
+  test "returns 404 when the domain in the url doesn't match the site domain" do
     site = create(:site)
     card = create(:card, site: site)
     url = site.protocol <> "://" <> "fakedomain.com" <> "/" <> card.path
@@ -34,8 +34,7 @@ defmodule PhxOembed.CardControllerTest do
     assert json_response(conn, 404) == nil
   end
 
-  @tag :wip
-  test "throws an error when card does not exist", %{conn: conn} do
+  test "returns 404 when card does not exist" do
     site = create(:site)
     card = create(:card, site: site)
     url = site.protocol <> "://" <> site.domain <> "/" <> "doesnotexist"
