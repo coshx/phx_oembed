@@ -17,7 +17,6 @@ defmodule PhxOembed.CardControllerTest do
     assert resp["url"] == url
   end
 
-  @tag :wip
   test "returns xml when requested", %{conn: conn} do
     site = create(:site)
     card = create(:card, site: site, title: "test card")
