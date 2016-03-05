@@ -15,6 +15,8 @@ defmodule PhxOembed.CardControllerTest do
     resp = json_response(conn, 200)
     assert resp["title"] == card.title
     assert resp["url"] == url
+    assert resp["type"] == card.card_type
+    assert resp["version"] == card.version
   end
 
   test "returns xml when requested", %{conn: conn} do

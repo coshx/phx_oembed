@@ -14,12 +14,17 @@ defmodule PhxOembed.Card do
     field :thumbnail_url,     :string, default: ""
     field :thumbnail_width,   :string, default: ""
     field :thumbnail_height,  :string, default: ""
+    field :version,           :string, null: false, default: "1.0"
+    field :height,            :integer
+    field :width,             :integer
+    field :html,              :string, default: ""
     timestamps
   end
 
-  @required_fields ~w(path card_type)
+  @required_fields ~w(path card_type version)
   @optional_fields ~w(title author_name author_url provider_name provider_url
-                      cache_age thumbnail_url thumbnail_width thumbnail_height)
+                      cache_age thumbnail_url thumbnail_width thumbnail_height
+                      height width html)
 
   @doc """
   Card changeset. Fields 'url' and 'card_type required'
