@@ -1,4 +1,3 @@
-require IEx
 defmodule PhxOembed.CardControllerTest do
   use PhxOembed.ConnCase
   alias PhxOembed.Endpoint
