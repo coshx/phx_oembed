@@ -1,0 +1,11 @@
+@import "bourbon/core/bourbon";
+@import "bourbon-neat/app/assets/stylesheets/neat";
+@import "base/base";
+
+#main-container {
+  @include outer-container(85%);
+}
+
+main {
+  @include span-columns(12);
+}
