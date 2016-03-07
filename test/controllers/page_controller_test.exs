@@ -4,7 +4,7 @@ defmodule PhxOembed.PageControllerTest do
 
   test "GET /", %{conn: conn} do
     conn = get conn, page_path(Endpoint, :index)
-    assert html_response(conn, 200) =~ "Welcome to Phoenix!"
+    assert html_response(conn, 200) =~ "Phoenix Oembed"
   end
 end
 
