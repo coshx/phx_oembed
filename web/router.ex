@@ -13,7 +13,7 @@ defmodule PhxOembed.Router do
     plug :put_secure_browser_headers
   end
 
-  scope "/", PhxOembed do
+  scope "/oembed", PhxOembed do
     pipe_through :api
 
     resources "/sites", SiteController, only: [] do
@@ -21,7 +21,7 @@ defmodule PhxOembed.Router do
     end
   end
 
-  scope "/admin", PhxOembed do
+  scope "/", PhxOembed do
     pipe_through :browser
     get "/", PageController, :index
   end
