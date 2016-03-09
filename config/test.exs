@@ -15,3 +15,6 @@ config :phx_oembed, PhxOembed.Repo,
   database: "phx_oembed_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# speed up tests by reducing the number of hashing rounds
+config :comeonin, :bcrypt_log_rounds, 1

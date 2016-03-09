@@ -19,7 +19,7 @@ defmodule PhxOembed.Mixfile do
   def application do
     [mod: {PhxOembed, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ex_machina]]
+                    :phoenix_ecto, :postgrex, :ex_machina, :comeonin]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,7 +38,8 @@ defmodule PhxOembed.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:ex_machina, "~> 0.6.1"},
-     {:xml_builder, "~> 0.0.6"}]
+     {:xml_builder, "~> 0.0.6"},
+     {:comeonin, "~> 2.1"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
