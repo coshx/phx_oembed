@@ -6,20 +6,19 @@ defmodule PhxOembed.SiteTest do
 
   @valid_attrs %{domain: "example.com", protocol: "https"}
   @invalid_attrs %{domain: "", protocol: ""}
-  @missing_attrs %{}
 
   test "changeset with valid attributes" do
-    changeset = Site.changeset %Site{}, @valid_attrs
+    changeset = Site.changeset(%Site{}, @valid_attrs)
     assert changeset.valid?
   end
 
   test "changeset with invalid attributes" do
-    changeset = Site.changeset %Site{}, @invalid_attrs
+    changeset = Site.changeset(%Site{}, @invalid_attrs)
     refute changeset.valid?
   end
 
   test "changeset with missing attributes" do
-    changeset = Site.changeset %Site{}, @missing_attrs
+    changeset = Site.changeset(%Site{}, %{})
     refute changeset.valid?
   end
 
