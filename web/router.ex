@@ -25,4 +25,12 @@ defmodule PhxOembed.Router do
     pipe_through :browser
     get "/", PageController, :index
   end
+
+  scope "/api", PhxOembed do
+    pipe_through :api
+    scope "v1" do
+      post "/sessions", SessionController, :create
+      delete "/sessions", SessionController, :delete
+    end
+  end
 end
