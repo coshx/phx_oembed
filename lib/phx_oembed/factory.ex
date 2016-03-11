@@ -1,9 +1,7 @@
 defmodule PhxOembed.Factory do
 
   use ExMachina.Ecto, repo: PhxOembed.Repo
-  alias PhxOembed.Card
-  alias PhxOembed.Site
-  alias PhxOembed.User
+  alias PhxOembed.{User, Site, Card}
 
   def factory(:site) do
     %Site{domain: "example.com"}
