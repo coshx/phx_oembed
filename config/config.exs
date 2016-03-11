@@ -9,7 +9,7 @@ use Mix.Config
 config :phx_oembed, PhxOembed.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
-  secret_key_base: "2K9ZEowEF7aqXs5Qye6xedEx6Tzy5uLK/tk6O2ETVZoHhURQFvSx+QHJITCZKqKR",
+  secret_key_base: "123456",
   render_errors: [accepts: ~w(json)],
   pubsub: [name: PhxOembed.PubSub,
            adapter: Phoenix.PubSub.PG2]
@@ -27,3 +27,12 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :guardian, Guardian,
+  allowed_algos: ["HS512"], # optional
+  verify_module: Guardian.JWT,  # optional
+  issuer: "PhxOembed",
+  ttl: { 30, :days },
+  verify_issuer: true, # optional
+  secret_key: "123456",
+  serializer: MyApp.GuardianSerializer

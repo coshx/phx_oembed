@@ -39,7 +39,8 @@ defmodule PhxOembed.Mixfile do
      {:cowboy, "~> 1.0"},
      {:ex_machina, "~> 0.6.1"},
      {:xml_builder, "~> 0.0.6"},
-     {:comeonin, "~> 2.1"}]
+     {:comeonin, "~> 2.1"},
+     {:guardian, "~> 0.10.0"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.

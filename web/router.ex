@@ -1,7 +1,7 @@
 defmodule PhxOembed.Router do
   use PhxOembed.Web, :router
 
-  pipeline :api do
+  pipeline :oembed do
     plug :accepts, ["json"]
   end
 
@@ -13,8 +13,14 @@ defmodule PhxOembed.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :api do
+    plug :accepts, ["json"]
+    plug Guardian.Plug.VerifyHeader
+    plug Guardian.Plug.LoadResource
+  end
+
   scope "/oembed", PhxOembed do
-    pipe_through :api
+    pipe_through :oembed
 
     resources "/sites", SiteController, only: [] do
       get "/cards", CardController, :show
