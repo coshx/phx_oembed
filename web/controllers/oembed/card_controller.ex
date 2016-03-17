@@ -9,11 +9,11 @@ defmodule PhxOembed.CardController do
 
     if (site != nil) && (card != nil) && (site.domain == uri.host) do
       conn
-      |> put_status(200)
+      |> put_status(:ok)
       |> render(show_view, card: card)
     else
       conn
-      |> put_status(404)
+      |> put_status(:not_found)
       |> render(ErrorView, error_view)
     end
   end
