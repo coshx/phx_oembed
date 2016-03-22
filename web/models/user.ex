@@ -30,4 +30,12 @@ defmodule PhxOembed.User do
     pass = changeset.params["password"]
     put_change(changeset, :encrypted_password, Comeonin.Bcrypt.hashpwsalt(pass))
   end
+
+  defimpl Poison.Encoder, for: PhxOembed.User do
+    def encode(model, opts) do
+      model
+      |> Map.take([:id, :first_name, :lastname, :email])
+      |> Poison.Encoder.encode(opts)
+    end
+  end
 end
