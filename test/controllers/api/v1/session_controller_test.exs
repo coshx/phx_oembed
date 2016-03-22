@@ -17,15 +17,27 @@ defmodule PhxOembed.SessionControllerTest do
   end
 
   test "when the email does not match", %{conn: conn} do
-
+    user = create_user
+    params = %{email: "doesnotmatch@example.com", password: user.password}
+    conn = post(conn, session_path(Endpoint, :create, session: params))
+    resp = json_response(conn, :unprocessable_entity)
+    assert resp["error"] == "Invalid email or password"
   end
 
   test "when the password does not match", %{conn: conn} do
-
+    user = create_user
+    params = %{email: user.email, password: "doesnotmatch"}
+    conn = post(conn, session_path(Endpoint, :create, session: params))
+    resp = json_response(conn, :unprocessable_entity)
+    assert resp["error"] == "Invalid email or password"
   end
 
   test "when no info matches", %{conn: conn} do
-
+    user = create_user
+    params = %{email: "doesnotmatch@example.com", password: "doesnotmatch"}
+    conn = post(conn, session_path(Endpoint, :create, session: params))
+    resp = json_response(conn, :unprocessable_entity)
+    assert resp["error"] == "Invalid email or password"
   end
 
   defp create_user do
