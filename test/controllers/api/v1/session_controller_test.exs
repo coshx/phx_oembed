@@ -11,7 +11,6 @@ defmodule PhxOembed.SessionControllerTest do
     params = %{email: user.email, password: user.password}
     conn = post(conn, session_path(Endpoint, :create, session: params))
     resp = json_response(conn, :created)
-    {:ok, user_as_json } = Poison.encode(user)
     assert String.length(resp["jwt"]) > 0
     assert resp["user"]["email"] == user.email
   end
@@ -33,7 +32,7 @@ defmodule PhxOembed.SessionControllerTest do
   end
 
   test "when no info matches", %{conn: conn} do
-    user = create_user
+    create_user
     params = %{email: "doesnotmatch@example.com", password: "doesnotmatch"}
     conn = post(conn, session_path(Endpoint, :create, session: params))
     resp = json_response(conn, :unprocessable_entity)
