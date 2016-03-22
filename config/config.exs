@@ -35,4 +35,4 @@ config :guardian, Guardian,
   ttl: { 30, :days },
   verify_issuer: true, # optional
   secret_key: "123456",
-  serializer: MyApp.GuardianSerializer
+  serializer: PhxOembed.GuardianSerializer
