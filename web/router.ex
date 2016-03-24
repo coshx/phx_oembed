@@ -35,8 +35,9 @@ defmodule PhxOembed.Router do
   scope "/api", PhxOembed do
     pipe_through :api
     scope "v1" do
-      post "/sessions", SessionController, :create
-      delete "/sessions", SessionController, :delete
+      post    "/sessions",      SessionController, :create
+      delete  "/sessions",      SessionController, :delete
+      get     "/current_user",  CurrentUserController, :show
     end
   end
 end

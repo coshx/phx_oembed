@@ -1,6 +1,5 @@
 defmodule PhxOembed.SessionController do
   use PhxOembed.Web, :controller
-  require IEx
 
   plug :scrub_params, "session" when action in [:create]
 
@@ -18,5 +17,11 @@ defmodule PhxOembed.SessionController do
         |> put_status(:unprocessable_entity)
         |> render("error.json")
     end
+  end
+
+  def unauthenticated(conn, _params) do
+    conn
+    |> put_status(:forbidden)
+    |> render(PhxOembed.SessionView, "error.json", error: "Not Autenthicated")
   end
 end

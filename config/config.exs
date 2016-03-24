@@ -9,7 +9,8 @@ use Mix.Config
 config :phx_oembed, PhxOembed.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
-  secret_key_base: "123456",
+  secret_key_base:
+  "1asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasfs23456asdfasdfasdfasdfasdfasfasdfasdfasdasdasasdsadf",
   render_errors: [accepts: ~w(json)],
   pubsub: [name: PhxOembed.PubSub,
            adapter: Phoenix.PubSub.PG2]
