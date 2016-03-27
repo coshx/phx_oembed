@@ -31,23 +31,6 @@ defmodule PhxOembed.ConnCase do
       @endpoint PhxOembed.Endpoint
 
       import PhxOembed.Factory
-
-      # https://github.com/hassox/phoenix_guardian/blob/ueberauth-guardian/test/support/conn_case.ex
-      #def guardian_login(%PhxOembed.User{} = user), do: guardian_login(conn(), user, :token, [])
-      #def guardian_login(%PhxOembed.User{} = user, token), do: guardian_login(conn(), user, token, [])
-      #def guardian_login(%PhxOembed.User{} = user, token, opts), do: guardian_login(conn(), user, token, opts)
-
-      #def guardian_login(%Plug.Conn{} = conn, user), do: guardian_login(conn, user, :token, [])
-      #def guardian_login(%Plug.Conn{} = conn, user, token), do: guardian_login(conn, user, token, [])
-      def guardian_login(%Plug.Conn{} = conn, user) do
-        conn
-          |> bypass_through(PhxOembed.Router, [:api])
-          |> get("/") # https://github.com/phoenixframework/phoenix/issues/861
-          |> fetch_session
-          |> Guardian.Plug.sign_in(user, :token, [])
-          |> send_resp(200, "Flush the session")
-          |> recycle()
-      end
     end
   end
 
