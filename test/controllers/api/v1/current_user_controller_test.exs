@@ -12,19 +12,27 @@ defmodule PhxOembed.CurrentUserControllerTest do
   end
 
   test "when the user is signed in" do
-    user = create_user
-    # get a jwt token
-    # set that token as a header
+    token = create_user |> get_token(conn)
 
-
-    #conn = get(conn, current_user_path(Endpoint, :show))
-    #json_response(conn, :ok)
+    conn
+    |> put_req_header("authorization", token)
+    |> get(current_user_path(Endpoint, :show))
+    |> json_response(:ok)
   end
 
   defp create_user do
     attrs = %{email: "example@example.com", password: "password"}
     changeset = User.changeset(%User{}, attrs)
     Repo.insert!(changeset)
+  end
+
+  defp get_token(user, conn) do
+    params = %{email: user.email, password: user.password}
+    resp = conn
+    |> post(session_path(Endpoint, :create, session: params))
+    |> json_response(:created)
+
+    resp["jwt"]
   end
 end
 
