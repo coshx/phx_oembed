@@ -6,7 +6,8 @@ const initialState = {
     lastUpdated: Date.now()
   },
   session: {
-    user: {}
+    user: {},
+    jwt: ""
   }
 };
 
@@ -26,6 +27,10 @@ function appReducer (state = initialState, action) {
           isFetching: false,
           msg: "Successfully signed in",
           lastUpdated: Date.now()
+        },
+        session: {
+          user: action.user,
+          jwt: action.jwt
         }
       })
 
