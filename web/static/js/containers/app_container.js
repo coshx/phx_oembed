@@ -1,7 +1,15 @@
 import React from "react";
+import { connect }    from "react-redux";
 
-export default class AppContainer extends React.Component {
+const mapStateToProps = () => {
+  return {}
+}
 
+const mapDispatchToProps = (dispatch) => {
+  return {}
+}
+
+class AppContainer extends React.Component {
   render() {
     return (
       <div>
@@ -11,3 +19,5 @@ export default class AppContainer extends React.Component {
     )
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppContainer)
