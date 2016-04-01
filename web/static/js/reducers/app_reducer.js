@@ -38,8 +38,12 @@ function appReducer (state = initialState, action) {
       return Object.assign({}, state, {
         request: {
           isFetching: false,
-          msg: action.msg,
+          msg: msg,
           lastUpdated: Date.now()
+        },
+        session: {
+          user: {},
+          jwt: ""
         }
       })
 
