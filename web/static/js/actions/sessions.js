@@ -1,5 +1,6 @@
 import Constants from "../constants";
 import Utils from "../utils";
+import { hashHistory } from "react-router";
 
 function newSessionRequest() {
   return {
@@ -42,6 +43,7 @@ const SessionActions = {
         if (xhr.status == 201) {
           const resp = JSON.parse(xhr.responseText);
           dispatch(newSessionSuccess(resp.user, resp.jwt));
+          hashHistory.push("/sites");
         } else if (xhr.status == 422) {
           dispatch(newSessionFailure("Invalid credentials"));
         } else {
