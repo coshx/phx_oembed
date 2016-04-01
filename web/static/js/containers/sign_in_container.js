@@ -1,15 +1,24 @@
 import React          from "react";
-import SessionActions from "../actions/sessions"
+import { connect }    from "react-redux";
+import SessionActions from "../actions/sessions";
 import SignInForm     from "../components/sign_in_form"
 
-export default class SignInContainer extends React.Component {
-
-  signInUser(e) {
-    e.preventDefault();
-    SessionActions.signInUser(e.target.email.value, e.target.password.value)
-  }
-
+class SignInContainer extends React.Component {
   render() {
-    return <SignInForm onSubmit={this.signInUser}/>
+    return <SignInForm onSubmit={this.props.signInUser}/>
   }
 }
+
+const mapStateToProps = () => {
+  return {}
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signInUser: (e) => {
+      dispatch(SessionActions.signInUser(e.target.email.value, e.target.password.value))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignInContainer)

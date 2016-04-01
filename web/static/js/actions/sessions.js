@@ -10,20 +10,33 @@ const SessionActions = {
     //indicate success and set the current user. If not successful, return an
     //action to indicate failure
 
-    const sessionData = { session: { email: email, password: password } }
+    const sessionData = { session: { email: email, password: password } };
+    let signInAction = { type: Constants.SIGN_IN_USER, status: "", msg: "" };
 
     Utils.makeRequest("POST", Constants.ROUTES.NEW_SESSION, sessionData)
     .then(function(xhr) {
       console.log("request responded: ", xhr);
-      //return the success action
+      if (xhr.status == 201) {
+        signInAction.status = "success";
+        signInAction.msg = "Signed in";
+        return signInAction;
+      } else if (xhr.status == 422) {
+        signInAction.status = "failure";
+        signInAction.msg = "Invalid credentials";
+        return signInAction;
+      } else {
+        signInAction.status = "error";
+        signInAction.msg = "Something went wrong";
+        return signInAction;
+      }
     })
     .catch(function(xhr) {
       console.log("request error: ", xhr);
-      //return the error action
+      signInAction.status = "error";
+      signInAction.msg = "Something went wrong";
+      return signInAction;
     });
   }
-
-
 };
 
 export default SessionActions;

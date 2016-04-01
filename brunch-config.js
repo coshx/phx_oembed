@@ -71,6 +71,7 @@ exports.config = {
     enabled: true,
     // Whitelist the npm deps to be pulled in as front-end assets.
     // All other deps in package.json will be excluded from the bundle.
-    whitelist: ["phoenix", "phoenix_html", "react", "react-dom"]
+    whitelist: ["phoenix", "phoenix_html", "redux", "react", "react-dom",
+                "react-redux"]
   }
 };
