@@ -1,41 +1,56 @@
 import Constants from "../constants";
 import Utils from "../utils";
 
+function newSessionRequest() {
+  return {
+    type: Constants.ACTIONS.NEW_SESSION_REQUEST,
+    sentAt: Date.now()
+  }
+}
+
+function newSessionSuccess(user) {
+  return {
+    type: Constants.ACTIONS.NEW_SESSION_SUCCESS,
+    recievedAt: Date.now(),
+    user: user
+  }
+}
+
+function newSessionFailure(msg) {
+  return {
+    type: Constants.ACTIONS.NEW_SESSION_FAILURE,
+    sentAt: Date.now(),
+    msg: msg
+  }
+}
+
+/* Only exporting the thunk actions */
 const SessionActions = {
 
   signInUser: function(email, password) {
-    console.log("SessionActions.signIn()");
+    return function(dispatch) {
+      /* dispatch an action to update the app state to inform than an api call
+       * is happening */
+      dispatch(newSessionRequest);
 
-    //Attempt to sign in. If successful, return an action to
-    //indicate success and set the current user. If not successful, return an
-    //action to indicate failure
+      /* make the api request */
+      const sessionData = { session: { email: email, password: password } };
 
-    const sessionData = { session: { email: email, password: password } };
-    let signInAction = { type: Constants.SIGN_IN_USER, status: "", msg: "" };
-
-    Utils.makeRequest("POST", Constants.ROUTES.NEW_SESSION, sessionData)
-    .then(function(xhr) {
-      console.log("request responded: ", xhr);
-      if (xhr.status == 201) {
-        signInAction.status = "success";
-        signInAction.msg = "Signed in";
-        return signInAction;
-      } else if (xhr.status == 422) {
-        signInAction.status = "failure";
-        signInAction.msg = "Invalid credentials";
-        return signInAction;
-      } else {
-        signInAction.status = "error";
-        signInAction.msg = "Something went wrong";
-        return signInAction;
-      }
-    })
-    .catch(function(xhr) {
-      console.log("request error: ", xhr);
-      signInAction.status = "error";
-      signInAction.msg = "Something went wrong";
-      return signInAction;
-    });
+      Utils.makeRequest("POST", Constants.ROUTES.NEW_SESSION, sessionData)
+      .then(function(xhr) {
+        console.log("request responded: ", xhr);
+        if (xhr.status == 201) {
+          dispatch(newSessionSuccess({}));
+        } else if (xhr.status == 422) {
+          dispatch(newSessionFailure("Invalid credentials"));
+        } else {
+          dispatch(newSessionFailure("Something went wrong"));
+        }
+      })
+      .catch(function(xhr) {
+        dispatch(newSessionFailure("Something went wrong"));
+      });
+    };
   }
 };
 

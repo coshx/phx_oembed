@@ -1,16 +1,21 @@
 import "phoenix_html";
-import React                          from "react";
-import ReactDOM                       from "react-dom";
-import appReducer                     from "./reducers/app_reducer";
-import { createStore }                from "redux";
-import { Provider }                   from "react-redux";
-import { Router, Route, hashHistory } from "react-router";
-import AppContainer                   from "./containers/app_container";
-import SitesContainer                 from "./containers/sites_container";
-import SignInContainer                from "./containers/sign_in_container";
+import React                            from "react";
+import ReactDOM                         from "react-dom";
+import { createStore, applyMiddleware } from "redux";
+import { Provider }                     from "react-redux";
+import thunk                            from "redux-thunk";
+import createLogger                     from "redux-logger";
+import { Router, Route, hashHistory }   from "react-router";
+import appReducer                       from "./reducers/app_reducer";
+import AppContainer                     from "./containers/app_container";
+import SitesContainer                   from "./containers/sites_container";
+import SignInContainer                  from "./containers/sign_in_container";
+
+const logger = createLogger();
+const store = createStore(appReducer, applyMiddleware(thunk, logger));
 
 ReactDOM.render(
-  <Provider store={createStore(appReducer)}>
+  <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={AppContainer}>
         <Route path="sites" component={SitesContainer} />
