@@ -14,7 +14,7 @@ class AppContainer extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav currentPath={""} />
         <h1>PhxOembed</h1>
         {this.props.children}
       </div>
