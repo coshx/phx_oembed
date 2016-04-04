@@ -8,7 +8,7 @@ import createLogger                     from "redux-logger";
 import { Router, Route, hashHistory }   from "react-router";
 import appReducer                       from "./reducers/app_reducer";
 import AppContainer                     from "./containers/app_container";
-import SitesContainer                   from "./containers/sites_container";
+import AuthenticatedContainer           from "./containers/authenticated_container";
 import SignInContainer                  from "./containers/sign_in_container";
 
 const logger = createLogger();
@@ -18,7 +18,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={AppContainer}>
-        <Route path="sites" component={SitesContainer} />
+        <Route path="sites" component={AuthenticatedContainer} />
         <Route path="sign_in" component={SignInContainer} />
       </Route>
     </Router>

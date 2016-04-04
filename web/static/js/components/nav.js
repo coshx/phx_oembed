@@ -6,14 +6,13 @@ export default class Nav extends React.Component {
 
   navContent() {
     const signInPath = Constants.PAGES.SIGN_IN;
-    const signOutPath = Constants.PAGES.SIGN_OUT;
 
     if (this.props.signedIn == true)
-      return(<Link to={signOutPath}>Sign Out</Link>);
+      return(<a href="">Sign Out</a>);
     else if (this.context.router.isActive({pathname: signInPath}))
       return("");
     else
-      return(<a href="">Sign Out</a>);
+      return(<Link to={signInPath}>Sign In</Link>);
   }
 
   render() {
