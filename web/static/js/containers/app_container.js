@@ -2,8 +2,8 @@ import React          from "react";
 import { connect }    from "react-redux";
 import Nav            from "../components/nav";
 
-const mapStateToProps = () => {
-  return {}
+const mapStateToProps = (state) => {
+  return { signedIn: state.session.signedIn }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -15,7 +15,7 @@ class AppContainer extends React.Component {
   render() {
     return (
       <div>
-        <Nav />
+        <Nav signedIn={this.props.signedIn}/>
         <h1>PhxOembed</h1>
         {this.props.children}
       </div>

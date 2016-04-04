@@ -6,7 +6,7 @@ const initialState = {
     lastUpdated: Date.now()
   },
   session: {
-    signedIn: false;
+    signedIn: false,
     user: {},
     jwt: ""
   }
