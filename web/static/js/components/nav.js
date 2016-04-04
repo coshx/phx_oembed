@@ -1,25 +1,31 @@
-import React from "react";
+import React      from "react";
+import { Link }   from "react-router";
+import Constants  from "../constants";
 
 export default class Nav extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
+      signedIn: false,
       userEmail: ""
     }
   }
 
-  userMenu() {
-    if (this.props.loggedIn == true)
-      return(<div>Log out</div>);
+  navContent() {
+    if (this.state.signedIn == true)
+      return(<Link to={Constants.PAGES.SIGN_OUT}>Sign Out</Link>);
+    else if (this.state.signedIn == true)
+      return("");
     else
-      return(<div>Log In</div>);
+      return(<Link to={Constants.PAGES.SIGN_IN}>Sign In</Link>);
   }
 
   render() {
     return(
-      <nav>{this.userMenu()}</nav>
+      <nav>
+        {this.navContent()}
+      </nav>
     );
   }
 }

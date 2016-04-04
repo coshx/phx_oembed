@@ -6,6 +6,10 @@ const Constants = {
   },
   ROUTES: {
     NEW_SESSION: "/api/v1/sessions"
+  },
+  PAGES: {
+    SIGN_IN: "/sign_in",
+    SIGN_OUT: "/sign_out"
   }
 };
 
