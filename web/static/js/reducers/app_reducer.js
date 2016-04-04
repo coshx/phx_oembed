@@ -6,6 +6,7 @@ const initialState = {
     lastUpdated: Date.now()
   },
   session: {
+    signedIn: false;
     user: {},
     jwt: ""
   }
@@ -29,6 +30,7 @@ function appReducer (state = initialState, action) {
           lastUpdated: Date.now()
         },
         session: {
+          signedIn: true,
           user: action.user,
           jwt: action.jwt
         }
@@ -42,6 +44,7 @@ function appReducer (state = initialState, action) {
           lastUpdated: Date.now()
         },
         session: {
+          signedIn: false,
           user: {},
           jwt: ""
         }
