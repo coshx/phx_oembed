@@ -11,10 +11,11 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class AppContainer extends React.Component {
+
   render() {
     return (
       <div>
-        <Nav currentPath={""} />
+        <Nav />
         <h1>PhxOembed</h1>
         {this.props.children}
       </div>
