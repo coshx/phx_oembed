@@ -13,7 +13,7 @@ export default class Nav extends React.Component {
     else if (this.context.router.isActive({pathname: signInPath}))
       return("");
     else
-      return(<Link to={signInPath}>Sign In</Link>);
+      return(<a href="">Sign Out</a>);
   }
 
   render() {
