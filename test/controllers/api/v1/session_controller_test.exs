@@ -1,6 +1,7 @@
 defmodule PhxOembed.SessionControllerTest do
   use PhxOembed.ConnCase
   alias PhxOembed.{Endpoint, User}
+  require IEx
 
   setup %{conn: conn} do
     user = create_user
@@ -51,11 +52,11 @@ defmodule PhxOembed.SessionControllerTest do
 
   test "when logging out with a session", %{conn: conn, user: user} do
     token = get_token(user, conn)
-    conn
+    resp = conn
     |> put_req_header("authorization", token)
     |> delete(session_path(Endpoint, :delete))
 
-    assert conn.status == 200
+    assert resp.status == 200
   end
 
   defp create_user do

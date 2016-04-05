@@ -22,10 +22,14 @@ defmodule PhxOembed.SessionController do
   def delete(conn, _) do
     case Guardian.Plug.claims(conn) do
     {:ok, claims} ->
+
       conn
       |> Guardian.Plug.current_token
       |> Guardian.revoke!(claims)
+
+      conn
       |> put_status(:ok)
+
 
     {:error, _} ->
       conn
