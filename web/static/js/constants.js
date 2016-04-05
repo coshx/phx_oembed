@@ -8,10 +8,11 @@ const Constants = {
     SESSION_DESTROY_FAILURE: "SESSION_DESTROY_FAILURE",
   },
   ROUTES: {
-    NEW_SESSION: "/api/v1/sessions"
+    SESSION: "/api/v1/sessions"
   },
   PAGES: {
-    SIGN_IN: "/sign_in"
+    SIGN_IN: "/sign_in",
+    SITES: "/sites"
   }
 };
 

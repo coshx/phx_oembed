@@ -8,7 +8,7 @@ export default class Nav extends React.Component {
     const signInPath = Constants.PAGES.SIGN_IN;
 
     if (this.props.signedIn == true)
-      return(<a href="">Sign Out</a>);
+      return(<a href="#" onClick={this.props.signOutUser}>Sign Out</a>);
     else if (this.context.router.isActive({pathname: signInPath}))
       return("");
     else

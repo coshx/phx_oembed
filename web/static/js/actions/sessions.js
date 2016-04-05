@@ -26,6 +26,28 @@ function newSessionFailure(msg) {
   }
 }
 
+function sessionDestroyRequest() {
+  return {
+    type: Constants.ACTIONS.SESSION_DESTROY_REQUEST,
+    sentAt: Date.now()
+  }
+}
+
+function sessionDestroySuccess() {
+  return {
+    type: Constants.ACTIONS.SESSION_DESTROY_SUCCESS,
+    recievedAt: Date.now()
+  }
+}
+
+function sessionDestroyFailure(msg) {
+  return {
+    type: Constants.ACTIONS.SESSION_DESTROY_FAILURE,
+    sentAt: Date.now(),
+    msg: msg
+  }
+}
+
 /* Only exporting the thunk actions */
 const SessionActions = {
 
@@ -38,20 +60,41 @@ const SessionActions = {
       /* make the api request */
       const sessionData = { session: { email: email, password: password } };
 
-      Utils.makeRequest("POST", Constants.ROUTES.NEW_SESSION, sessionData)
+      Utils.makeRequest("POST", Constants.ROUTES.SESSION, sessionData)
       .then(function(xhr) {
         if (xhr.status == 201) {
           const resp = JSON.parse(xhr.responseText);
           dispatch(newSessionSuccess(resp.user, resp.jwt));
-          hashHistory.push("/sites");
+          hashHistory.push(Constants.PAGES.SITES);
         } else if (xhr.status == 422) {
           dispatch(newSessionFailure("Invalid credentials"));
         } else {
           dispatch(newSessionFailure("Something went wrong"));
         }
       })
-      .catch(function(xhr) {
+      .catch(function() {
         dispatch(newSessionFailure("Something went wrong"));
+      });
+    };
+  },
+
+  signOutUser: function() {
+    return function(dispatch) {
+      dispatch(sessionDestroyRequest);
+
+      Utils.makeRequest("DELETE", Constants.ROUTES.SESSION)
+      .then(function(xhr) {
+        if (xhr.status == 200) {
+          dispatch(sessionDestroySuccess());
+          hashHistory.push(Constants.PAGES.SIGN_IN);
+        } else {
+          dispatch(sessionDestroyFailure("Something went wrong"));
+          hashHistory.push(Constants.PAGES.SIGN_IN);
+        }
+      })
+      .catch(function() {
+        dispatch(sessionDestroyFailure("Something went wrong"));
+          hashHistory.push(Constants.PAGES.SIGN_IN);
       });
     };
   }

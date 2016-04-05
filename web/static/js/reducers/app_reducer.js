@@ -50,6 +50,42 @@ function appReducer (state = initialState, action) {
         }
       })
 
+    case Constants.ACTIONS.SESSION_DESTROY_REQUEST:
+      return Object.assign({}, state, {
+        request: {
+          isFetching: true,
+          lastUpdated: Date.now()
+        }
+      })
+
+    case Constants.ACTIONS.SESSION_DESTROY_SUCCESS:
+      return Object.assign({}, state, {
+        request: {
+          isFetching: false,
+          msg: "Successfully signed out",
+          lastUpdated: Date.now()
+        },
+        session: {
+          signedIn: false,
+          user: {},
+          jwt: ""
+        }
+      })
+
+    case Constants.ACTIONS.SESSION_DESTROY_FAILURE:
+      return Object.assign({}, state, {
+        request: {
+          isFetching: false,
+          msg: "An error occured. Please try to sign in again",
+          lastUpdated: Date.now()
+        },
+        session: {
+          signedIn: false,
+          user: {},
+          jwt: ""
+        }
+      })
+
     default:
       return state
   }
