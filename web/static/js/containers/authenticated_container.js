@@ -2,8 +2,8 @@ import React          from "react";
 import { connect }    from "react-redux";
 import SessionActions from "../actions/sessions";
 
-const mapStateToProps = () => {
-  return {}
+const mapStateToProps = (state) => {
+  return { session: state.session }
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -13,7 +13,10 @@ const mapDispatchToProps = (dispatch) => {
 class AuthenticatedContainer extends React.Component {
 
   render() {
-    return (<div>AuthenticatedContainer</div>)
+    if (this.props.session.signedIn == true)
+      return (<div>AuthenticatedContainer</div>)
+    else
+      return (<div>You need to be signed in to view this page</div>);
   }
 }
 
