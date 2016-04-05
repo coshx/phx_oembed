@@ -1,3 +1,4 @@
+import fetch from "isomorphic-fetch";
 import Constants from "../constants";
 import Utils from "../utils";
 import { hashHistory } from "react-router";
@@ -58,23 +59,26 @@ const SessionActions = {
 
       /* make the api request */
       const sessionData = { session: { email: email, password: password } };
+      const requestOpts = Utils.makeRequestOptions("POST", sessionData);
 
-      Utils.makeRequest("POST", Constants.ROUTES.SESSION, sessionData)
-      .then(function(xhr) {
-        if (xhr.status == 201) {
-          const resp = JSON.parse(xhr.responseText);
-          localStorage.setItem("phxAuthToken", resp.jwt);
-          dispatch(newSessionSuccess(resp.user));
-          hashHistory.push(Constants.PAGES.SITES);
-        } else if (xhr.status == 422) {
-          dispatch(newSessionFailure("Invalid credentials"));
-        } else {
-          dispatch(newSessionFailure("Something went wrong"));
-        }
+      fetch(Constants.ROUTES.SESSION, requestOpts)
+      .then((response) => {
+        if (response.status == 201)
+          return response.json()
+        else if (response.status == 422)
+          throw "Invalid credentials";
       })
-      .catch(function() {
-        dispatch(newSessionFailure("Something went wrong"));
-      });
+      .then((json) => {
+        localStorage.setItem("phxAuthToken", json.jwt);
+        dispatch(newSessionSuccess(json.user));
+        hashHistory.push(Constants.PAGES.SITES);
+      })
+      .catch((message) => {
+        if (message == "Invalid Credentials")
+          dispatch(newSessionFailure(message));
+        else
+          dispatch(newSessionFailure("Something went wrong"));
+      })
     };
   },
 
@@ -82,9 +86,11 @@ const SessionActions = {
     return function(dispatch) {
       dispatch(sessionDestroyRequest);
 
-      Utils.makeRequest("DELETE", Constants.ROUTES.SESSION)
-      .then(function(xhr) {
-        if (xhr.status == 200) {
+      const requestOpts = Utils.makeRequestOptions("DELETE");
+
+      fetch(Constants.ROUTES.SESSION, requestOpts)
+      .then(function(response) {
+        if (response.status == 200) {
           dispatch(sessionDestroySuccess());
         } else {
           dispatch(sessionDestroyFailure("Something went wrong"));

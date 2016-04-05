@@ -1,20 +1,22 @@
+import fetch from "isomorphic-fetch";
+
 const Utils = {
 
-  makeRequest: function (method, url, data = {}) {
-    return new Promise(function(resolve, reject) {
-      const token = localStorage.getItem("phxAuthToken");
-      const xhr = new XMLHttpRequest();
-      xhr.open(method, url);
-      xhr.setRequestHeader("Content-type", "application/json");
-      xhr.setRequestHeader("Authorization", token);
-      xhr.onload = function() {
-        resolve(xhr);
-      };
-      xhr.onerror = function() {
-        reject(xhr);
-      };
-      xhr.send(JSON.stringify(data));
-    });
+  makeRequestOptions: function (method, data = {}) {
+    const token = localStorage.getItem("phxAuthToken");
+    const body = JSON.stringify(data);
+    const headers = new Headers();
+    headers.append("Content-type", "application/json");
+    headers.append("Content-Length", body.length.toString());
+    headers.append("Authorization", token);
+
+    const options = {
+      method: method,
+      headers: headers,
+      body: body
+    }
+
+    return options
   }
 };
 
