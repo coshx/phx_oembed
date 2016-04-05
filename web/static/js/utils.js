@@ -1,5 +1,3 @@
-import fetch from "isomorphic-fetch";
-
 const Utils = {
 
   makeRequestOptions: function (method, data = {}) {

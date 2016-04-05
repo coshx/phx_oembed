@@ -1,7 +1,6 @@
-import fetch from "isomorphic-fetch";
-import Constants from "../constants";
-import Utils from "../utils";
-import { hashHistory } from "react-router";
+import Constants        from "../constants";
+import Utils            from "../utils";
+import { hashHistory }  from "react-router";
 
 function newSessionRequest() {
   return {
@@ -67,6 +66,8 @@ const SessionActions = {
           return response.json()
         else if (response.status == 422)
           throw "Invalid credentials";
+        else
+          throw "";
       })
       .then((json) => {
         localStorage.setItem("phxAuthToken", json.jwt);

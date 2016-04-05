@@ -1,5 +1,4 @@
 import "phoenix_html";
-import "babel-polyfill";
 import React                            from "react";
 import ReactDOM                         from "react-dom";
 import { createStore, applyMiddleware } from "redux";
