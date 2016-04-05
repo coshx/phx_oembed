@@ -7,8 +7,9 @@ defmodule PhxOembed.CurrentUserControllerTest do
   end
 
   test "when the user is not signed in" do
-    conn = get(conn, current_user_path(Endpoint, :show))
-    json_response(conn, :forbidden)
+    conn
+    |> get(current_user_path(Endpoint, :show))
+    |> json_response(:forbidden)
   end
 
   test "when the user is signed in" do
