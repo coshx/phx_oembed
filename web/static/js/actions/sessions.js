@@ -95,7 +95,7 @@ const SessionActions = {
       });
 
       // remove auth token and redirect regardless
-      localstorage.removeItem("phxAuthToken");
+      localStorage.removeItem("phxAuthToken");
       hashHistory.push(Constants.PAGES.SIGN_IN);
     };
   }
