@@ -19,6 +19,20 @@ defmodule PhxOembed.SessionController do
     end
   end
 
+  def delete(conn, _) do
+    case Guardian.Plug.claims(conn) do
+    {:ok, claims} ->
+      conn
+      |> Guardian.Plug.current_token
+      |> Guardian.revoke!(claims)
+      |> put_status(:ok)
+
+    {:error, _} ->
+      conn
+      |> put_status(:unprocessable_entity)
+    end
+  end
+
   def unauthenticated(conn, _params) do
     conn
     |> put_status(:forbidden)

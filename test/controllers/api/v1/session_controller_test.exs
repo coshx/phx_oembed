@@ -1,7 +1,7 @@
 defmodule PhxOembed.SessionControllerTest do
   use PhxOembed.ConnCase
   alias PhxOembed.{Endpoint, User}
-
+  require IEx
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
@@ -37,6 +37,18 @@ defmodule PhxOembed.SessionControllerTest do
     conn = post(conn, session_path(Endpoint, :create, session: params))
     resp = json_response(conn, :unprocessable_entity)
     assert resp["error"] == "Invalid email or password"
+  end
+
+  test "when logging out with no session", %{conn: conn} do
+    create_user
+    conn = delete(conn, session_path(Endpoint, :delete))
+    assert conn.status == 422
+  end
+
+  @tag :skip
+  test "when logging out with a session", %{conn: conn} do
+    conn = delete(conn, session_path(Endpoint, :delete))
+    assert conn.status == 200
   end
 
   defp create_user do
