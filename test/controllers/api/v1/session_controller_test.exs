@@ -49,9 +49,12 @@ defmodule PhxOembed.SessionControllerTest do
     assert conn.status == 422
   end
 
-  @tag :skip
-  test "when logging out with a session", %{conn: conn} do
-    conn = delete(conn, session_path(Endpoint, :delete))
+  test "when logging out with a session", %{conn: conn, user: user} do
+    token = get_token(user, conn)
+    conn
+    |> put_req_header("authorization", token)
+    |> delete(session_path(Endpoint, :delete))
+
     assert conn.status == 200
   end
 
@@ -59,5 +62,14 @@ defmodule PhxOembed.SessionControllerTest do
     attrs = %{email: "example@example.com", password: "password"}
     changeset = User.changeset(%User{}, attrs)
     Repo.insert!(changeset)
+  end
+
+  defp get_token(user, conn) do
+    params = %{email: user.email, password: user.password}
+    resp = conn
+    |> post(session_path(Endpoint, :create, session: params))
+    |> json_response(:created)
+
+    resp["jwt"]
   end
 end
