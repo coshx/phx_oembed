@@ -6,13 +6,13 @@ defmodule PhxOembed.CurrentUserControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
-  test "when the user is not signed in" do
+  test "when the user is not signed in", %{conn: conn} do
     conn
     |> get(current_user_path(Endpoint, :show))
     |> json_response(:forbidden)
   end
 
-  test "when the user is signed in" do
+  test "when the user is signed in", %{conn: conn} do
     token = create_user |> get_token(conn)
 
     conn
