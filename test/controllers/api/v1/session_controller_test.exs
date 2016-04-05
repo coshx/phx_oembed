@@ -1,10 +1,9 @@
 defmodule PhxOembed.SessionControllerTest do
   use PhxOembed.ConnCase
-  alias PhxOembed.{Endpoint, User}
-  require IEx
+  alias PhxOembed.{Endpoint, TestUtils}
 
   setup %{conn: conn} do
-    user = create_user
+    user = build(:user) |> set_password("password") |> create()
     {:ok, user: user, conn: put_req_header(conn, "accept", "application/json")}
   end
 
@@ -51,26 +50,11 @@ defmodule PhxOembed.SessionControllerTest do
   end
 
   test "when logging out with a session", %{conn: conn, user: user} do
-    token = get_token(user, conn)
+    token = TestUtils.get_user_token(user)
     resp = conn
     |> put_req_header("authorization", token)
     |> delete(session_path(Endpoint, :delete))
 
     assert resp.status == 200
-  end
-
-  defp create_user do
-    attrs = %{email: "example@example.com", password: "password"}
-    changeset = User.changeset(%User{}, attrs)
-    Repo.insert!(changeset)
-  end
-
-  defp get_token(user, conn) do
-    params = %{email: user.email, password: user.password}
-    resp = conn
-    |> post(session_path(Endpoint, :create, session: params))
-    |> json_response(:created)
-
-    resp["jwt"]
   end
 end

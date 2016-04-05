@@ -50,7 +50,7 @@ defmodule PhxOembed.UserTest do
   end
 
   test "unique emails" do
-    user = create(:user)
+    user = build(:user) |> set_password("password") |> create()
     changeset = User.changeset(%User{}, %{email: user.email, password: "password",
                                           password_confirmation: "password"})
     catch_error Repo.insert!(changeset)
