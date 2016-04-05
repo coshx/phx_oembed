@@ -9,12 +9,11 @@ function newSessionRequest() {
   }
 }
 
-function newSessionSuccess(user, jwt) {
+function newSessionSuccess(user) {
   return {
     type: Constants.ACTIONS.NEW_SESSION_SUCCESS,
     recievedAt: Date.now(),
-    user: user,
-    jwt: jwt
+    user: user
   }
 }
 
@@ -64,7 +63,8 @@ const SessionActions = {
       .then(function(xhr) {
         if (xhr.status == 201) {
           const resp = JSON.parse(xhr.responseText);
-          dispatch(newSessionSuccess(resp.user, resp.jwt));
+          localStorage.setItem("phxAuthToken", resp.jwt);
+          dispatch(newSessionSuccess(resp.user));
           hashHistory.push(Constants.PAGES.SITES);
         } else if (xhr.status == 422) {
           dispatch(newSessionFailure("Invalid credentials"));
@@ -86,16 +86,17 @@ const SessionActions = {
       .then(function(xhr) {
         if (xhr.status == 200) {
           dispatch(sessionDestroySuccess());
-          hashHistory.push(Constants.PAGES.SIGN_IN);
         } else {
           dispatch(sessionDestroyFailure("Something went wrong"));
-          hashHistory.push(Constants.PAGES.SIGN_IN);
         }
       })
       .catch(function() {
         dispatch(sessionDestroyFailure("Something went wrong"));
-          hashHistory.push(Constants.PAGES.SIGN_IN);
       });
+
+      // remove auth token and redirect regardless
+      localstorage.removeItem("phxAuthToken");
+      hashHistory.push(Constants.PAGES.SIGN_IN);
     };
   }
 };

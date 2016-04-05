@@ -7,8 +7,7 @@ const initialState = {
   },
   session: {
     signedIn: false,
-    user: {},
-    jwt: ""
+    user: {}
   }
 };
 
@@ -31,8 +30,7 @@ function appReducer (state = initialState, action) {
         },
         session: {
           signedIn: true,
-          user: action.user,
-          jwt: action.jwt
+          user: action.user
         }
       })
 
@@ -42,11 +40,6 @@ function appReducer (state = initialState, action) {
           isFetching: false,
           msg: action.msg,
           lastUpdated: Date.now()
-        },
-        session: {
-          signedIn: false,
-          user: {},
-          jwt: ""
         }
       })
 
@@ -67,8 +60,7 @@ function appReducer (state = initialState, action) {
         },
         session: {
           signedIn: false,
-          user: {},
-          jwt: ""
+          user: {}
         }
       })
 
@@ -81,8 +73,7 @@ function appReducer (state = initialState, action) {
         },
         session: {
           signedIn: false,
-          user: {},
-          jwt: ""
+          user: {}
         }
       })
 
