@@ -15,7 +15,7 @@ defmodule PhxOembed.SessionController do
       :error ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render("error.json")
+        |> render("error.json", error: "Invalid email or password")
     end
   end
 
@@ -29,11 +29,13 @@ defmodule PhxOembed.SessionController do
 
       conn
       |> put_status(:ok)
-
+      |> render("success.json", message: "Logged out")
 
     {:error, _} ->
       conn
       |> put_status(:unprocessable_entity)
+      |> render("error.json", error: "Could not log out")
+
     end
   end
 

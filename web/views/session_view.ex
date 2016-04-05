@@ -8,7 +8,12 @@ defmodule PhxOembed.SessionView do
     }
   end
 
-  def render("error.json", _) do
-    %{error: "Invalid email or password"}
+  def render("success.json", %{message: message}) do
+    %{message: message}
   end
+
+  def render("error.json", %{error: error}) do
+    %{error: error}
+  end
+
 end

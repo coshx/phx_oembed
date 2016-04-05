@@ -5,11 +5,11 @@ const Utils = {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
       xhr.setRequestHeader("Content-type", "application/json");
-      xhr.onload = function() { 
-        resolve(xhr); 
+      xhr.onload = function() {
+        resolve(xhr);
       };
       xhr.onerror = function() {
-        reject(xhr); 
+        reject(xhr);
       };
       xhr.send(JSON.stringify(data));
     });
