@@ -16,3 +16,7 @@ export default class SignInForm extends React.Component {
     );
   }
 }
+
+SignInForm.propTypes = {
+  onSubmit: React.PropTypes.func.isRequired
+}

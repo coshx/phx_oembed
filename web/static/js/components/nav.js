@@ -27,3 +27,8 @@ export default class Nav extends React.Component {
 Nav.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
+
+Nav.propTypes = {
+  signedIn: React.PropTypes.bool.isRequired,
+  signOutUser: React.PropTypes.func.isRequired
+}
