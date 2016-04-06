@@ -3,12 +3,15 @@ import appReducer         from "../../../web/static/js/reducers/app_reducer";
 import * as Actions       from "../../../web/static/js/actions/sessions";
 
 const initialState = {
+  isFetching: false,
   flash: {
     flashType: "",
     message: ""
   },
-  isFetching: false,
-  user: {}
+  session: {
+    signedIn: false,
+    user: {}
+  }
 };
 
 describe("appReducer", () => {
@@ -20,12 +23,15 @@ describe("appReducer", () => {
   it("should handle NEW_SESSION_REQUEST", () => {
     const returnedState = appReducer(undefined, Actions.newSessionRequest());
     expect(returnedState).toEqual({
+      isFetching: true,
       flash: {
         flashType: "",
         message: ""
       },
-      isFetching: true,
-      user: {}
+      session: {
+        signedIn: false,
+        user: {}
+      }
     });
   })
 
@@ -33,12 +39,15 @@ describe("appReducer", () => {
     const user = {id: 3, email: "example@example.com"};
     const returnedState = appReducer(undefined, Actions.newSessionSuccess(user));
     expect(returnedState).toEqual({
+      isFetching: false,
       flash: {
         flashType: "success",
         message: "Successfully signed in"
       },
-      isFetching: false,
-      user: user
+      session: {
+        signedIn: true,
+        user: user
+      }
     });
   })
 
@@ -46,36 +55,45 @@ describe("appReducer", () => {
     const msg = "Something went wrong"
     const returnedState = appReducer(undefined, Actions.newSessionFailure(msg));
     expect(returnedState).toEqual({
+      isFetching: false,
       flash: {
         flashType: "error",
         message: msg
       },
-      isFetching: false,
-      user: {}
+      session: {
+        signedIn: false,
+        user: {}
+      },
     });
   })
 
   it("should handle DESTROY_SESSION_REQUEST", () => {
     const returnedState = appReducer(undefined, Actions.destroySessionRequest());
     expect(returnedState).toEqual({
+      isFetching: true,
       flash: {
         flashType: "",
         message: ""
       },
-      isFetching: true,
-      user: {}
+      session: {
+        signedIn: false,
+        user: {}
+      }
     });
   })
 
   it("should handle DESTROY_SESSION_SUCCESS", () => {
     const returnedState = appReducer(undefined, Actions.destroySessionSuccess());
     expect(returnedState).toEqual({
+      isFetching: false,
       flash: {
         flashType: "success",
         message: "Successfully signed out"
       },
-      isFetching: false,
-      user: {}
+      session: {
+        signedIn: false,
+        user: {}
+      }
     });
   })
 
@@ -83,12 +101,15 @@ describe("appReducer", () => {
     const msg = "some message";
     const returnedState = appReducer(undefined, Actions.destroySessionFailure(msg));
     expect(returnedState).toEqual({
+      isFetching: false,
       flash: {
         flashType: "error",
         message: msg
       },
-      isFetching: false,
-      user: {}
+      session: {
+        signedIn: false,
+        user: {}
+      }
     });
   })
 })

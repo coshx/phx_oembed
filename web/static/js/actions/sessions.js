@@ -85,7 +85,7 @@ const SessionActions = {
 
   signOutUser: function() {
     return function(dispatch) {
-      dispatch(sessionDestroyRequest);
+      dispatch(destroySessionRequest);
 
       const requestOpts = Utils.makeRequestOptions("DELETE");
 

@@ -1,12 +1,15 @@
 import Constants from "../constants";
 
 const initialState = {
+  isFetching: false,
   flash: {
     flashType: "",
     message: ""
   },
-  isFetching: false,
-  user: {}
+  session: {
+    signedIn: false,
+    user: {}
+  }
 };
 
 function appReducer(state = initialState, action) {
@@ -16,22 +19,28 @@ function appReducer(state = initialState, action) {
 
     case Constants.ACTIONS.NEW_SESSION_SUCCESS:
       return Object.assign({}, state, {
+        isFetching: false,
         flash: {
           flashType: "success",
           message: "Successfully signed in"
         },
-        isFetching: false,
-        user: action.user
+        session: {
+          signedIn: true,
+          user: action.user
+        }
       })
 
     case Constants.ACTIONS.NEW_SESSION_FAILURE:
       return Object.assign({}, state, {
+        isFetching: false,
         flash: {
           flashType: "error",
           message: action.msg
         },
-        isFetching: false,
-        user: {}
+        session: {
+          signedIn: false,
+          user: {}
+        }
       })
 
     case Constants.ACTIONS.DESTROY_SESSION_REQUEST:
@@ -39,22 +48,28 @@ function appReducer(state = initialState, action) {
 
     case Constants.ACTIONS.DESTROY_SESSION_SUCCESS:
       return Object.assign({}, state, {
+        isFetching: false,
         flash: {
           flashType: "success",
           message: "Successfully signed out"
         },
-        isFetching: false,
-        user: {}
+        session: {
+          signedIn: false,
+          user: {}
+        }
       })
 
     case Constants.ACTIONS.DESTROY_SESSION_FAILURE:
       return Object.assign({}, state, {
+        isFetching: false,
         flash: {
           flashType: "error",
           message: action.msg
         },
-        isFetching: false,
-        user: {}
+        session: {
+          signedIn: false,
+          user: {}
+        }
       })
 
     default:
