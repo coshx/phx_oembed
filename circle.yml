@@ -1,7 +1,7 @@
 dependencies:
   pre:
     - ./circle-prepare.sh
-    - npm install
+
   cache_directories:
     - ~/dependencies
     - ~/.mix
