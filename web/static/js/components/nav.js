@@ -22,13 +22,13 @@ export default class Nav extends React.Component {
       </nav>
     );
   }
-}
+};
 
 Nav.contextTypes = {
   router: React.PropTypes.object.isRequired
-}
+};
 
 Nav.propTypes = {
   signedIn: React.PropTypes.bool.isRequired,
   signOutUser: React.PropTypes.func.isRequired
-}
+};
