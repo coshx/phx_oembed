@@ -1,6 +1,6 @@
 import React          from "react";
 import { connect }    from "react-redux";
-import SessionActions from "../actions/sessions"
+import SessionActions from "../actions/sessions";
 import Nav            from "../components/nav";
 import Flash          from "../components/flash";
 
