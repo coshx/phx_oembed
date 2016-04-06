@@ -8,6 +8,10 @@ const initialState = {
   session: {
     signedIn: false,
     user: {}
+  },
+  flash: {
+    flashType: "",
+    message: ""
   }
 };
 
@@ -26,12 +30,15 @@ function appReducer(state = initialState, action) {
       return Object.assign({}, state, {
         request: {
           isFetching: false,
-          msg: "Successfully signed in",
           lastUpdated: Date.now()
         },
         session: {
           signedIn: true,
           user: action.user
+        },
+        flash: {
+          flashType: "success",
+          message: "Successfully signed in"
         }
       })
 
@@ -41,6 +48,10 @@ function appReducer(state = initialState, action) {
           isFetching: false,
           msg: action.msg,
           lastUpdated: Date.now()
+        },
+        flash: {
+          flashType: "error",
+          message: action.msg
         }
       })
 
@@ -56,12 +67,15 @@ function appReducer(state = initialState, action) {
       return Object.assign({}, state, {
         request: {
           isFetching: false,
-          msg: "Successfully signed out",
           lastUpdated: Date.now()
         },
         session: {
           signedIn: false,
           user: {}
+        },
+        flash: {
+          flashType: "success",
+          message: "Successfully signed out"
         }
       })
 
@@ -69,12 +83,15 @@ function appReducer(state = initialState, action) {
       return Object.assign({}, state, {
         request: {
           isFetching: false,
-          msg: action.msg,
           lastUpdated: Date.now()
         },
         session: {
           signedIn: false,
           user: {}
+        },
+        flash: {
+          flashType: "error",
+          message: action.msg
         }
       })
 
