@@ -97,7 +97,7 @@ const SessionActions = {
         hashHistory.push(Constants.PAGES.SITES);
       })
       .catch((message) => {
-        if (message == "Invalid Credentials")
+        if (message == "Invalid credentials")
           dispatch(newSessionFailure(message));
         else
           dispatch(newSessionFailure("Something went wrong"));
