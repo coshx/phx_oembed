@@ -2,14 +2,14 @@ import Constants        from "../constants";
 import Utils            from "../utils";
 import { hashHistory }  from "react-router";
 
-function newSessionRequest() {
+export function newSessionRequest() {
   return {
     type: Constants.ACTIONS.NEW_SESSION_REQUEST,
     sentAt: Date.now()
   }
 }
 
-function newSessionSuccess(user) {
+export function newSessionSuccess(user) {
   return {
     type: Constants.ACTIONS.NEW_SESSION_SUCCESS,
     recievedAt: Date.now(),
@@ -17,7 +17,7 @@ function newSessionSuccess(user) {
   }
 }
 
-function newSessionFailure(msg) {
+export function newSessionFailure(msg) {
   return {
     type: Constants.ACTIONS.NEW_SESSION_FAILURE,
     sentAt: Date.now(),
@@ -25,29 +25,29 @@ function newSessionFailure(msg) {
   }
 }
 
-function sessionDestroyRequest() {
+export function destroySessionRequest() {
   return {
-    type: Constants.ACTIONS.SESSION_DESTROY_REQUEST,
+    type: Constants.ACTIONS.DESTROY_SESSION_REQUEST,
     sentAt: Date.now()
   }
 }
 
-function sessionDestroySuccess() {
+export function destroySessionSuccess() {
   return {
-    type: Constants.ACTIONS.SESSION_DESTROY_SUCCESS,
+    type: Constants.ACTIONS.DESTROY_SESSION_SUCCESS,
     recievedAt: Date.now()
   }
 }
 
-function sessionDestroyFailure(msg) {
+export function destroySessionFailure(msg) {
   return {
-    type: Constants.ACTIONS.SESSION_DESTROY_FAILURE,
+    type: Constants.ACTIONS.DESTROY_SESSION_FAILURE,
     sentAt: Date.now(),
     msg: msg
   }
 }
 
-/* Only exporting the thunk actions */
+/* Thunks */
 const SessionActions = {
 
   signInUser: function(email, password) {
@@ -92,13 +92,13 @@ const SessionActions = {
       fetch(Constants.ROUTES.SESSION, requestOpts)
       .then(function(response) {
         if (response.status == 200) {
-          dispatch(sessionDestroySuccess());
+          dispatch(destroySessionSuccess());
         } else {
-          dispatch(sessionDestroyFailure("Something went wrong"));
+          dispatch(destroySessionFailure("Something went wrong"));
         }
       })
       .catch(function() {
-        dispatch(sessionDestroyFailure("Something went wrong"));
+        dispatch(destroySessionFailure("Something went wrong"));
       });
 
       // remove auth token and redirect regardless

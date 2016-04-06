@@ -11,9 +11,10 @@ const initialState = {
   }
 };
 
-function appReducer (state = initialState, action) {
+function appReducer(state = initialState, action) {
   switch (action.type) {
     case Constants.ACTIONS.NEW_SESSION_REQUEST:
+
       return Object.assign({}, state, {
         request: {
           isFetching: true,
@@ -43,7 +44,7 @@ function appReducer (state = initialState, action) {
         }
       })
 
-    case Constants.ACTIONS.SESSION_DESTROY_REQUEST:
+    case Constants.ACTIONS.DESTROY_SESSION_REQUEST:
       return Object.assign({}, state, {
         request: {
           isFetching: true,
@@ -51,7 +52,7 @@ function appReducer (state = initialState, action) {
         }
       })
 
-    case Constants.ACTIONS.SESSION_DESTROY_SUCCESS:
+    case Constants.ACTIONS.DESTROY_SESSION_SUCCESS:
       return Object.assign({}, state, {
         request: {
           isFetching: false,
@@ -64,11 +65,11 @@ function appReducer (state = initialState, action) {
         }
       })
 
-    case Constants.ACTIONS.SESSION_DESTROY_FAILURE:
+    case Constants.ACTIONS.DESTROY_SESSION_FAILURE:
       return Object.assign({}, state, {
         request: {
           isFetching: false,
-          msg: "An error occured. Please try to sign in again",
+          msg: action.msg,
           lastUpdated: Date.now()
         },
         session: {
