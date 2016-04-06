@@ -28,23 +28,25 @@ export function rehydrateFailure() {
 const rehydrateActions = {
 
   rehydrateStore: function() {
-    dispatch(rehydrateRequest);
+    return function(dispatch) {
+      dispatch(rehydrateRequest);
 
-    const requestOpts = Utils.makeRequestOptions("GET");
+      const requestOpts = Utils.makeRequestOptions("GET");
 
-    fetch(Constants.ROUTES.CURRENT_USER, requestOpts)
-    .then(function(response){
-      if (response.status == 200)
-        return response.json()
-      else
-        throw "";
-    })
-    .then(function(json) {
-      dispatch(rehydrateSuccess(json.user));
-    })
-    .catch(function(){
-      dispatch(rehydrateFailure())
-    })
+      fetch(Constants.ROUTES.CURRENT_USER, requestOpts)
+      .then(function(response){
+        if (response.status == 200)
+          return response.json()
+        else
+          throw "";
+      })
+      .then(function(userAsJson) {
+        dispatch(rehydrateSuccess(userAsJson));
+      })
+      .catch(function(){
+        dispatch(rehydrateFailure())
+      })
+    };
   }
 }
 

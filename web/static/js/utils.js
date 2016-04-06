@@ -1,20 +1,21 @@
 const Utils = {
 
-  makeRequestOptions: function (method, data = {}) {
+  makeRequestOptions: function (method, data) {
     const token = localStorage.getItem("phxAuthToken");
-    const body = JSON.stringify(data);
     const headers = new Headers();
     headers.append("Content-type", "application/json");
-    headers.append("Content-Length", body.length.toString());
     headers.append("Authorization", token);
 
-    const options = {
+    const baseOptions = {
       method: method,
-      headers: headers,
-      body: body
-    }
+      headers: headers
+    };
 
-    return options
+    if (data) {
+      return Object.assign({}, baseOptions, { body: JSON.stringify(data) });
+    } else {
+      return baseOptions;
+    }
   }
 };
 

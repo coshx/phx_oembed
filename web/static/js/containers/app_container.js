@@ -1,8 +1,9 @@
-import React          from "react";
-import { connect }    from "react-redux";
-import SessionActions from "../actions/sessions";
-import Nav            from "../components/nav";
-import Flash          from "../components/flash";
+import React            from "react";
+import { connect }      from "react-redux";
+import sessionActions   from "../actions/sessions";
+import rehydrateActions from "../actions/rehydrate"
+import Nav              from "../components/nav";
+import Flash            from "../components/flash";
 
 const mapStateToProps = (state) => {
   return {
@@ -17,12 +18,23 @@ const mapDispatchToProps = (dispatch) => {
   return {
     signOutUser: (e) => {
       e.preventDefault();
-      dispatch(SessionActions.signOutUser())
+      dispatch(sessionActions.signOutUser());
+    },
+    rehydrateStore: () => {
+      dispatch(rehydrateActions.rehydrateStore());
     }
   }
 }
 
 class AppContainer extends React.Component {
+
+  componentDidMount() {
+    const token = localStorage.getItem("phxAuthToken");
+    if (token && this.props.signedIn == false) {
+      this.props.rehydrateStore();
+    }
+  }
+
   render() {
     return (
       <div id="app">
