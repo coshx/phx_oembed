@@ -44,7 +44,6 @@ class AppContainer extends React.Component {
         <div id="app-main">
           <Flash flashType={this.props.flashType}
                  message={this.props.flashMsg}/>
-          <h1>PhxOembed</h1>
           {this.props.children}
         </div>
       </div>
