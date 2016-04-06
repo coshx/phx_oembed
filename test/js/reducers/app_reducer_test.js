@@ -112,4 +112,50 @@ describe("appReducer", () => {
       }
     });
   })
+
+  it("should handle REHYDRATE_REQUEST", () => {
+    const returnedState = appReducer(undefined, Actions.rehydrateRequest());
+    expect(returnedState).toEqual({
+      isFetching: true,
+      flash: {
+        flashType: "",
+        message: ""
+      },
+      session: {
+        signedIn: false,
+        user: {}
+      }
+    });
+  })
+
+  it("should handle REHYDRATE_SUCCESS", () => {
+    const user = {id: 3, email: "example@example.com"};
+    const returnedState = appReducer(undefined, Actions.rehydrateSuccess(user));
+    expect(returnedState).toEqual({
+      isFetching: false,
+      flash: {
+        flashType: "",
+        message: ""
+      },
+      session: {
+        signedIn: true,
+        user: user
+      }
+    });
+  })
+
+  it("should handle REHYDRATE_FAILURE", () => {
+    const returnedState = appReducer(undefined, Actions.rehydrateFailure());
+    expect(returnedState).toEqual({
+      isFetching: false,
+      flash: {
+        flashType: "error",
+        message: "Something went wrong. Please sign in again"
+      },
+      session: {
+        signedIn: false,
+        user: {}
+      }
+    });
+  })
 })
