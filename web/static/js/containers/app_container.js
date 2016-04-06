@@ -7,7 +7,9 @@ import Flash          from "../components/flash";
 const mapStateToProps = (state) => {
   return {
     signedIn: state.session.signedIn,
-    currentUserId: state.session.user.id
+    currentUserId: state.session.user.id,
+    flashType: state.flash.flashType,
+    flashMsg: state.flash.message
   }
 }
 
@@ -25,10 +27,11 @@ class AppContainer extends React.Component {
     return (
       <div id="app">
         <Nav signedIn={this.props.signedIn}
-          signOutUser={this.props.signOutUser}/>
+             signOutUser={this.props.signOutUser}/>
 
         <div id="app-main">
-          <Flash flashType={""} message={""}/>
+          <Flash flashType={this.props.flashType}
+                 message={this.props.flashMsg}/>
           <h1>PhxOembed</h1>
           {this.props.children}
         </div>
