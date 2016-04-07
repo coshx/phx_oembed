@@ -137,7 +137,6 @@ describe("appReducer", () => {
     });
   })
 
-
   it("should handle GET_SITES_FAILURE", () => {
     const returnedState = appReducer(undefined, siteActions.getSitesFailure());
     expect(returnedState).toEqual({
