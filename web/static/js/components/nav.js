@@ -4,7 +4,7 @@ import Constants  from "../constants";
 
 export default class Nav extends React.Component {
 
-  navContent() {
+  userMenu() {
     const signInPath = Constants.PAGES.SIGN_IN;
 
     if (this.props.signedIn == true)
@@ -18,7 +18,8 @@ export default class Nav extends React.Component {
   render() {
     return(
       <nav>
-        {this.navContent()}
+        <div className="app-logo">PhxOembed</div>
+        <div className="user-menu">{this.userMenu()}</div>
       </nav>
     );
   }

@@ -1,6 +1,7 @@
 @import "bourbon/app/assets/stylesheets/bourbon";
 @import "bourbon-neat/app/assets/stylesheets/neat";
 @import "base/base";
+@import "flash";
 
 #main-container {
   @include outer-container(85%);
@@ -12,6 +13,14 @@ main {
 
 nav {
   @include display(flex);
-  @include justify-content(flex-end);
+  margin-bottom: 5%;
 }
 
+nav .user-menu {
+  margin-left: auto;
+}
+
+.sign-in-form {
+  @include span-columns(6);
+  @include shift(3);
+}

@@ -9,7 +9,7 @@ export default class Flash extends React.Component {
   render() {
     if(this.isFlashPresent())
       return(
-        <div id="flash" className={"flash "}>
+        <div id="flash" className={"flash-" + this.props.flashType}>
           <span className="flash-message">{this.props.message}</span>
         </div>
       );

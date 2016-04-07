@@ -4,7 +4,7 @@ export default class SignInForm extends React.Component {
 
   render() {
     return(
-      <div className="form fieldset">
+      <div className="form fieldset sign-in-form">
         <form onSubmit={this.props.onSubmit}>
           <label htmlFor="email">Email</label>
           <input name="email" id="email" type="email" />
