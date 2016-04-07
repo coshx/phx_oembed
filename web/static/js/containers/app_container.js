@@ -1,7 +1,7 @@
 import React            from "react";
 import { connect }      from "react-redux";
 import sessionActions   from "../actions/sessions";
-import rehydrateActions from "../actions/rehydrate"
+import rehydrateActions from "../actions/rehydrate";
 import Nav              from "../components/nav";
 import Flash            from "../components/flash";
 

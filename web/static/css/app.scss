@@ -1,4 +1,4 @@
-@import "bourbon/core/bourbon";
+@import "bourbon/app/assets/stylesheets/bourbon";
 @import "bourbon-neat/app/assets/stylesheets/neat";
 @import "base/base";
 
@@ -10,10 +10,8 @@ main {
   @include span-columns(12);
 }
 
-/* for some reason the version of bourbon being used via npm does not include
- * many mix-ins
 nav {
   @include display(flex);
   @include justify-content(flex-end);
 }
-*/
+
