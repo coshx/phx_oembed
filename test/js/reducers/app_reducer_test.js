@@ -1,7 +1,7 @@
 import expect                   from "expect";
 import appReducer               from "../../../web/static/js/reducers/app_reducer";
 import * as sessionActions      from "../../../web/static/js/actions/sessions";
-import * as rehydrateActions    from "../../../web/static/js/actions/rehydrate";
+import * as siteActions         from "../../../web/static/js/actions/sites";
 
 const initialState = {
   isFetching: false,
@@ -106,6 +106,54 @@ describe("appReducer", () => {
       flash: {
         flashType: "error",
         message: msg
+      },
+      session: {
+        signedIn: false,
+        user: {}
+      }
+    });
+  })
+
+  it("should handle GET_SITES_REQUEST", () => {
+    const returnedState = appReducer(undefined, siteActions.getSitesRequest());
+    expect(returnedState).toEqual({
+      isFetching: true,
+      flash: {
+        flashType: "",
+        message: ""
+      },
+      session: {
+        signedIn: false,
+        user: {}
+      }
+    });
+  })
+
+  it("should handle GET_SITES_SUCCESS", () => {
+    const sites = [{domain: "example.com", protocol: "https"}]
+    const returnedState = appReducer(undefined, siteActions.getSitesSuccess(sites));
+    expect(returnedState).toEqual({
+      isFetching: false,
+      flash: {
+        flashType: "",
+        message: ""
+      },
+      session: {
+        signedIn: false,
+        user: {}
+      },
+      sites: sites
+    });
+  })
+
+
+  it("should handle GET_SITES_FAILURE", () => {
+    const returnedState = appReducer(undefined, siteActions.getSitesFailure());
+    expect(returnedState).toEqual({
+      isFetching: false,
+      flash: {
+        flashType: "error",
+        message: "Error retrieving site list"
       },
       session: {
         signedIn: false,
