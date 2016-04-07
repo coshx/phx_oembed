@@ -11,4 +11,4 @@ dependencies:
 test:
   override:
     - ./circle-tests.sh
-    - mocha -r mock-local-storage --compilers js:babel-register --recursive test/js
+    - npm test
