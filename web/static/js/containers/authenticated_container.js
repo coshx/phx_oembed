@@ -1,6 +1,7 @@
 import React          from "react";
 import { connect }    from "react-redux";
 import SessionActions from "../actions/sessions";
+import SiteList       from "../components/site_list";
 
 const mapStateToProps = (state) => {
   return { session: state.session }
@@ -16,7 +17,7 @@ class AuthenticatedContainer extends React.Component {
     if (this.props.session.signedIn == true)
       return (
         <div className="authenticated-container">
-          <h2>Authenticated Container</h2>
+          <SiteList />
         </div>
       );
     else
