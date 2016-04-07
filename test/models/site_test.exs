@@ -27,6 +27,17 @@ defmodule PhxOembed.SiteTest do
     assert site.protocol == "http"
   end
 
+  test "user relationship" do
+    user = build(:user) |> set_password("password") |> create()
+    site = create(:site, user: user)
+ 
+    site = Site
+    |> Repo.get(site.id)
+    |> Repo.preload(:user)
+
+    assert site.user.id == user.id
+  end
+
   test "cards relationship" do
     site = create(:site)
     create(:card, site: site)

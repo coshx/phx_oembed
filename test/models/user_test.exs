@@ -2,9 +2,22 @@ defmodule PhxOembed.UserTest do
   use PhxOembed.ModelCase
   import PhxOembed.Factory
   alias PhxOembed.User
+
   @valid_attrs %{first_name: "Jose", last_name: "Valim",
                  email: "jose@example.com", password: "password",
                  password_confirmation: "password"}
+
+  test "sites relationship" do
+    user = build(:user) |> set_password("password") |> create()
+    create(:site, user: user)
+    create(:site, user: user)
+
+    user = User
+    |> Repo.get(user.id)
+    |> Repo.preload(:sites)
+
+    assert(Enum.count(user.sites) == 2)
+  end
 
   test "changeset with valid attributes" do
     changeset = User.changeset(%User{}, @valid_attrs)

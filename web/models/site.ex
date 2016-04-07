@@ -2,6 +2,7 @@ defmodule PhxOembed.Site do
   use PhxOembed.Web, :model
 
   schema "sites" do
+    belongs_to :user, PhxOembed.User
     has_many :cards, PhxOembed.Card
     field :domain,        :string, null: false
     field :protocol,      :string, null: false, default: "http"

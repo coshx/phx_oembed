@@ -1,6 +1,7 @@
 defmodule PhxOembed.User do
   use PhxOembed.Web, :model
   schema "users" do
+    has_many :sites, PhxOembed.Site
     field :first_name,            :string, default: ""
     field :last_name,             :string, default: ""
     field :email,                 :string, null: false
