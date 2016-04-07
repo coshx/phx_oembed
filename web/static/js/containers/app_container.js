@@ -1,7 +1,6 @@
 import React            from "react";
 import { connect }      from "react-redux";
 import sessionActions   from "../actions/sessions";
-import rehydrateActions from "../actions/rehydrate";
 import Nav              from "../components/nav";
 import Flash            from "../components/flash";
 
@@ -27,13 +26,6 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 class AppContainer extends React.Component {
-
-  componentDidMount() {
-    const token = localStorage.getItem("phxAuthToken");
-    if (token && this.props.signedIn == false) {
-      this.props.rehydrateStore();
-    }
-  }
 
   render() {
     return (

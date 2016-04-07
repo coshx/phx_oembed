@@ -10,6 +10,9 @@ export default class Flash extends React.Component {
     }
   }
 
+  /* by setting the state strings to "" in the constructor, and using this
+   * function, we assure the flash state will be set to not display on page
+   * refresh or change */
   componentWillReceiveProps(nextProps) {
     this.setState({
       message: nextProps.message,

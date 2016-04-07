@@ -72,44 +72,6 @@ function appReducer(state = initialState, action) {
         }
       })
 
-    case Constants.ACTIONS.REHYDRATE_REQUEST:
-      return Object.assign({}, state, {
-        isFetching: true,
-        flash: {
-          flashType: "",
-          message: ""
-        },
-        session: {
-          signedIn: false,
-          user: {}
-        }
-      })
-
-    case Constants.ACTIONS.REHYDRATE_SUCCESS:
-      return Object.assign({}, state, {
-        isFetching: false,
-        flash: {
-          flashType: "",
-          message: ""
-        },
-        session: {
-          signedIn: true,
-          user: action.user
-        }
-      })
-
-    case Constants.ACTIONS.REHYDRATE_FAILURE:
-      return Object.assign({}, state, {
-        isFetching: false,
-        flash: {
-          flashType: "error",
-          message: "Something went wrong. Please sign in again"
-        },
-        session: {
-          signedIn: false,
-          user: {}
-        }
-      })
     default:
       return state
   }
