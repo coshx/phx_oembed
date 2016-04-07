@@ -4,7 +4,9 @@
   display: block;
   margin-bottom: $base-spacing / 2;
   padding: $base-spacing / 2;
-  text-align: center;
+  @include display(flex);
+  @include justify-content(center);
+  @include flex-grow(4);
 
   a {
     color: darken($color, 70%);
@@ -32,3 +34,6 @@
 .flash-success {
   @include flash($success-color);
 }
+
+.flash-message { margin-right: auto; }
+#flash .close-button a { text-decoration: none; }
