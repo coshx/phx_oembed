@@ -1,16 +1,6 @@
 import Constants from "../constants";
 
-const initialState = {
-  isFetching: false,
-  flash: {
-    flashType: "",
-    message: ""
-  },
-  session: {
-    signedIn: false,
-    user: {}
-  }
-};
+const initialState = Constants.DEFAULT_STATE;
 
 function appReducer(state = initialState, action) {
   switch (action.type) {

@@ -6,6 +6,8 @@ import { Provider }                     from "react-redux";
 import thunk                            from "redux-thunk";
 import createLogger                     from "redux-logger";
 import { Router, Route, hashHistory }   from "react-router";
+import Utils                            from "./utils";
+import Constants                        from "./constants";
 import appReducer                       from "./reducers/app_reducer";
 import AppContainer                     from "./containers/app_container";
 import AuthenticatedContainer           from "./containers/authenticated_container";
@@ -13,12 +15,15 @@ import SignInContainer                  from "./containers/sign_in_container";
 
 function persistStore() {
   const stringifiedState = JSON.stringify(store.getState());
-  localStorage.setItem("appState", stringifiedState);
+  Utils.debounce(localStorage.setItem("appState", stringifiedState));
 }
 
+const defaultState = Constants.DEFAULT_STATE;
 const persistedState = JSON.parse(localStorage.getItem("appState"));
+const initialState = persistedState == null ? defaultState : persistedState;
+
 const logger = createLogger();
-const store = createStore(appReducer, persistedState, applyMiddleware(thunk, logger));
+const store = createStore(appReducer, initialState, applyMiddleware(thunk, logger));
 store.subscribe(persistStore);
 
 ReactDOM.render(

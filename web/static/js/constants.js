@@ -1,4 +1,15 @@
 const Constants = {
+  DEFAULT_STATE: {
+    isFetching: false,
+    flash: {
+      flashType: "",
+      message: ""
+    },
+    session: {
+      signedIn: false,
+      user: {}
+    }
+  },
   ACTIONS: {
     NEW_SESSION_REQUEST:      "NEW_SESSION_REQUEST",
     NEW_SESSION_SUCCESS:      "NEW_SESSION_SUCCESS",

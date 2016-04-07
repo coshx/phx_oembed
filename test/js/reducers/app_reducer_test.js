@@ -1,19 +1,10 @@
 import expect                   from "expect";
+import Constants                from "../../../web/static/js/constants";
 import appReducer               from "../../../web/static/js/reducers/app_reducer";
 import * as sessionActions      from "../../../web/static/js/actions/sessions";
 import * as siteActions         from "../../../web/static/js/actions/sites";
 
-const initialState = {
-  isFetching: false,
-  flash: {
-    flashType: "",
-    message: ""
-  },
-  session: {
-    signedIn: false,
-    user: {}
-  }
-};
+const initialState = Constants.DEFAULT_STATE;
 
 describe("appReducer", () => {
   it("should return the initial state", () => {
