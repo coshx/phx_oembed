@@ -3,6 +3,7 @@ defmodule PhxOembed.SiteView do
 
   def render("show.json", %{site: site}) do
     %{
+      id: site.id,
       domain: site.domain,
       protocol: site.protocol
     }
