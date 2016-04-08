@@ -1,18 +1,18 @@
 defmodule PhxOembed.Authorization do
 
-  def authorize(:site, :create, site, user) do
+  def authorize(:site, :create, user, site) do
     site.user_id == user.id
   end
 
-  def authorize(:site, :show, site, user) do
+  def authorize(:site, :show, user, site) do
     site.user_id == user.id
   end
 
-  def authorize(:site, :update, site, user) do
+  def authorize(:site, :update, user, site) do
     site.user_id == user.id
   end
 
-  def authorize(:site, :delete, site, user) do
+  def authorize(:site, :delete, user, site) do
     site.user_id == user.id
   end
 

@@ -13,7 +13,7 @@ defmodule PhxOembed.AuthorizationTest do
     user = build(:user) |> set_password("password") |> create()
     site = create(:site, user: user)
 
-    auth = Authorization.authorize(:site, :create, site, user)
+    auth = Authorization.authorize(:site, :create, user, site)
     assert auth == true
   end
 
@@ -21,7 +21,7 @@ defmodule PhxOembed.AuthorizationTest do
     user = build(:user) |> set_password("password") |> create()
     site = create(:site)
 
-    auth = Authorization.authorize(:site, :create, site, user)
+    auth = Authorization.authorize(:site, :create, user, site)
     assert auth == false
   end
 
@@ -29,7 +29,7 @@ defmodule PhxOembed.AuthorizationTest do
     user = build(:user) |> set_password("password") |> create()
     site = create(:site, user: user)
 
-    auth = Authorization.authorize(:site, :show, site, user)
+    auth = Authorization.authorize(:site, :show, user, site)
     assert auth == true
   end
 
@@ -37,7 +37,7 @@ defmodule PhxOembed.AuthorizationTest do
     user = build(:user) |> set_password("password") |> create()
     site = create(:site)
 
-    auth = Authorization.authorize(:site, :show, site, user)
+    auth = Authorization.authorize(:site, :show, user, site)
     assert auth == false
   end
 
@@ -45,7 +45,7 @@ defmodule PhxOembed.AuthorizationTest do
     user = build(:user) |> set_password("password") |> create()
     site = create(:site, user: user)
 
-    auth = Authorization.authorize(:site, :update, site, user)
+    auth = Authorization.authorize(:site, :update, user, site)
     assert auth == true
   end
 
@@ -53,7 +53,7 @@ defmodule PhxOembed.AuthorizationTest do
     user = build(:user) |> set_password("password") |> create()
     site = create(:site)
 
-    auth = Authorization.authorize(:site, :update, site, user)
+    auth = Authorization.authorize(:site, :update, user, site)
     assert auth == false
   end
 
@@ -61,7 +61,7 @@ defmodule PhxOembed.AuthorizationTest do
     user = build(:user) |> set_password("password") |> create()
     site = create(:site, user: user)
 
-    auth = Authorization.authorize(:site, :delete, site, user)
+    auth = Authorization.authorize(:site, :delete, user, site)
     assert auth == true
   end
 
@@ -69,7 +69,7 @@ defmodule PhxOembed.AuthorizationTest do
     user = build(:user) |> set_password("password") |> create()
     site = create(:site)
 
-    auth = Authorization.authorize(:site, :delete, site, user)
+    auth = Authorization.authorize(:site, :delete, user, site)
     assert auth == false
   end
 end

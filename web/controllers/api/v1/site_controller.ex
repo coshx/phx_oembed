@@ -10,7 +10,7 @@ defmodule PhxOembed.SiteController do
     site = Repo.get(Site, id)
     user = Guardian.Plug.current_resource(conn)
 
-    case Authorization.authorize(:site, :show, site, user) do
+    case Authorization.authorize(:site, :show, user, site) do
       true ->
         conn
         |> put_status(:ok)
