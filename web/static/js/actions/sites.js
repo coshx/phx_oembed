@@ -1,4 +1,5 @@
 import Constants        from "../constants";
+import Utils            from "../utils";
 
 export function getSitesRequest() {
   return({
@@ -26,5 +27,27 @@ export function getSitesFailure() {
 
 const SiteActions = {
 
+  getSites: function() {
+    return function(dispatch) {
+      dispatch(getSitesRequest());
 
+      const requestOpts = Utils.makeRequestOptions("GET");
+
+      fetch(Constants.ROUTES.SITES, requestOpts)
+      .then((response) => {
+        if (response.status == 200)
+          return response.json()
+        else
+          throw "";
+      })
+      .then((json) => {
+        dispatch(getSitesSuccess(json));
+      })
+      .catch((message) => {
+        dispatch(getSitesFailure());
+      });
+    };
+  }
 }
+
+export default SiteActions

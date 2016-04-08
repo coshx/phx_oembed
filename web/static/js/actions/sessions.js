@@ -54,7 +54,7 @@ const SessionActions = {
     return function(dispatch) {
       /* dispatch an action to update the app state to inform that an api call
        * is happening */
-      dispatch(newSessionRequest);
+      dispatch(newSessionRequest());
 
       /* make the api request */
       const sessionData = { session: { email: email, password: password } };
@@ -79,7 +79,7 @@ const SessionActions = {
           dispatch(newSessionFailure(message));
         else
           dispatch(newSessionFailure("Something went wrong"));
-      })
+      });
     };
   },
 

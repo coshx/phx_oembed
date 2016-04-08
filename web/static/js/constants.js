@@ -23,7 +23,8 @@ const Constants = {
   },
   ROUTES: {
     SESSION:      "/api/v1/sessions",
-    CURRENT_USER: "/api/v1/current_user"
+    CURRENT_USER: "/api/v1/current_user",
+    SITES:        "/api/v1/sites"
   },
   PAGES: {
     SIGN_IN:  "/sign_in",

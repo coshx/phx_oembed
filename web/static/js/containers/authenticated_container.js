@@ -1,23 +1,31 @@
 import React          from "react";
 import { connect }    from "react-redux";
-import SessionActions from "../actions/sessions";
+import SiteActions    from "../actions/sites";
 import SiteList       from "../components/site_list";
 
 const mapStateToProps = (state) => {
-  return { session: state.session }
+  return { session: state.session, sites: state.sites }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    getSites: () => {
+      dispatch(SiteActions.getSites());
+    }
+  }
 }
 
 class AuthenticatedContainer extends React.Component {
+
+  componentWillMount() {
+    this.props.getSites();
+  }
 
   render() {
     if (this.props.session.signedIn == true)
       return (
         <div className="authenticated-container">
-          <SiteList />
+          <SiteList sites={this.props.sites} />
         </div>
       );
     else
