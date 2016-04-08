@@ -12,7 +12,42 @@
 alias PhxOembed.{Repo, Card, List, User}
 
 user_attrs = %{first_name: "Jose", last_name: "Valim",
-               email: "example@example.com", password: "password",
+               email: "example223@example.com", password: "password",
                password_confirmation: "password"}
 user_changeset = User.changeset(%User{}, user_attrs)
-Repo.insert!(user_changeset)
+
+user = Repo.insert!(user_changeset)
+
+site = user
+|> Ecto.build_assoc(:sites, %{domain: "example.com", protocol: "https"})
+|> Repo.insert!
+
+site
+|> Ecto.build_assoc(:cards, %{path: "/foo", card_type: "twitter"})
+|> Repo.insert!
+
+site = user
+|> Ecto.build_assoc(:sites, %{domain: "example.org", protocol: "http"})
+|> Repo.insert!
+
+site
+|> Ecto.build_assoc(:cards, %{path: "/baz", card_type: "twitter"})
+|> Repo.insert!
+
+site = user
+|> Ecto.build_assoc(:sites, %{domain: "foo.com", protocol: "https"})
+|> Repo.insert!
+
+
+site
+|> Ecto.build_assoc(:cards, %{path: "/cats", card_type: "twitter"})
+|> Repo.insert!
+
+site = user
+|> Ecto.build_assoc(:sites, %{domain: "bar.com", protocol: "https"})
+|> Repo.insert!
+
+
+site
+|> Ecto.build_assoc(:cards, %{path: "/dogs", card_type: "twitter"})
+|> Repo.insert!
