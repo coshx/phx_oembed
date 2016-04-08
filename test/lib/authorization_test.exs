@@ -1,6 +1,6 @@
 defmodule PhxOembed.AuthorizationTest do
   use PhxOembed.ModelCase
-  alias PhxOembed.{Authorization, Site}
+  alias PhxOembed.Authorization
   import PhxOembed.Factory
   require IEx
 
@@ -72,5 +72,4 @@ defmodule PhxOembed.AuthorizationTest do
     auth = Authorization.authorize(:site, :delete, site, user)
     assert auth == false
   end
-  
 end
