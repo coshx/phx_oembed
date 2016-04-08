@@ -20,7 +20,17 @@ nav .user-menu {
   margin-left: auto;
 }
 
-.sign-in-form {
-  @include span-columns(6);
-  @include shift(3);
+/* Sign in form */
+@media screen and (min-width: $medium-screen) {
+  .sign-in-form {
+    @include span-columns(8);
+    @include shift(2);
+  }
+}
+
+@media screen and (min-width: $large-screen) {
+  .sign-in-form {
+    @include span-columns(6);
+    @include shift(3);
+  }
 }
