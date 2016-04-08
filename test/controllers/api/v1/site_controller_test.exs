@@ -37,4 +37,22 @@ defmodule PhxOembed.SiteControllerTest do
     assert resp["protocol"] == site.protocol
   end
 
+  test "INDEX - not signed in", %{conn: conn} do
+    conn
+    |> get(site_path(Endpoint, :index))
+    |> json_response(:forbidden)
+  end
+
+  test "INDEX - signed in", %{conn: conn, user: user} do
+    token = TestUtils.get_user_token(user)
+    create(:site, user: user)
+    create(:site, user: user)
+
+    resp = conn
+    |> put_req_header("authorization", token)
+    |> get(site_path(Endpoint, :index))
+    |> json_response(:ok)
+
+    assert(Enum.count(resp) == 2)
+  end
 end

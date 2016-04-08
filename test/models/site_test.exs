@@ -3,7 +3,6 @@ defmodule PhxOembed.SiteTest do
   import PhxOembed.Factory
 
   alias PhxOembed.Site
-
   @valid_attrs %{domain: "example.com", protocol: "https"}
   @invalid_attrs %{domain: "", protocol: ""}
 

@@ -7,4 +7,8 @@ defmodule PhxOembed.SiteView do
       protocol: site.protocol
     }
   end
+
+  def render("index.json", %{sites: sites}) do
+    render_many(sites, PhxOembed.SiteView, "show.json")
+  end
 end

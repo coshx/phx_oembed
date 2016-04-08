@@ -22,4 +22,23 @@ defmodule PhxOembed.SiteController do
         |> render(PhxOembed.SessionView, "error.json", error: "Not authorized")
     end
   end
+
+  def index(conn, %{}) do
+    user = Guardian.Plug.current_resource(conn)
+    |> Repo.preload(:sites)
+
+    sites = user.sites
+ 
+    case Authorization.authorize(:site, :index, user) do
+      true ->
+        conn
+        |> put_status(:ok)
+        |> render("index.json", sites: sites)
+
+      false ->
+        conn
+        |> put_status(:forbidden)
+        |> render(PhxOembed.SessionView, "error.json", error: "Not authorized")
+    end
+  end
 end
