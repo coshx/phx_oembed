@@ -57,6 +57,13 @@ defmodule PhxOembed.AuthorizationTest do
     assert auth == false
   end
 
+  test "Site INDEX" do
+    user = build(:user) |> set_password("password") |> create()
+
+    auth = Authorization.authorize(:site, :index, user)
+    assert auth == true
+  end
+
   test "Site DELETE when the user owns the site" do
     user = build(:user) |> set_password("password") |> create()
     site = create(:site, user: user)
