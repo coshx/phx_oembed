@@ -11,6 +11,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getSites: () => {
       dispatch(SiteActions.getSites());
+    },
+    addNewSite: (e) => {
+      e.preventDefault();
+      console.log("woot");
     }
   }
 }
@@ -25,7 +29,8 @@ class AuthenticatedContainer extends React.Component {
     if (this.props.session.signedIn == true)
       return (
         <div className="authenticated-container">
-          <SiteList sites={this.props.sites} />
+          <SiteList addNewSite={this.props.addNewSite}
+                    sites={this.props.sites} />
         </div>
       );
     else

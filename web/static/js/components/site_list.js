@@ -1,7 +1,17 @@
-import React        from "react";
-import Site         from "./site";
+import React              from "react";
+import Site               from "./site";
+import NewSiteForm        from "./new_site_form";
 
 export default class SiteList extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {displayNewSiteForm: false};
+  }
+
+  toggleNewSiteForm(e) {
+    this.setState({displayNewSiteForm: !this.state.displayNewSiteForm})
+  }
 
   buildSiteList() {
     return(this.props.sites.map(function(site) {
@@ -11,9 +21,11 @@ export default class SiteList extends React.Component {
 
   render() {
     return(
-      <div className="site-list">
-        <h1>Sites</h1>
-        {this.buildSiteList()}
+      <div>
+        <NewSiteForm onSubmit={this.props.addNewSite} />
+        <div className="site-list">
+          {this.buildSiteList()}
+        </div>
       </div>
     );
   }
