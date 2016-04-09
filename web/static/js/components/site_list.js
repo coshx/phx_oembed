@@ -18,3 +18,7 @@ export default class SiteList extends React.Component {
     );
   }
 }
+
+SiteList.propTypes ={
+  sites: React.PropTypes.array.isRequired
+};
