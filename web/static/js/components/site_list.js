@@ -9,10 +9,6 @@ export default class SiteList extends React.Component {
     this.state = {displayNewSiteForm: false};
   }
 
-  toggleNewSiteForm(e) {
-    this.setState({displayNewSiteForm: !this.state.displayNewSiteForm})
-  }
-
   buildSiteList() {
     return(this.props.sites.map(function(site) {
       return(<Site key={site.id} site={site} />);

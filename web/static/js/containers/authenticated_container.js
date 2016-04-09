@@ -12,8 +12,7 @@ const mapDispatchToProps = (dispatch) => {
     getSites: () => {
       dispatch(SiteActions.getSites());
     },
-    addNewSite: (e) => {
-      e.preventDefault();
+    addNewSite: () => {
       console.log("woot");
     }
   }
