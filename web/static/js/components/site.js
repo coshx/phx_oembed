@@ -14,4 +14,4 @@ export default class Site extends React.Component {
 
 Site.propTypes = {
   site: React.PropTypes.object.isRequired
-}
+};
