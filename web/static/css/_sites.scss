@@ -1,0 +1,10 @@
+.site-list .site {
+  border-bottom: 1px solid $medium-gray;
+}
+
+.site-list .site a {
+  &:hover {background-color: $light-gray;}
+  padding: 1.5% 1%;
+  display: block;
+  color: $dark-gray;
+}

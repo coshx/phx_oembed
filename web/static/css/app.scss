@@ -2,6 +2,7 @@
 @import "bourbon-neat/app/assets/stylesheets/neat";
 @import "base/base";
 @import "flash";
+@import "sites";
 
 #main-container {
   @include outer-container(85%);
@@ -18,6 +19,10 @@ nav {
 
 nav .user-menu {
   margin-left: auto;
+}
+
+nav .app-logo {
+  font-size: 1.5em;
 }
 
 /* Sign in form */
