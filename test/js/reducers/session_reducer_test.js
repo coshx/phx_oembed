@@ -1,19 +1,19 @@
 import expect                   from "expect";
 import Constants                from "../../../web/static/js/constants";
-import appReducer               from "../../../web/static/js/reducers/app_reducer";
+import sessionReducer           from "../../../web/static/js/reducers/session_reducer";
 import * as sessionActions      from "../../../web/static/js/actions/sessions";
 import * as siteActions         from "../../../web/static/js/actions/sites";
 
 const initialState = Constants.DEFAULT_STATE;
 
-describe("appReducer", () => {
+describe("sessionReducer", () => {
   it("should return the initial state", () => {
-    const returnedState = appReducer(undefined, {});
+    const returnedState = sessionReducer(undefined, {});
     expect(returnedState).toEqual(initialState);
   })
 
   it("should handle NEW_SESSION_REQUEST", () => {
-    const returnedState = appReducer(undefined, sessionActions.newSessionRequest());
+    const returnedState = sessionReducer(undefined, sessionActions.newSessionRequest());
     expect(returnedState).toEqual({
       isFetching: true,
       flash: {
@@ -29,7 +29,7 @@ describe("appReducer", () => {
 
   it("should handle NEW_SESSION_SUCCESS", () => {
     const user = {id: 3, email: "example@example.com"};
-    const returnedState = appReducer(undefined, sessionActions.newSessionSuccess(user));
+    const returnedState = sessionReducer(undefined, sessionActions.newSessionSuccess(user));
     expect(returnedState).toEqual({
       isFetching: false,
       flash: {
@@ -45,7 +45,7 @@ describe("appReducer", () => {
 
   it("should handle NEW_SESSION_FAILURE", () => {
     const msg = "Something went wrong"
-    const returnedState = appReducer(undefined, sessionActions.newSessionFailure(msg));
+    const returnedState = sessionReducer(undefined, sessionActions.newSessionFailure(msg));
     expect(returnedState).toEqual({
       isFetching: false,
       flash: {
@@ -60,7 +60,7 @@ describe("appReducer", () => {
   })
 
   it("should handle DESTROY_SESSION_REQUEST", () => {
-    const returnedState = appReducer(undefined, sessionActions.destroySessionRequest());
+    const returnedState = sessionReducer(undefined, sessionActions.destroySessionRequest());
     expect(returnedState).toEqual({
       isFetching: true,
       flash: {
@@ -75,7 +75,7 @@ describe("appReducer", () => {
   })
 
   it("should handle DESTROY_SESSION_SUCCESS", () => {
-    const returnedState = appReducer(undefined, sessionActions.destroySessionSuccess());
+    const returnedState = sessionReducer(undefined, sessionActions.destroySessionSuccess());
     expect(returnedState).toEqual({
       isFetching: false,
       flash: {
@@ -91,7 +91,7 @@ describe("appReducer", () => {
 
   it("should handle DESTROY_SESSION_FAILURE", () => {
     const msg = "some message";
-    const returnedState = appReducer(undefined, sessionActions.destroySessionFailure(msg));
+    const returnedState = sessionReducer(undefined, sessionActions.destroySessionFailure(msg));
     expect(returnedState).toEqual({
       isFetching: false,
       flash: {

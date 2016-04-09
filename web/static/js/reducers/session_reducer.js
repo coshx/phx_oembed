@@ -2,7 +2,7 @@ import Constants from "../constants";
 
 const initialState = Constants.DEFAULT_STATE;
 
-function appReducer(state = initialState, action) {
+function sessionReducer(state = initialState, action) {
   switch (action.type) {
     case Constants.ACTIONS.NEW_SESSION_REQUEST:
       return Object.assign({}, state, {isFetching: true})
@@ -67,4 +67,4 @@ function appReducer(state = initialState, action) {
   }
 };
 
-export default appReducer
+export default sessionReducer

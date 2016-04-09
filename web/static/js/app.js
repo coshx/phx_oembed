@@ -8,7 +8,7 @@ import createLogger                     from "redux-logger";
 import { Router, Route, hashHistory }   from "react-router";
 import Utils                            from "./utils";
 import Constants                        from "./constants";
-import appReducer                       from "./reducers/app_reducer";
+import sessionReducer                   from "./reducers/session_reducer";
 import AppContainer                     from "./containers/app_container";
 import AuthenticatedContainer           from "./containers/authenticated_container";
 import SignInContainer                  from "./containers/sign_in_container";
@@ -23,7 +23,7 @@ const persistedState = JSON.parse(localStorage.getItem("appState"));
 const initialState = persistedState == null ? defaultState : persistedState;
 
 const logger = createLogger();
-const store = createStore(appReducer, initialState, applyMiddleware(thunk, logger));
+const store = createStore(sessionReducer, initialState, applyMiddleware(thunk, logger));
 store.subscribe(persistStore);
 
 ReactDOM.render(

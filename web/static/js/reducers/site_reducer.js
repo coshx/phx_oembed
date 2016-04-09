@@ -24,7 +24,6 @@ function siteReducer(state = initialState, action) {
 
     default:
       return state
-
   }
 };
 
