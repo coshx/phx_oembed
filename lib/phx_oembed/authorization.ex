@@ -16,7 +16,7 @@ defmodule PhxOembed.Authorization do
     site.user_id == user.id
   end
 
-  def authorize(:site, :index, user) do
+  def authorize(:site, :index, _user) do
     true
   end
 
