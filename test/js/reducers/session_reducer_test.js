@@ -7,24 +7,10 @@ import * as siteActions         from "../../../web/static/js/actions/sites";
 const initialState = Constants.DEFAULT_STATE;
 
 describe("sessionReducer", () => {
-  it("should return the initial state", () => {
-    const returnedState = sessionReducer(undefined, {});
-    expect(returnedState).toEqual(initialState);
-  })
 
   it("should handle NEW_SESSION_REQUEST", () => {
     const returnedState = sessionReducer(undefined, sessionActions.newSessionRequest());
-    expect(returnedState).toEqual({
-      isFetching: true,
-      flash: {
-        flashType: "",
-        message: ""
-      },
-      session: {
-        signedIn: false,
-        user: {}
-      }
-    });
+    expect(returnedState).toEqual({isFetching: true });
   })
 
   it("should handle NEW_SESSION_SUCCESS", () => {
@@ -61,17 +47,7 @@ describe("sessionReducer", () => {
 
   it("should handle DESTROY_SESSION_REQUEST", () => {
     const returnedState = sessionReducer(undefined, sessionActions.destroySessionRequest());
-    expect(returnedState).toEqual({
-      isFetching: true,
-      flash: {
-        flashType: "",
-        message: ""
-      },
-      session: {
-        signedIn: false,
-        user: {}
-      }
-    });
+    expect(returnedState).toEqual({isFetching: true});
   })
 
   it("should handle DESTROY_SESSION_SUCCESS", () => {

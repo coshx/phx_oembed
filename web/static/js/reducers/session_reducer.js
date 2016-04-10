@@ -1,8 +1,6 @@
 import Constants from "../constants";
 
-const initialState = Constants.DEFAULT_STATE;
-
-function sessionReducer(state = initialState, action) {
+function sessionReducer(state, action) {
   switch (action.type) {
     case Constants.ACTIONS.NEW_SESSION_REQUEST:
       return Object.assign({}, state, {isFetching: true})

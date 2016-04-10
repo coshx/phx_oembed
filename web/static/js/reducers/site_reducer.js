@@ -1,8 +1,6 @@
 import Constants from "../constants";
 
-const initialState = Constants.DEFAULT_STATE;
-
-function siteReducer(state = initialState, action) {
+function siteReducer(state, action) {
   switch(action.type) {
     case Constants.ACTIONS.GET_SITES_REQUEST:
       return Object.assign({}, state, {isFetching: true})
