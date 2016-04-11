@@ -8,10 +8,6 @@ function sessionReducer(state = {}, action) {
     case Constants.ACTIONS.NEW_SESSION_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        flash: {
-          flashType: "success",
-          message: "Successfully signed in"
-        },
         session: {
           signedIn: true,
           user: action.user
@@ -21,10 +17,6 @@ function sessionReducer(state = {}, action) {
     case Constants.ACTIONS.NEW_SESSION_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        flash: {
-          flashType: "error",
-          message: action.msg
-        },
         session: {
           signedIn: false,
           user: {}
@@ -37,10 +29,6 @@ function sessionReducer(state = {}, action) {
     case Constants.ACTIONS.DESTROY_SESSION_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
-        flash: {
-          flashType: "success",
-          message: "Successfully signed out"
-        },
         session: {
           signedIn: false,
           user: {}
@@ -50,10 +38,6 @@ function sessionReducer(state = {}, action) {
     case Constants.ACTIONS.DESTROY_SESSION_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        flash: {
-          flashType: "error",
-          message: action.msg
-        },
         session: {
           signedIn: false,
           user: {}

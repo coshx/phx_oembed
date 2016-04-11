@@ -12,6 +12,9 @@ const Constants = {
     sites: []
   },
   ACTIONS: {
+    FLASH_SUCCESS:            "FLASH_SUCCESS",
+    FLASH_ERROR:              "FLASH_ERROR",
+    FLASH_CLEAR:              "FLASH_CLEAR",
     NEW_SESSION_REQUEST:      "NEW_SESSION_REQUEST",
     NEW_SESSION_SUCCESS:      "NEW_SESSION_SUCCESS",
     NEW_SESSION_FAILURE:      "NEW_SESSION_FAILURE",

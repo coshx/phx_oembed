@@ -26,12 +26,6 @@ describe("siteReduer", () => {
 
   it("should handle GET_SITES_FAILURE", () => {
     const returnedState = siteReducer(undefined, siteActions.getSitesFailure());
-    expect(returnedState).toEqual({
-      isFetching: false,
-      flash: {
-        flashType: "error",
-        message: "Error retrieving site list"
-      }
-    });
+    expect(returnedState).toEqual({isFetching: false});
   })
 });

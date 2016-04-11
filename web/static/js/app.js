@@ -24,7 +24,10 @@ const persistedState = JSON.parse(localStorage.getItem("appState"));
 const initialState = persistedState == null ? defaultState : persistedState;
 
 const appReducer = combineReducers(
-  {session: sessionReducer, sites: sitesReducer }
+  {
+    session: sessionReducer,
+    sites: sitesReducer 
+  }
 );
 
 const logger = createLogger();

@@ -2,7 +2,6 @@ import expect                   from "expect";
 import Constants                from "../../../web/static/js/constants";
 import sessionReducer           from "../../../web/static/js/reducers/session_reducer";
 import * as sessionActions      from "../../../web/static/js/actions/sessions";
-import * as siteActions         from "../../../web/static/js/actions/sites";
 
 const initialState = Constants.DEFAULT_STATE;
 
@@ -23,10 +22,6 @@ describe("sessionReducer", () => {
     const returnedState = sessionReducer(undefined, sessionActions.newSessionSuccess(user));
     expect(returnedState).toEqual({
       isFetching: false,
-      flash: {
-        flashType: "success",
-        message: "Successfully signed in"
-      },
       session: {
         signedIn: true,
         user: user
@@ -39,10 +34,6 @@ describe("sessionReducer", () => {
     const returnedState = sessionReducer(undefined, sessionActions.newSessionFailure(msg));
     expect(returnedState).toEqual({
       isFetching: false,
-      flash: {
-        flashType: "error",
-        message: msg
-      },
       session: {
         signedIn: false,
         user: {}
@@ -59,10 +50,6 @@ describe("sessionReducer", () => {
     const returnedState = sessionReducer(undefined, sessionActions.destroySessionSuccess());
     expect(returnedState).toEqual({
       isFetching: false,
-      flash: {
-        flashType: "success",
-        message: "Successfully signed out"
-      },
       session: {
         signedIn: false,
         user: {}
@@ -75,10 +62,6 @@ describe("sessionReducer", () => {
     const returnedState = sessionReducer(undefined, sessionActions.destroySessionFailure(msg));
     expect(returnedState).toEqual({
       isFetching: false,
-      flash: {
-        flashType: "error",
-        message: msg
-      },
       session: {
         signedIn: false,
         user: {}

@@ -14,10 +14,6 @@ function siteReducer(state = [], action) {
     case Constants.ACTIONS.GET_SITES_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
-        flash: {
-          flashType: "error",
-          message: "Error retrieving site list"
-        }
       })
 
     default:
