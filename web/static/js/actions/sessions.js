@@ -1,6 +1,8 @@
-import Constants        from "../constants";
-import Utils            from "../utils";
-import { hashHistory }  from "react-router";
+import Constants              from "../constants";
+import Utils                  from "../utils";
+import { hashHistory }        from "react-router";
+import * as requestActions    from "./request";
+import * as flashActions      from "./flash";
 
 export function newSessionSuccess(user) {
   return {
@@ -47,6 +49,7 @@ const SessionActions = {
     return function(dispatch) {
       /* dispatch an action to update the app state to inform that an api call
        * is happening */
+      dispatch(requestActions.requestStart("NEW_SESSION"));
 
       /* make the api request */
       const sessionData = { session: { email: email, password: password } };
@@ -55,7 +58,7 @@ const SessionActions = {
       fetch(Constants.ROUTES.SESSION, requestOpts)
       .then((response) => {
         if (response.status == 201)
-          return response.json()
+                    return response.json();
         else if (response.status == 422)
           throw "Invalid credentials";
         else
@@ -64,13 +67,14 @@ const SessionActions = {
       .then((json) => {
         localStorage.setItem("phxAuthToken", json.jwt);
         dispatch(newSessionSuccess(json.user));
+        dispatch(requestActions.requestEnd());
+        dispatch(flashActions.flashSuccess("Successfuly signed in"));
         hashHistory.push(Constants.PAGES.SITES);
       })
       .catch((message) => {
-        if (message == "Invalid credentials")
-          dispatch(newSessionFailure(message));
-        else
-          dispatch(newSessionFailure("Something went wrong"));
+        dispatch(requestActions.requestEnd());
+        dispatch(flashActions.flashSuccess(message));
+        dispatch(newSessionFailure(message));
       });
     };
   },

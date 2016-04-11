@@ -1,8 +1,9 @@
-import React            from "react";
-import { connect }      from "react-redux";
-import sessionActions   from "../actions/sessions";
-import Nav              from "../components/nav";
-import Flash            from "../components/flash";
+import React              from "react";
+import { connect }        from "react-redux";
+import sessionActions     from "../actions/sessions";
+import * as flashActions  from "../actions/flash";
+import Nav                from "../components/nav";
+import Flash              from "../components/flash";
 
 const mapStateToProps = (state) => {
   return {
@@ -19,8 +20,9 @@ const mapDispatchToProps = (dispatch) => {
       e.preventDefault();
       dispatch(sessionActions.signOutUser());
     },
-    rehydrateStore: () => {
-      dispatch(rehydrateActions.rehydrateStore());
+    closeFlash: (e) => {
+      e.preventDefault();
+      dispatch(flashActions.flashClear());
     }
   }
 }
@@ -35,7 +37,8 @@ class AppContainer extends React.Component {
 
         <div id="app-main">
           <Flash flashType={this.props.flashType}
-                 message={this.props.flashMsg}/>
+                 message={this.props.flashMsg}
+                 closeFlash={this.props.closeFlash}/>
           {this.props.children}
         </div>
       </div>

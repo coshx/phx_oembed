@@ -1,5 +1,7 @@
 import Constants        from "../constants";
 import Utils            from "../utils";
+import * as requestActions    from "./request";
+import * as flashActions      from "./flash";
 
 export function getSitesSuccess(sites) {
   return({
@@ -22,6 +24,8 @@ const SiteActions = {
 
   getSites: function() {
     return function(dispatch) {
+      dispatch(requestActions.requestStart("GET_SITES"));
+
       const requestOpts = Utils.makeRequestOptions("GET");
 
       fetch(Constants.ROUTES.SITES, requestOpts)
@@ -32,9 +36,12 @@ const SiteActions = {
           throw "";
       })
       .then((json) => {
+        dispatch(requestActions.requestEnd());
         dispatch(getSitesSuccess(json));
       })
       .catch((message) => {
+        dispatch(flashActions.flashError("Problem fetching sites"));
+        dispatch(requestActions.requestEnd());
         dispatch(getSitesFailure());
       });
     };

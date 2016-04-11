@@ -19,7 +19,7 @@ export function flashError(message) {
 
 }
 
-export function flashClear(message) {
+export function flashClear() {
   return(
     {
       type: Constants.ACTIONS.FLASH_CLEAR
