@@ -1,6 +1,6 @@
 import Constants from "../constants";
 
-function siteReducer(state, action) {
+function siteReducer(state = [], action) {
   switch(action.type) {
     case Constants.ACTIONS.GET_SITES_REQUEST:
       return Object.assign({}, state, {isFetching: true})

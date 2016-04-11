@@ -4,7 +4,13 @@ import siteReducer               from "../../../web/static/js/reducers/site_redu
 import * as siteActions         from "../../../web/static/js/actions/sites";
 
 describe("siteReduer", () => {
-    it("should handle GET_SITES_REQUEST", () => {
+
+  it("should return the default state with no match", () => {
+    const returnedState = siteReducer(undefined, {})
+    expect(returnedState).toEqual([])
+  })
+
+  it("should handle GET_SITES_REQUEST", () => {
     const returnedState = siteReducer(undefined, siteActions.getSitesRequest());
     expect(returnedState).toEqual({isFetching: true});
   })

@@ -8,6 +8,11 @@ const initialState = Constants.DEFAULT_STATE;
 
 describe("sessionReducer", () => {
 
+  it("should return the default state with no match", () => {
+    const returnedState = sessionReducer(undefined, {})
+    expect(returnedState).toEqual({})
+  })
+
   it("should handle NEW_SESSION_REQUEST", () => {
     const returnedState = sessionReducer(undefined, sessionActions.newSessionRequest());
     expect(returnedState).toEqual({isFetching: true });

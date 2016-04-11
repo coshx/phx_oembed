@@ -8,7 +8,8 @@ const Constants = {
     session: {
       signedIn: false,
       user: {}
-    }
+    },
+    sites: []
   },
   ACTIONS: {
     NEW_SESSION_REQUEST:      "NEW_SESSION_REQUEST",
