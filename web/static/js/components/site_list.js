@@ -10,7 +10,7 @@ export default class SiteList extends React.Component {
   }
 
   buildSiteList() {
-    return(this.props.sites.map(function(site) {
+    return(this.props.sites.siteList.map(function(site) {
       return(<Site key={site.id} site={site} />);
     }));
   }
@@ -28,5 +28,5 @@ export default class SiteList extends React.Component {
 }
 
 SiteList.propTypes ={
-  sites: React.PropTypes.array.isRequired
+  sites: React.PropTypes.object.isRequired
 };

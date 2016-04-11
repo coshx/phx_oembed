@@ -14,11 +14,8 @@ describe("sessionReducer", () => {
     const user = {id: 3, email: "example@example.com"};
     const returnedState = sessionReducer(undefined, sessionActions.newSessionSuccess(user));
     expect(returnedState).toEqual({
-      isFetching: false,
-      session: {
-        signedIn: true,
-        user: user
-      }
+      signedIn: true,
+      user: user
     });
   })
 
@@ -26,22 +23,16 @@ describe("sessionReducer", () => {
     const msg = "Something went wrong"
     const returnedState = sessionReducer(undefined, sessionActions.newSessionFailure(msg));
     expect(returnedState).toEqual({
-      isFetching: false,
-      session: {
-        signedIn: false,
-        user: {}
-      },
+      signedIn: false,
+      user: {}
     });
   })
 
   it("should handle DESTROY_SESSION_SUCCESS", () => {
     const returnedState = sessionReducer(undefined, sessionActions.destroySessionSuccess());
     expect(returnedState).toEqual({
-      isFetching: false,
-      session: {
-        signedIn: false,
-        user: {}
-      }
+      signedIn: false,
+      user: {}
     });
   })
 
@@ -49,11 +40,8 @@ describe("sessionReducer", () => {
     const msg = "some message";
     const returnedState = sessionReducer(undefined, sessionActions.destroySessionFailure(msg));
     expect(returnedState).toEqual({
-      isFetching: false,
-      session: {
-        signedIn: false,
-        user: {}
-      }
+      signedIn: false,
+      user: {}
     });
   })
 })

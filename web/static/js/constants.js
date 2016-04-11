@@ -12,7 +12,9 @@ const Constants = {
       signedIn: false,
       user: {}
     },
-    sites: []
+    sites: {
+      siteList: []
+    }
   },
   ACTIONS: {
     REQUEST_START:            "REQUEST_START",
