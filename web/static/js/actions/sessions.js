@@ -2,13 +2,6 @@ import Constants        from "../constants";
 import Utils            from "../utils";
 import { hashHistory }  from "react-router";
 
-export function newSessionRequest() {
-  return {
-    type: Constants.ACTIONS.NEW_SESSION_REQUEST,
-    sentAt: Date.now()
-  }
-}
-
 export function newSessionSuccess(user) {
   return {
     type: Constants.ACTIONS.NEW_SESSION_SUCCESS,
@@ -54,7 +47,6 @@ const SessionActions = {
     return function(dispatch) {
       /* dispatch an action to update the app state to inform that an api call
        * is happening */
-      dispatch(newSessionRequest());
 
       /* make the api request */
       const sessionData = { session: { email: email, password: password } };
@@ -85,7 +77,6 @@ const SessionActions = {
 
   signOutUser: function() {
     return function(dispatch) {
-      dispatch(destroySessionRequest);
 
       const requestOpts = Utils.makeRequestOptions("DELETE");
 

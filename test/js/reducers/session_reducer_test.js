@@ -3,18 +3,11 @@ import Constants                from "../../../web/static/js/constants";
 import sessionReducer           from "../../../web/static/js/reducers/session_reducer";
 import * as sessionActions      from "../../../web/static/js/actions/sessions";
 
-const initialState = Constants.DEFAULT_STATE;
-
 describe("sessionReducer", () => {
 
   it("should return the default state with no match", () => {
     const returnedState = sessionReducer(undefined, {})
     expect(returnedState).toEqual({})
-  })
-
-  it("should handle NEW_SESSION_REQUEST", () => {
-    const returnedState = sessionReducer(undefined, sessionActions.newSessionRequest());
-    expect(returnedState).toEqual({isFetching: true });
   })
 
   it("should handle NEW_SESSION_SUCCESS", () => {
@@ -39,11 +32,6 @@ describe("sessionReducer", () => {
         user: {}
       },
     });
-  })
-
-  it("should handle DESTROY_SESSION_REQUEST", () => {
-    const returnedState = sessionReducer(undefined, sessionActions.destroySessionRequest());
-    expect(returnedState).toEqual({isFetching: true});
   })
 
   it("should handle DESTROY_SESSION_SUCCESS", () => {

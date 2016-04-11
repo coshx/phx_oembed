@@ -10,11 +10,6 @@ describe("siteReduer", () => {
     expect(returnedState).toEqual([])
   })
 
-  it("should handle GET_SITES_REQUEST", () => {
-    const returnedState = siteReducer(undefined, siteActions.getSitesRequest());
-    expect(returnedState).toEqual({isFetching: true});
-  })
-
   it("should handle GET_SITES_SUCCESS", () => {
     const sites = [{domain: "example.com", protocol: "https"}]
     const returnedState = siteReducer(undefined, siteActions.getSitesSuccess(sites));

@@ -1,13 +1,6 @@
 import Constants        from "../constants";
 import Utils            from "../utils";
 
-export function getSitesRequest() {
-  return({
-    type: Constants.ACTIONS.GET_SITES_REQUEST,
-    sentAt: Date.now()
-  });
-}
-
 export function getSitesSuccess(sites) {
   return({
     type: Constants.ACTIONS.GET_SITES_SUCCESS,
@@ -29,8 +22,6 @@ const SiteActions = {
 
   getSites: function() {
     return function(dispatch) {
-      dispatch(getSitesRequest());
-
       const requestOpts = Utils.makeRequestOptions("GET");
 
       fetch(Constants.ROUTES.SITES, requestOpts)

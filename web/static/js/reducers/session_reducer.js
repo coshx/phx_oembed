@@ -2,9 +2,6 @@ import Constants from "../constants";
 
 function sessionReducer(state = {}, action) {
   switch (action.type) {
-    case Constants.ACTIONS.NEW_SESSION_REQUEST:
-      return Object.assign({}, state, {isFetching: true})
-
     case Constants.ACTIONS.NEW_SESSION_SUCCESS:
       return Object.assign({}, state, {
         isFetching: false,
@@ -22,9 +19,6 @@ function sessionReducer(state = {}, action) {
           user: {}
         }
       })
-
-    case Constants.ACTIONS.DESTROY_SESSION_REQUEST:
-      return Object.assign({}, state, {isFetching: true})
 
     case Constants.ACTIONS.DESTROY_SESSION_SUCCESS:
       return Object.assign({}, state, {

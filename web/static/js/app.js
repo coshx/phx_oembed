@@ -10,6 +10,8 @@ import Utils                            from "./utils";
 import Constants                        from "./constants";
 import sessionReducer                   from "./reducers/session_reducer";
 import sitesReducer                     from "./reducers/site_reducer";
+import flashReducer                     from "./reducers/flash_reducer";
+import requestReducer                   from "./reducers/request_reducer";
 import AppContainer                     from "./containers/app_container";
 import AuthenticatedContainer           from "./containers/authenticated_container";
 import SignInContainer                  from "./containers/sign_in_container";
@@ -25,8 +27,10 @@ const initialState = persistedState == null ? defaultState : persistedState;
 
 const appReducer = combineReducers(
   {
+    flash: flashReducer,
+    request: requestReducer,
     session: sessionReducer,
-    sites: sitesReducer 
+    sites: sitesReducer,
   }
 );
 
