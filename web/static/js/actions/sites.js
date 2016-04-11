@@ -18,6 +18,20 @@ export function getSitesFailure() {
   });
 }
 
+export function newSiteSuccess(newSite) {
+  return({
+    type: Constants.ACTIONS.NEW_SITE_SUCCESS,
+    newSite: newSite,
+    sentAt: Date.now()
+  });
+}
+
+export function newSiteFailure() {
+  return({
+    type: Constants.ACTIONS.NEW_SITE_FAILURE,
+    sentAt: Date.now()
+  });
+}
 /* Thunks */
 
 const SiteActions = {
@@ -45,6 +59,15 @@ const SiteActions = {
         dispatch(getSitesFailure());
       });
     };
+  },
+
+  newSite: function() {
+    return function(dispatch) {
+      dispatch(requestActions.requestStart("NEW_SITE"));
+
+      const newSiteData = {};
+      const requestOpts = Utils.makeRequestOptions("POST", newSiteData);
+    }
   }
 }
 

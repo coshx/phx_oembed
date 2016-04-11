@@ -8,9 +8,17 @@ function siteReducer(state = {}, action) {
       })
 
     case Constants.ACTIONS.GET_SITES_FAILURE:
+      return state
+
+    case Constants.ACTIONS.NEW_SITE_SUCCESS:
+      const updatedSiteList = state.siteList;
+      updatedSiteList.unshift(action.newSite);
       return Object.assign({}, state, {
-        siteList: []
+        siteList: updatedSiteList
       })
+
+    case Constants.ACTIONS.NEW_SITE_FAILURE:
+      return state
 
     default:
       return state

@@ -11,7 +11,7 @@ describe("siteReduer", () => {
   })
 
   it("should handle GET_SITES_SUCCESS", () => {
-    const sites = [{domain: "example.com", protocol: "https"}]
+    const sites = [{domain: "example.com", protocol: "https"}];
     const returnedState = siteReducer(undefined, siteActions.getSitesSuccess(sites));
     expect(returnedState).toEqual({
       siteList: sites
@@ -19,7 +19,21 @@ describe("siteReduer", () => {
   })
 
   it("should handle GET_SITES_FAILURE", () => {
-    const returnedState = siteReducer(undefined, siteActions.getSitesFailure());
+    const returnedState = siteReducer({siteList: []}, siteActions.getSitesFailure());
+    expect(returnedState).toEqual({siteList: []});
+  })
+
+  it("should handle NEW_SITE_SUCCESS", () => {
+    const sites = [{domain: "example.com", protocol: "https"}];
+    const newSite = {domain: "example.com", protocol: "https"};
+    const returnedState = siteReducer({siteList: []}, siteActions.newSiteSuccess(newSite));
+    expect(returnedState).toEqual({
+      siteList: sites
+    });
+  })
+
+  it("should handle NEW_SITE_FAILURE", () => {
+    const returnedState = siteReducer({siteList: []}, siteActions.newSiteFailure());
     expect(returnedState).toEqual({siteList: []});
   })
 });
