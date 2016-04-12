@@ -12,4 +12,8 @@ defmodule PhxOembed.SiteView do
   def render("index.json", %{sites: sites}) do
     render_many(sites, PhxOembed.SiteView, "show.json")
   end
+
+  def render("error.json", %{error: error}) do
+    %{error: error}
+  end
 end

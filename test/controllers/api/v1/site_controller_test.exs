@@ -9,6 +9,25 @@ defmodule PhxOembed.SiteControllerTest do
      conn: put_req_header(conn, "accept", "application/json")}
   end
 
+  test "CREATE - not signed in", %{conn: conn} do
+    conn
+    |> post(site_path(Endpoint, :create, site: %{}))
+    |> json_response(:forbidden)
+  end
+
+  test "CREATE - signed in", %{conn: conn, user: user} do
+    params = %{domain: "example.foo.com", protocol: "https"}
+    token = TestUtils.get_user_token(user)
+
+    resp = conn
+    |> put_req_header("authorization", token)
+    |> post(site_path(Endpoint, :create, site: %{site: params}))
+    |> json_response(:ok)
+
+    assert resp["domain"] == params.domain
+    assert resp["protocol"] == params.protocol
+  end
+
   test "SHOW - not signed in", %{conn: conn} do
     site = create(:site)
     conn
