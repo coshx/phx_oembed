@@ -38,7 +38,7 @@ defmodule PhxOembed.Api.SiteController do
       false ->
         conn
         |> put_status(:forbidden)
-        |> render(PhxOembed.SessionView, "error.json", error: "Not authorized")
+        |> render(PhxOembed.Api.SessionView, "error.json", error: "Not authorized")
     end
   end
 
