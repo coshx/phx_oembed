@@ -2,6 +2,7 @@ defmodule PhxOembed.SiteController do
   use PhxOembed.Web, :controller
   alias PhxOembed.{Site, Authorization}
 
+  require IEx
   plug Guardian.Plug.EnsureAuthenticated, handler: PhxOembed.SessionController
   plug :scrub_params, "site" when action in [:create]
 
@@ -43,9 +44,13 @@ defmodule PhxOembed.SiteController do
 
   def create(conn, %{"site" => site}) do
     user = Guardian.Plug.current_resource(conn)
+    changeset = user
+    |> build_assoc(:sites)
+    |> Site.changeset(site)
+
     case Authorization.authorize(:site, :index, user) do
       true ->
-        case Site.changeset(%Site{}, site) |> Repo.insert do
+        case Repo.insert(changeset) do
           {:ok, site} ->
             conn
             |> put_status(:ok)
