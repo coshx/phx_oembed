@@ -15,6 +15,7 @@ import requestReducer                   from "./reducers/request_reducer";
 import AppContainer                     from "./containers/app_container";
 import SignInContainer                  from "./containers/sign_in_container";
 import SitesContainer                   from "./containers/sites_container";
+import SiteContainer                    from "./containers/site_container";
 
 function persistStore() {
   const stringifiedState = JSON.stringify(store.getState());
@@ -44,6 +45,7 @@ ReactDOM.render(
       <Route path="/" component={AppContainer}>
         <Route path="sign_in" component={SignInContainer} />
         <Route path="sites" component={SitesContainer} />
+        <Route path="sites/:siteId" component={SiteContainer} />
       </Route>
     </Router>
   </Provider>,

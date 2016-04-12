@@ -1,12 +1,13 @@
-import React  from "react";
+import React      from "react";
+import { Link }   from "react-router";
 
 export default class Site extends React.Component {
   render() {
     return(
       <div className="site">
-        <a href="" className="site-link">
+        <Link to={"sites/" + this.props.site.id} className="site-link">
           {this.props.site.protocol + "://" + this.props.site.domain}
-        </a>
+        </Link>
       </div>
     );
   }
