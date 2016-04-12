@@ -1,4 +1,4 @@
-defmodule PhxOembed.SessionController do
+defmodule PhxOembed.Api.SessionController do
   use PhxOembed.Web, :controller
 
   plug :scrub_params, "session" when action in [:create]
@@ -10,12 +10,12 @@ defmodule PhxOembed.SessionController do
 
         conn
         |> put_status(:created)
-        |> render("show.json", jwt: jwt, user: user)
+        |> render(PhxOembed.Api.SessionView, "show.json", jwt: jwt, user: user)
 
       :error ->
         conn
         |> put_status(:unprocessable_entity)
-        |> render("error.json", error: "Invalid email or password")
+        |> render(PhxOembed.Api.SessionView, "error.json", error: "Invalid email or password")
     end
   end
 
@@ -29,12 +29,12 @@ defmodule PhxOembed.SessionController do
 
       conn
       |> put_status(:ok)
-      |> render("success.json", message: "Logged out")
+      |> render(PhxOembed.Api.SessionView, "success.json", message: "Logged out")
 
     {:error, _} ->
       conn
       |> put_status(:unprocessable_entity)
-      |> render("error.json", error: "Could not log out")
+      |> render(PhxOembed.Api.SessionView, "error.json", error: "Could not log out")
 
     end
   end
@@ -42,6 +42,6 @@ defmodule PhxOembed.SessionController do
   def unauthenticated(conn, _params) do
     conn
     |> put_status(:forbidden)
-    |> render(PhxOembed.SessionView, "error.json", error: "Not Autenthicated")
+    |> render(PhxOembed.Api.SessionView, "error.json", error: "Not Autenthicated")
   end
 end

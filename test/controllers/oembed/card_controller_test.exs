@@ -1,4 +1,4 @@
-defmodule PhxOembed.CardControllerTest do
+defmodule PhxOembed.Oembed.CardControllerTest do
   use PhxOembed.ConnCase
   alias PhxOembed.Endpoint
 

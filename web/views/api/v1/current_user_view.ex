@@ -1,4 +1,4 @@
-defmodule PhxOembed.CurrentUserView do
+defmodule PhxOembed.Api.CurrentUserView do
   use PhxOembed.Web, :view
 
   def render("show.json", %{user: user}) do

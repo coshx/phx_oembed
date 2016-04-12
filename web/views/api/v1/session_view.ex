@@ -1,4 +1,4 @@
-defmodule PhxOembed.SessionView do
+defmodule PhxOembed.Api.SessionView do
   use PhxOembed.Web, :view
 
   def render("show.json", %{jwt: jwt, user: user}) do
@@ -15,5 +15,4 @@ defmodule PhxOembed.SessionView do
   def render("error.json", %{error: error}) do
     %{error: error}
   end
-
 end

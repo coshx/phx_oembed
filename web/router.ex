@@ -22,8 +22,8 @@ defmodule PhxOembed.Router do
   scope "/oembed", PhxOembed do
     pipe_through :oembed
 
-    resources "/sites", SiteController, only: [] do
-      get "/cards", CardController, :show
+    resources "/sites", Oembed.SiteController, only: [] do
+      get "/cards", Oembed.CardController, :show
     end
   end
 
@@ -35,10 +35,10 @@ defmodule PhxOembed.Router do
   scope "/api", PhxOembed do
     pipe_through :api
     scope "v1" do
-      post      "/sessions",      SessionController, :create
-      delete    "/sessions",      SessionController, :delete
-      get       "/current_user",  CurrentUserController, :show
-      resources "/sites",          SiteController
+      post      "/sessions",      Api.SessionController, :create
+      delete    "/sessions",      Api.SessionController, :delete
+      get       "/current_user",  Api.CurrentUserController, :show
+      resources "/sites",         Api.SiteController
     end
   end
 end

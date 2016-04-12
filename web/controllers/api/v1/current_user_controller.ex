@@ -1,7 +1,7 @@
-defmodule PhxOembed.CurrentUserController do
+defmodule PhxOembed.Api.CurrentUserController do
   use PhxOembed.Web, :controller
 
-  plug Guardian.Plug.EnsureAuthenticated, handler: PhxOembed.SessionController
+  plug Guardian.Plug.EnsureAuthenticated, handler: PhxOembed.Api.SessionController
 
   def show(conn, _) do
     case decode_and_verify_token(conn) do

@@ -1,4 +1,4 @@
-defmodule PhxOembed.SiteView do
+defmodule PhxOembed.Api.SiteView do
   use PhxOembed.Web, :view
 
   def render("show.json", %{site: site}) do
@@ -10,7 +10,7 @@ defmodule PhxOembed.SiteView do
   end
 
   def render("index.json", %{sites: sites}) do
-    render_many(sites, PhxOembed.SiteView, "show.json")
+    render_many(sites, PhxOembed.Api.SiteView, "show.json")
   end
 
   def render("error.json", %{error: error}) do

@@ -1,4 +1,4 @@
-defmodule PhxOembed.CardView do
+defmodule PhxOembed.Oembed.CardView do
   use PhxOembed.Web, :view
   alias PhxOembed.Repo
 

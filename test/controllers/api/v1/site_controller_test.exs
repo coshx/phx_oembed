@@ -1,4 +1,4 @@
-defmodule PhxOembed.SiteControllerTest do
+defmodule PhxOembed.Api.SiteControllerTest do
   use PhxOembed.ConnCase
   alias PhxOembed.{Endpoint, TestUtils}
 

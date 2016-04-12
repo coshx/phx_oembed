@@ -1,4 +1,4 @@
-defmodule PhxOembed.CardController do
+defmodule PhxOembed.Oembed.CardController do
   use PhxOembed.Web, :controller
   alias PhxOembed.Site
   alias PhxOembed.ErrorView
