@@ -21,7 +21,7 @@ export default class NewSiteForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.onSubmit();
+    this.props.onSubmit(e.target.domain.value, e.target.protocol.value);
     this.setState({expanded: false})
   }
 

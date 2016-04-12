@@ -21,7 +21,7 @@ defmodule PhxOembed.SiteControllerTest do
 
     resp = conn
     |> put_req_header("authorization", token)
-    |> post(site_path(Endpoint, :create, site: %{site: params}))
+    |> post(site_path(Endpoint, :create, site: params))
     |> json_response(:ok)
 
     assert resp["domain"] == params.domain

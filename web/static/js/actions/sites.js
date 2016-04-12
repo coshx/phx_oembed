@@ -54,19 +54,36 @@ const SiteActions = {
         dispatch(getSitesSuccess(json));
       })
       .catch((message) => {
-        dispatch(flashActions.flashError("Problem fetching sites"));
         dispatch(requestActions.requestEnd());
+        dispatch(flashActions.flashError("Problem fetching sites: " + message));
         dispatch(getSitesFailure());
       });
     };
   },
 
-  newSite: function() {
+  addSite: function(domain, protocol) {
     return function(dispatch) {
       dispatch(requestActions.requestStart("NEW_SITE"));
 
-      const newSiteData = {};
+      const newSiteData = {site: {domain: domain, protocol: protocol}};
       const requestOpts = Utils.makeRequestOptions("POST", newSiteData);
+
+      fetch(Constants.ROUTES.SITES, requestOpts)
+      .then((response) => {
+        if (response.status == 200)
+          return response.json()
+        else
+          throw "Somethign went wrong";
+      })
+      .then((json) => {
+        dispatch(requestActions.requestEnd());
+        dispatch(newSiteSuccess(json))
+      })
+      .catch((message) => {
+        dispatch(requestActions.requestEnd());
+        dispatch(flashActions.flashError("Problem adding new site: " + message));
+        dispatch(newSiteFailure());
+      })
     }
   }
 }

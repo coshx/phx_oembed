@@ -9,9 +9,8 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signInUser: (e) => {
-      e.preventDefault();
-      dispatch(SessionActions.signInUser(e.target.email.value, e.target.password.value))
+    signInUser: (email, password) => {
+      dispatch(SessionActions.signInUser(email, password))
     }
   }
 }

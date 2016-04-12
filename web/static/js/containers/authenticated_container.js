@@ -1,6 +1,6 @@
 import React          from "react";
 import { connect }    from "react-redux";
-import SiteActions    from "../actions/sites";
+import siteActions    from "../actions/sites";
 import SiteList       from "../components/site_list";
 
 const mapStateToProps = (state) => {
@@ -10,10 +10,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getSites: () => {
-      dispatch(SiteActions.getSites());
+      dispatch(siteActions.getSites());
     },
-    addNewSite: () => {
-      console.log("woot");
+    addNewSite: (domain, protocol) => {
+      dispatch(siteActions.addSite(domain, protocol))
     }
   }
 }

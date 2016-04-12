@@ -45,7 +45,7 @@ defmodule PhxOembed.SiteController do
     user = Guardian.Plug.current_resource(conn)
     case Authorization.authorize(:site, :index, user) do
       true ->
-        case Site.changeset(%Site{}, site["site"]) |> Repo.insert do
+        case Site.changeset(%Site{}, site) |> Repo.insert do
           {:ok, site} ->
             conn
             |> put_status(:ok)
