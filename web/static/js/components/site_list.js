@@ -1,5 +1,5 @@
 import React              from "react";
-import Site               from "./site";
+import SiteListing        from "./site_listing";
 import NewSiteForm        from "./new_site_form";
 
 export default class SiteList extends React.Component {
@@ -11,7 +11,7 @@ export default class SiteList extends React.Component {
 
   buildSiteList() {
     return(this.props.sites.siteList.map(function(site) {
-      return(<Site key={site.id} site={site} />);
+      return(<SiteListing key={site.id} site={site} />);
     }));
   }
 
