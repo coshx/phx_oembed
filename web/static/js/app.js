@@ -13,8 +13,8 @@ import sitesReducer                     from "./reducers/site_reducer";
 import flashReducer                     from "./reducers/flash_reducer";
 import requestReducer                   from "./reducers/request_reducer";
 import AppContainer                     from "./containers/app_container";
-import AuthenticatedContainer           from "./containers/authenticated_container";
 import SignInContainer                  from "./containers/sign_in_container";
+import SitesContainer                   from "./containers/sites_container";
 
 function persistStore() {
   const stringifiedState = JSON.stringify(store.getState());
@@ -42,8 +42,8 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path="/" component={AppContainer}>
-        <Route path="sites" component={AuthenticatedContainer} />
         <Route path="sign_in" component={SignInContainer} />
+        <Route path="sites" component={SitesContainer} />
       </Route>
     </Router>
   </Provider>,

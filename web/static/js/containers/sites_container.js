@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-class AuthenticatedContainer extends React.Component {
+class SitesContainer extends React.Component {
 
   componentWillMount() {
     this.props.getSites();
@@ -37,4 +37,4 @@ class AuthenticatedContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthenticatedContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(SitesContainer)
