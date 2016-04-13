@@ -1,6 +1,6 @@
 defmodule PhxOembed.Api.CardController do
   use PhxOembed.Web, :controller
-  alias PhxOembed.{Site, Card, Authorization}
+  alias PhxOembed.{Site, Authorization}
 
   plug Guardian.Plug.EnsureAuthenticated, handler: PhxOembed.Api.SessionController
   plug :scrub_params, "card" when action in [:create]
