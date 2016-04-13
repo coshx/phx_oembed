@@ -1,7 +1,11 @@
 defmodule PhxOembed.Authorization do
 
-  def authorize(:site, :create, user, site) do
-    site.user_id == user.id
+  def authorize(:site, :create, _user) do
+    true
+  end
+
+  def authorize(:site, :index, _user) do
+    true
   end
 
   def authorize(:site, :show, user, site) do
@@ -14,10 +18,6 @@ defmodule PhxOembed.Authorization do
 
   def authorize(:site, :delete, user, site) do
     site.user_id == user.id
-  end
-
-  def authorize(:site, :index, _user) do
-    true
   end
 
   # Default response is false, only explicitly matched actions can return true

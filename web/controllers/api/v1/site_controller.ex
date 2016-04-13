@@ -48,7 +48,7 @@ defmodule PhxOembed.Api.SiteController do
     |> build_assoc(:sites)
     |> Site.changeset(site)
 
-    case Authorization.authorize(:site, :index, user) do
+    case Authorization.authorize(:site, :create, user) do
       true ->
         case Repo.insert(changeset) do
           {:ok, site} ->
