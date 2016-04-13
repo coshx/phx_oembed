@@ -42,6 +42,7 @@ const store = createStore(appReducer, initialState, applyMiddleware(thunk, logge
 store.subscribe(persistStore);
 
 const history = syncHistoryWithStore(hashHistory, store);
+history.listen(location => console.log("transitioned to ", location))
 
 ReactDOM.render(
   <Provider store={store}>
