@@ -38,7 +38,9 @@ defmodule PhxOembed.Router do
       post      "/sessions",      Api.SessionController, :create
       delete    "/sessions",      Api.SessionController, :delete
       get       "/current_user",  Api.CurrentUserController, :show
-      resources "/sites",         Api.SiteController
+      resources "/sites",         Api.SiteController do
+        resources "/cards",       Api.CardController
+      end
     end
   end
 end

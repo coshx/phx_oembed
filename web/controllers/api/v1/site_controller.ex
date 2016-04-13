@@ -2,7 +2,6 @@ defmodule PhxOembed.Api.SiteController do
   use PhxOembed.Web, :controller
   alias PhxOembed.{Site, Authorization}
 
-  require IEx
   plug Guardian.Plug.EnsureAuthenticated, handler: PhxOembed.Api.SessionController
   plug :scrub_params, "site" when action in [:create]
 

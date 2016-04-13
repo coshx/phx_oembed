@@ -8,6 +8,11 @@ defmodule PhxOembed.Authorization do
     true
   end
 
+  def authorize(:card, :index, user, site) do
+    # site is the parent record in this case
+    site.user_id == user.id
+  end
+
   def authorize(:site, :show, user, site) do
     site.user_id == user.id
   end
