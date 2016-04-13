@@ -14,7 +14,8 @@ const Constants = {
     },
     sites: {
       siteList: []
-    }
+    },
+    routing: {}
   },
   ACTIONS: {
     REQUEST_START:            "REQUEST_START",
