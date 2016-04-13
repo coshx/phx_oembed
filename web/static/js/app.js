@@ -6,6 +6,7 @@ import { Provider }                     from "react-redux";
 import thunk                            from "redux-thunk";
 import createLogger                     from "redux-logger";
 import { Router, Route, hashHistory }   from "react-router";
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import Utils                            from "./utils";
 import Constants                        from "./constants";
 import sessionReducer                   from "./reducers/session_reducer";
@@ -32,6 +33,7 @@ const appReducer = combineReducers(
     request: requestReducer,
     session: sessionReducer,
     sites: sitesReducer,
+    routing: routerReducer
   }
 );
 
@@ -39,9 +41,11 @@ const logger = createLogger();
 const store = createStore(appReducer, initialState, applyMiddleware(thunk, logger));
 store.subscribe(persistStore);
 
+const history = syncHistoryWithStore(hashHistory, store);
+
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory}>
+    <Router history={history}>
       <Route path="/" component={AppContainer}>
         <Route path="sign_in" component={SignInContainer} />
         <Route path="sites" component={SitesContainer} />
