@@ -20,6 +20,15 @@ function siteReducer(state = {}, action) {
     case Constants.ACTIONS.NEW_SITE_FAILURE:
       return state
 
+    case Constants.ACTIONS.SET_CURRENT_SITE:
+      const currentSite = state.siteList.filter(function(site) {
+        return parseInt(site.id) == parseInt(action.siteId)
+      })[0];
+
+      return Object.assign({}, state, {
+        currentSite: currentSite
+      })
+
     default:
       return state
   }

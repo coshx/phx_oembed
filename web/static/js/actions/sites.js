@@ -32,6 +32,15 @@ export function newSiteFailure() {
     sentAt: Date.now()
   });
 }
+
+export function setCurrentSite(siteId) {
+  return({
+    type: Constants.ACTIONS.SET_CURRENT_SITE,
+    siteId: siteId,
+    sentAt: Date.now()
+  });
+}
+
 /* Thunks */
 
 const SiteActions = {

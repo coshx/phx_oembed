@@ -30,7 +30,8 @@ const Constants = {
     NEW_SITE_SUCCESS:         "NEW_SITE_SUCCESS",
     NEW_SITE_FAILURE:         "NEW_SITE_FAILURE",
     GET_SITES_SUCCESS:        "GET_SITES_SUCCESS",
-    GET_SITES_FAILURE:        "GET_SITES_FAILURE"
+    GET_SITES_FAILURE:        "GET_SITES_FAILURE",
+    SET_CURRENT_SITE:         "SET_CURRENT_SITE"
   },
   ROUTES: {
     SESSION:      "/api/v1/sessions",
