@@ -1,29 +1,28 @@
-import React          from "react";
-import { connect }    from "react-redux";
-import SiteView       from "../components/site_view";
+import React              from "react";
+import { connect }        from "react-redux";
+import SiteView           from "../components/site_view";
+import * as siteActions   from "../actions/sites";
 
 const mapStateToProps = (state) => {
-  return { sites: state.sites }
+  return { currentSite: state.sites.currentSite }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    setCurrentSite: (siteId) => {
+      dispatch(siteActions.setCurrentSite(siteId));
+    }
+  }
 }
 
 class SiteContainer extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {site: this.setSite(props.params.siteId)}
-  }
 
-  setSite(siteId) {
-    return this.props.sites.siteList.filter(function(site) {
-      return parseInt(site.id) == parseInt(siteId)
-    })[0];
+  componentWillMount() {
+    this.props.setCurrentSite(this.props.params.siteId);
   }
 
   render() {
-    return(<SiteView site={this.state.site}/>);
+    return(<SiteView site={this.props.currentSite} />);
   }
 }
 
