@@ -42,7 +42,6 @@ export function setCurrentSite(siteId) {
 }
 
 /* Thunks */
-
 const SiteActions = {
 
   getSites: function() {
