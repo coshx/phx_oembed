@@ -1,13 +1,14 @@
 import React              from "react";
 import { connect }        from "react-redux";
 import SiteView           from "../components/site_view";
+import CardList           from "../components/card_list";
 import * as siteActions   from "../actions/sites";
 import cardActions        from "../actions/cards";
 
 const mapStateToProps = (state) => {
   return {
     currentSite: state.sites.currentSite,
-    cardList: state.cards.cardList
+    cards: state.cards
   }
 }
 
@@ -30,7 +31,12 @@ class SiteContainer extends React.Component {
   }
 
   render() {
-    return(<SiteView site={this.props.currentSite} />);
+    return(
+      <div>
+        <SiteView site={this.props.currentSite} />
+        <CardList cards={this.props.cards} />
+      </div>
+    );
   }
 }
 

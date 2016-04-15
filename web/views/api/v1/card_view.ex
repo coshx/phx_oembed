@@ -11,6 +11,7 @@ defmodule PhxOembed.Api.CardView do
     site = card.site
     url = site.protocol <> "://" <> site.domain <> "/" <> card.path
     %{
+      id:                 card.id,
       url:                url,
       version:            card.version,
       type:               card.card_type,
