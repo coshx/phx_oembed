@@ -10,7 +10,8 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import Utils                            from "./utils";
 import Constants                        from "./constants";
 import sessionReducer                   from "./reducers/session_reducer";
-import sitesReducer                     from "./reducers/site_reducer";
+import siteReducer                      from "./reducers/site_reducer";
+import cardReducer                      from "./reducers/card_reducer.js";
 import flashReducer                     from "./reducers/flash_reducer";
 import requestReducer                   from "./reducers/request_reducer";
 import AppContainer                     from "./containers/app_container";
@@ -32,7 +33,8 @@ const appReducer = combineReducers(
     flash: flashReducer,
     request: requestReducer,
     session: sessionReducer,
-    sites: sitesReducer,
+    sites: siteReducer,
+    cards: cardReducer,
     routing: routerReducer
   }
 );
