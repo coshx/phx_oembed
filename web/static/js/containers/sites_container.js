@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(siteActions.getSites());
     },
     addNewSite: (domain, protocol) => {
-      dispatch(siteActions.addSite(domain, protocol))
+      dispatch(siteActions.addSite(domain, protocol));
     }
   }
 }
