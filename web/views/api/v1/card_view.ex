@@ -7,12 +7,9 @@ defmodule PhxOembed.Api.CardView do
   end
 
   def render("show.json", %{card: card}) do
-    card = Repo.preload(card, :site)
-    site = card.site
-    url = site.protocol <> "://" <> site.domain <> "/" <> card.path
     %{
       id:                 card.id,
-      url:                url,
+      path:               card.path,
       version:            card.version,
       type:               card.card_type,
       title:              card.title,

@@ -1,0 +1,20 @@
+.card-list {
+  clear: both;
+  margin-top: 3%;
+}
+
+.card-list .card {
+  border-bottom: 1px solid $medium-gray;
+}
+
+.card-list .card a {
+  &:hover {background-color: $light-gray;}
+  padding: 1.5% 1%;
+  display: block;
+  color: $dark-gray;
+}
+
+a.new-card-form-expander {
+  float: right;
+  display: inline-block;
+}
