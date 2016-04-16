@@ -1,5 +1,6 @@
 import React              from "react";
 import CardListing        from "./card_listing";
+import NewCardForm        from "./new_card_form";
 
 export default class CardList extends React.Component {
 
@@ -12,6 +13,7 @@ export default class CardList extends React.Component {
   render() {
     return(
       <div>
+        <NewCardForm onSubmit={this.props.addNewCard}/>
         <div className="card-list">
           {this.buildCardList()}
         </div>
