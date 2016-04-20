@@ -20,8 +20,8 @@ const mapDispatchToProps = (dispatch) => {
     setCurrentSite: (siteId) => {
       dispatch(siteActions.setCurrentSite(siteId));
     },
-    addNewCard: () => {
-      console.log("addNewCard");
+    addNewCard: (newCard) => {
+      dispatch(cardActions.addCard(newCard));
     }
   }
 }

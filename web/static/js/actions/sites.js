@@ -81,7 +81,7 @@ const SiteActions = {
         if (response.status == 200)
           return response.json()
         else
-          throw "Somethign went wrong";
+          throw "Something went wrong";
       })
       .then((json) => {
         dispatch(requestActions.requestEnd());

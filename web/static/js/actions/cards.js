@@ -60,6 +60,32 @@ const cardActions = {
         dispatch(getCardsFailure());
       })
     };
+  },
+
+  addCard: function(newCard) {
+    return function(dispatch) {
+      dispatch(requestActions.requestStart("NEW_SITE"));
+
+      const newCardData = {card: newCard};
+      const requestOpts = Utils.makeRequestOptions("POST", newCardData);
+
+      fetch(Constants.ROUTES.CARDS, requestOpts)
+      .then((response) => {
+        if(response.status == 200)
+          return response.json();
+        else
+          throw "Something went wrong";
+      })
+      .then((json) => {
+        dispatch(requestActions.requestEnd());
+        disatch(newCardSuccess(json));
+      })
+      .catch((message) => {
+        dispatch(requestActions.requestEnd());
+        dispatch(flashActions.flashError("Problem adding new card: " + message));
+        dispatch(newCardFailure());
+      })
+    }
   }
 }
 

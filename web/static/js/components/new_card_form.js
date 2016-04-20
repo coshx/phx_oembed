@@ -21,7 +21,26 @@ export default class NewCardForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    this.props.onSubmit();
+    const form = e.target;
+    const newCard = {
+      path:             form.path.value,
+      card_type:        form.card_type.value,
+      title:            form.title.value,
+      author_name:      form.author_name.value,
+      author_url:       form.author_url.value,
+      provider_name:    form.provider_name.value,
+      provider_url:     form.provider_url.value,
+      cache_age:        form.cache_age.value,
+      thumbnail_url:    form.thumbnail_url.value,
+      thumbnail_width:  form.thumbnail_width.value,
+      thumbnail_height: form.thumbnail_height,
+      version:          form.version.value,
+      height:           form.height.value,
+      width:            form.width.value,
+      html:             form.html.value
+    };
+
+    this.props.onSubmit(newCard);
     this.setState({expanded: false})
   }
 
