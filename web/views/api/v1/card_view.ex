@@ -11,7 +11,7 @@ defmodule PhxOembed.Api.CardView do
       id:                 card.id,
       path:               card.path,
       version:            card.version,
-      type:               card.card_type,
+      card_type:          card.card_type,
       title:              card.title,
       author_name:        card.author_name,
       author_url:         card.author_url,

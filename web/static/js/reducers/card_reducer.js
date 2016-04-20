@@ -8,8 +8,18 @@ function cardReducer(state = {}, action) {
         cardList: action.cards
       })
 
-    case Constants.ACTIONS.GET_SITES_FAILURE:
+    case Constants.ACTIONS.GET_CARDS_FAILURE:
       return state
+
+    case Constants.ACTIONS.NEW_CARD_FAILURE:
+      return state
+
+    case Constants.ACTIONS.NEW_CARD_SUCCESS:
+      const updatedCardList = state.cardList;
+      updatedCardList.unshift(action.newCard);
+      return Object.assign({}, state, {
+        cardList: updatedCardList
+      })
 
     default:
       return state

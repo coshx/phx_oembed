@@ -33,7 +33,9 @@ const Constants = {
     GET_SITES_FAILURE:        "GET_SITES_FAILURE",
     SET_CURRENT_SITE:         "SET_CURRENT_SITE",
     GET_CARDS_SUCCESS:        "GET_CARDS_SUCCESS",
-    GET_CARDS_FAILURE:        "GET_CARDS_FAILURE"
+    GET_CARDS_FAILURE:        "GET_CARDS_FAILURE",
+    NEW_CARD_FAILURE:         "NEW_CARD_FAILURE",
+    NEW_CARD_SUCCESS:         "NEW_CARD_SUCCESS"
   },
   ROUTES: {
     SESSION:      "/api/v1/sessions",

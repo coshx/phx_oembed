@@ -18,6 +18,21 @@ export function getCardsFailure() {
   });
 }
 
+export function newCardFailure() {
+  return({
+    type: Constants.ACTIONS.NEW_CARD_FAILURE,
+    sentAt: Date.now()
+  });
+}
+
+export function newCardSuccess(newCard) {
+  return({
+    type: Constants.ACTIONS.NEW_CARD_SUCCESS,
+    newCard: newCard,
+    sentAt: Date.now(),
+  });
+}
+
 /* Thunks */
 const cardActions = {
 
