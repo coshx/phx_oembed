@@ -1,6 +1,6 @@
 import expect                   from "expect";
 import Constants                from "../../../web/static/js/constants";
-import siteReducer               from "../../../web/static/js/reducers/site_reducer";
+import siteReducer              from "../../../web/static/js/reducers/site_reducer";
 import * as siteActions         from "../../../web/static/js/actions/sites";
 
 describe("siteReduer", () => {
