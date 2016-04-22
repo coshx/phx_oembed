@@ -1,5 +1,6 @@
 import Constants              from "../constants";
 import Utils                  from "../utils";
+import Pages                  from "../pages";
 import { hashHistory }        from "react-router";
 import * as requestActions    from "./request";
 import * as flashActions      from "./flash";
@@ -69,7 +70,7 @@ const SessionActions = {
         dispatch(newSessionSuccess(json.user));
         dispatch(requestActions.requestEnd());
         dispatch(flashActions.flashSuccess("Successfuly signed in"));
-        hashHistory.push(Constants.PAGES.SITES);
+        hashHistory.push(Pages.sites());
       })
       .catch((message) => {
         dispatch(requestActions.requestEnd());
@@ -98,7 +99,7 @@ const SessionActions = {
 
       // remove auth token and redirect regardless
       localStorage.removeItem("phxAuthToken");
-      hashHistory.push(Constants.PAGES.SIGN_IN);
+      hashHistory.push(Pages.signIn());
     };
   },
 };

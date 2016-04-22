@@ -1,11 +1,12 @@
 import React      from "react";
 import { Link }   from "react-router";
 import Constants  from "../constants";
+import Pages      from "../pages";
 
 export default class Nav extends React.Component {
 
   userMenu() {
-    const signInPath = Constants.PAGES.SIGN_IN;
+    const signInPath = Pages.signIn();
 
     if (this.props.signedIn == true)
       return(<a href="#" onClick={this.props.signOutUser}>Sign Out</a>);
