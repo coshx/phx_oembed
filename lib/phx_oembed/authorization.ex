@@ -13,6 +13,10 @@ defmodule PhxOembed.Authorization do
     site.user_id == user.id
   end
 
+  def authorize(:card, :create, user, site) do
+    site.user_id == user.id
+  end
+
   def authorize(:site, :show, user, site) do
     site.user_id == user.id
   end

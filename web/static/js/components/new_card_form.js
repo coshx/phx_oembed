@@ -33,7 +33,7 @@ export default class NewCardForm extends React.Component {
       cache_age:        form.cache_age.value,
       thumbnail_url:    form.thumbnail_url.value,
       thumbnail_width:  form.thumbnail_width.value,
-      thumbnail_height: form.thumbnail_height,
+      thumbnail_height: form.thumbnail_height.value,
       version:          form.version.value,
       height:           form.height.value,
       width:            form.width.value,

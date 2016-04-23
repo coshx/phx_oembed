@@ -9,6 +9,38 @@ defmodule PhxOembed.AuthorizationTest do
     assert auth == false
   end
 
+  test "Card INDEX when the user owns the site" do
+    user = build(:user) |> set_password("password") |> create()
+    site = create(:site, user: user)
+    auth = Authorization.authorize(:card, :index, user, site)
+
+    assert auth == true
+  end
+
+  test "Card INDEX when the user does not own the site" do
+    user = build(:user) |> set_password("password") |> create()
+    site = create(:site)
+    auth = Authorization.authorize(:card, :index, user, site)
+
+    assert auth == false
+  end
+
+  test "Card CREATE when the user owns the site" do
+    user = build(:user) |> set_password("password") |> create()
+    site = create(:site, user: user)
+    auth = Authorization.authorize(:card, :create, user, site)
+
+    assert auth == true
+  end
+
+  test "Card CREATE when the user does not own the site" do
+    user = build(:user) |> set_password("password") |> create()
+    site = create(:site)
+    auth = Authorization.authorize(:card, :create, user, site)
+
+    assert auth == false
+  end
+
   test "Site CREATE" do
     user = build(:user) |> set_password("password") |> create()
 

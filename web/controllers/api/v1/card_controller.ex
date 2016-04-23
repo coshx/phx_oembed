@@ -1,9 +1,38 @@
 defmodule PhxOembed.Api.CardController do
   use PhxOembed.Web, :controller
-  alias PhxOembed.{Site, Authorization}
+  alias PhxOembed.{Site, Card, Authorization}
+  require IEx
 
   plug Guardian.Plug.EnsureAuthenticated, handler: PhxOembed.Api.SessionController
   plug :scrub_params, "card" when action in [:create]
+
+  def create(conn, %{"site_id" => site_id, "card" => card}) do
+    user = Guardian.Plug.current_resource(conn)
+    site = Repo.get(Site, site_id)
+
+    changeset = site
+    |> build_assoc(:cards)
+    |> Card.changeset(card)
+
+    case Authorization.authorize(:card, :create, user, site) do
+      true ->
+        case Repo.insert(changeset) do
+          {:ok, card} ->
+            conn
+            |> put_status(:ok)
+            |> render("show.json", card: card)
+
+          {:error, _} ->
+            conn
+            |> put_status(:unprocessable_entity)
+            |> render("error.json", error: "Problem adding new card")
+        end
+      false ->
+        conn
+        |> put_status(:forbidden)
+        |> render("error.json", error: "Not authorized")
+    end
+  end
 
   def index(conn, %{"site_id" => site_id}) do
     user = Guardian.Plug.current_resource(conn)

@@ -26,4 +26,8 @@ defmodule PhxOembed.Api.CardView do
       height:             card.height
      }
   end
+
+  def render("error.json", %{error: error}) do
+    %{error: error}
+  end
 end

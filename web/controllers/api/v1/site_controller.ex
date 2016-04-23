@@ -57,7 +57,7 @@ defmodule PhxOembed.Api.SiteController do
 
           {:error, _} ->
             conn
-            |> put_status(:unproccessable_entity)
+            |> put_status(:unprocessable_entity)
             |> render("error.json", error: "Problem adding new site")
         end
 
