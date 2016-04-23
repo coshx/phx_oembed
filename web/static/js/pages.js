@@ -4,7 +4,9 @@ const Pages = {
 
   sites: () => { return("/sites") },
 
-  site: (siteId) => { return("/sites/" + siteId) }
+  site: (siteId) => { return("/sites/" + siteId) },
+
+  card: (siteId, cardId) => { return("/sites/" + siteId + "/cards/" + cardId) }
 }
 
 export default Pages;

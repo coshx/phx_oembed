@@ -15,4 +15,10 @@ describe("Pages", () => {
     const siteId = 4;
     expect("/sites/4").toEqual(Pages.site(siteId));
   })
+
+  it("should return the proper card page", () => {
+    const siteId = 4;
+    const cardId = 5;
+    expect("/sites/4/cards/5").toEqual(Pages.card(siteId, cardId));
+  })
 })
