@@ -1,5 +1,6 @@
 import Constants              from "../constants";
 import Utils                  from "../utils";
+import Routes                 from "../routes";
 import * as requestActions    from "./request";
 import * as flashActions      from "./flash";
 
@@ -49,8 +50,9 @@ const SiteActions = {
       dispatch(requestActions.requestStart("GET_SITES"));
 
       const requestOpts = Utils.makeRequestOptions("GET");
+      const url = Routes.sites();
 
-      fetch(Constants.ROUTES.SITES, requestOpts)
+      fetch(url, requestOpts)
       .then((response) => {
         if (response.status == 200)
           return response.json()
@@ -75,8 +77,9 @@ const SiteActions = {
 
       const newSiteData = {site: {domain: domain, protocol: protocol}};
       const requestOpts = Utils.makeRequestOptions("POST", newSiteData);
+      const url = Routes.sites();
 
-      fetch(Constants.ROUTES.SITES, requestOpts)
+      fetch(url, requestOpts)
       .then((response) => {
         if (response.status == 200)
           return response.json()

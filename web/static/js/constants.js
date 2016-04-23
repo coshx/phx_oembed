@@ -36,12 +36,6 @@ const Constants = {
     GET_CARDS_FAILURE:        "GET_CARDS_FAILURE",
     NEW_CARD_FAILURE:         "NEW_CARD_FAILURE",
     NEW_CARD_SUCCESS:         "NEW_CARD_SUCCESS"
-  },
-  ROUTES: {
-    SESSION:      "/api/v1/sessions",
-    CURRENT_USER: "/api/v1/current_user",
-    SITES:        "/api/v1/sites",
-    CARDS:        "/api/v1/cards"
   }
 };
 

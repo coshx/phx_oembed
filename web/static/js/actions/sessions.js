@@ -1,6 +1,7 @@
 import Constants              from "../constants";
 import Utils                  from "../utils";
 import Pages                  from "../pages";
+import Routes                 from "../routes";
 import { hashHistory }        from "react-router";
 import * as requestActions    from "./request";
 import * as flashActions      from "./flash";
@@ -55,8 +56,9 @@ const SessionActions = {
       /* make the api request */
       const sessionData = { session: { email: email, password: password } };
       const requestOpts = Utils.makeRequestOptions("POST", sessionData);
+      const url = Routes.session();
 
-      fetch(Constants.ROUTES.SESSION, requestOpts)
+      fetch(url, requestOpts)
       .then((response) => {
         if (response.status == 201)
                     return response.json();
@@ -84,8 +86,9 @@ const SessionActions = {
     return function(dispatch) {
 
       const requestOpts = Utils.makeRequestOptions("DELETE");
+      const url = Routes.session();
 
-      fetch(Constants.ROUTES.SESSION, requestOpts)
+      fetch(url, requestOpts)
       .then(function(response) {
         if (response.status == 200) {
           dispatch(destroySessionSuccess());

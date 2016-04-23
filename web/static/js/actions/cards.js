@@ -63,14 +63,15 @@ const cardActions = {
     };
   },
 
-  addCard: function(newCard) {
+  addCard: function(siteId, newCard) {
     return function(dispatch) {
       dispatch(requestActions.requestStart("NEW_SITE"));
 
       const newCardData = {card: newCard};
       const requestOpts = Utils.makeRequestOptions("POST", newCardData);
 
-      fetch(Constants.ROUTES.CARDS, requestOpts)
+      const url = Routes.cards(siteId);
+      fetch(url, requestOpts)
       .then((response) => {
         if(response.status == 200)
           return response.json();
