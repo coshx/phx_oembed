@@ -80,7 +80,7 @@ const cardActions = {
       })
       .then((json) => {
         dispatch(requestActions.requestEnd());
-        disatch(newCardSuccess(json));
+        dispatch(newCardSuccess(json));
       })
       .catch((message) => {
         dispatch(requestActions.requestEnd());
