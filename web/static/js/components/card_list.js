@@ -5,8 +5,11 @@ import NewCardForm        from "./new_card_form";
 export default class CardList extends React.Component {
 
   buildCardList() {
+    const currentSite = this.props.currentSite;
     return(this.props.cards.cardList.map(function(card) {
-      return(<CardListing key={card.id} card={card} />);
+      return(<CardListing key={card.id}
+                          card={card}
+                          currentSite={currentSite}/>);
     }));
   }
 

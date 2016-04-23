@@ -21,7 +21,6 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(siteActions.setCurrentSite(siteId));
     },
     addNewCard: (siteId, newCard) => {
-      //const siteId = this.props.params.siteId;
       dispatch(cardActions.addCard(siteId, newCard));
     }
   }
@@ -39,6 +38,7 @@ class SiteContainer extends React.Component {
       <div>
         <SiteView site={this.props.currentSite} />
         <CardList addNewCard={this.props.addNewCard.bind(this, this.props.currentSite.id)}
+                  currentSite={this.props.currentSite}
                   cards={this.props.cards} />
       </div>
     );
