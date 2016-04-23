@@ -5,7 +5,7 @@ defmodule PhxOembed.CardTest do
   alias PhxOembed.Card
 
   @valid_attrs %{path: "cats", card_type: "twitter"}
-  @invalid_attrs %{path: "", card_type: "", version: ""}
+  @invalid_attrs %{path: "", card_type: ""}
 
   test "changeset with valid attributes" do
     changeset = Card.changeset(%Card{}, @valid_attrs)
@@ -20,23 +20,6 @@ defmodule PhxOembed.CardTest do
   test "changeset with missing attributes" do
     changeset = Card.changeset(%Card{}, %{})
     refute changeset.valid?
-  end
-
-  test "changeset with valid version" do
-    attrs = Map.put(@valid_attrs, :version, "1.0")
-    changeset = Card.changeset(%Card{}, attrs)
-    assert changeset.valid?
-  end
-
-  test "changeset with invalid version" do
-    attrs = Map.put(@valid_attrs, :version, "2.0")
-    changeset = Card.changeset(%Card{}, attrs)
-    refute changeset.valid?
-  end
-
-  test "default version value" do
-    card = create(:card)
-    assert card.version == "1.0"
   end
 
   test "site relationship" do

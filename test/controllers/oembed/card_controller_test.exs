@@ -18,7 +18,7 @@ defmodule PhxOembed.Oembed.CardControllerTest do
     assert resp["title"] == card.title
     assert resp["url"] == url
     assert resp["type"] == card.card_type
-    assert resp["version"] == card.version
+    assert resp["version"] == "1.0"
   end
 
   test "returns xml when requested", %{conn: conn, site: site} do

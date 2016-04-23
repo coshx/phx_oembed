@@ -14,14 +14,13 @@ defmodule PhxOembed.Card do
     field :thumbnail_url,     :string, default: ""
     field :thumbnail_width,   :string, default: ""
     field :thumbnail_height,  :string, default: ""
-    field :version,           :string, null: false, default: "1.0"
     field :height,            :integer
     field :width,             :integer
     field :html,              :string, default: ""
     timestamps
   end
 
-  @required_fields ~w(path card_type version)
+  @required_fields ~w(path card_type)
   @optional_fields ~w(title author_name author_url provider_name provider_url
                       cache_age thumbnail_url thumbnail_width thumbnail_height
                       height width html)
@@ -34,13 +33,5 @@ defmodule PhxOembed.Card do
     |> cast(params, @required_fields, @optional_fields)
     |> validate_length(:path, min: 1)
     |> validate_length(:card_type, min: 1)
-    |> validate_version(:version)
-  end
-
-  defp validate_version(changeset, field) do
-    validate_change changeset, field, fn
-      :version, "1.0" -> []
-      :version, _     -> [version: "is invalid"]
-    end
   end
 end

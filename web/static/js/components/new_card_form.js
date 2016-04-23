@@ -34,7 +34,6 @@ export default class NewCardForm extends React.Component {
       thumbnail_url:    form.thumbnail_url.value,
       thumbnail_width:  form.thumbnail_width.value,
       thumbnail_height: form.thumbnail_height.value,
-      version:          form.version.value,
       height:           form.height.value,
       width:            form.width.value,
       html:             form.html.value
@@ -76,8 +75,6 @@ export default class NewCardForm extends React.Component {
             <input name="thumbnail_width" id="thumbnail_width" type="text" />
             <label htmlFor="thumbnail_height">Thumb Height</label>
             <input name="thumbnail_height" id="thumbnail_height" type="text" />
-            <label htmlFor="version">Version</label>
-            <input name="version" id="version" type="text" />
             <label htmlFor="height">Height</label>
             <input name="height" id="height" type="text" />
             <label htmlFor="width">Width</label>

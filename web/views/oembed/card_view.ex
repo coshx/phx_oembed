@@ -8,7 +8,7 @@ defmodule PhxOembed.Oembed.CardView do
     url = site.protocol <> "://" <> site.domain <> "/" <> card.path
     %{
       url:                url,
-      version:            card.version,
+      version:            "1.0",
       type:               card.card_type,
       title:              card.title,
       author_name:        card.author_name,
@@ -33,7 +33,7 @@ defmodule PhxOembed.Oembed.CardView do
     {:oembed, nil,
       [
         {:url,              nil, url},
-        {:version,          nil, card.version},
+        {:version,          nil, "1.0"},
         {:type,             nil, card.card_type},
         {:title,            nil, card.title},
         {:author_name,      nil, card.author_name},
