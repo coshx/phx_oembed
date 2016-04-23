@@ -1,5 +1,6 @@
 import Constants              from "../constants";
 import Utils                  from "../utils";
+import Routes                 from "../routes";
 import * as requestActions    from "./request";
 import * as flashActions      from "./flash";
 
@@ -41,7 +42,7 @@ const cardActions = {
       dispatch(requestActions.requestStart("GET_CARDS"));
 
       const requestOpts = Utils.makeRequestOptions("GET");
-      const url = Constants.ROUTES.SITES + "/" + siteId + "/cards"
+      const url = Routes.cards(siteId);
 
       fetch(url, requestOpts)
       .then((response) => {
