@@ -7,7 +7,12 @@ describe("Pages", () => {
     expect("/sign_in").toEqual(Pages.signIn());
   })
 
-  it("should return the proper sites in page", () => {
+  it("should return the proper sites page", () => {
     expect("/sites").toEqual(Pages.sites());
+  })
+
+  it("should return the proper site page", () => {
+    const siteId = 4;
+    expect("/sites/4").toEqual(Pages.site(siteId));
   })
 })
