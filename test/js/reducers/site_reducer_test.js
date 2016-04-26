@@ -39,7 +39,8 @@ describe("siteReduer", () => {
 
   it("should handle SET_CURRENT_SITE", () => {
     const site = {id: 2, domain: "example.com", protocol: "https"}
-    const sites = [site];
+    const site2 = {id: 3, domain: "example.org", protocol: "https"}
+    const sites = [site, site2];
     const returnedState = siteReducer({siteList: sites}, siteActions.setCurrentSite(site.id));
     expect(returnedState).toEqual({siteList: sites, currentSite: site })
   })

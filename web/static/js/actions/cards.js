@@ -34,6 +34,14 @@ export function newCardSuccess(newCard) {
   });
 }
 
+export function setCurrentCard(cardId) {
+  return({
+    type: Constants.ACTIONS.SET_CURRENT_CARD,
+    cardId: cardId,
+    sentAt: Date.now()
+  });
+}
+
 /* Thunks */
 const cardActions = {
 

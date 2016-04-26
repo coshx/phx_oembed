@@ -21,6 +21,15 @@ function cardReducer(state = {}, action) {
         cardList: updatedCardList
       })
 
+    case Constants.ACTIONS.SET_CURRENT_CARD:
+      const currentCard = state.cardList.filter(function(card) {
+        return parseInt(card.id) == parseInt(action.cardId)
+      })[0];
+
+      return Object.assign({}, state, {
+        currentCard: currentCard
+      })
+
     default:
       return state
   }

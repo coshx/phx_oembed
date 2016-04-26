@@ -40,5 +40,16 @@ describe("cardRecuer", () => {
       cardList: newList
     })
   })
+
+  it("should handle SET_CURRENT_CARD", () => {
+    const card = {id: 4, path: "/foo", card_type: "twitter"};
+    const existingCard = {id: 3, path: "/bar", card_type: "facebook"};
+    const cardList = [card, existingCard]
+    const returnedState = cardReducer({cardList: cardList}, cardActions.setCurrentCard(card.id));
+    expect(returnedState).toEqual({
+      cardList: cardList,
+      currentCard: card
+    })
+  })
 })
 
