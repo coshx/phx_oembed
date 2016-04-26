@@ -1,4 +1,5 @@
-import React from "react";
+import React      from "react";
+import InlineEdit from "./inline_edit";
 
 export default class CardView extends React.Component {
 
@@ -7,7 +8,7 @@ export default class CardView extends React.Component {
     for(let key in this.props.card) {
       rows.push(
         <tr key={key}>
-          <td>{key}</td><td>{this.props.card[key]}</td>
+          <td>{key}</td><td><InlineEdit value={this.props.card[key]}/></td>
         </tr>
       );
     }
