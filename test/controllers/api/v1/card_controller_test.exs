@@ -1,6 +1,7 @@
 defmodule PhxOembed.Api.CardControllerTest do
   use PhxOembed.ConnCase
-  alias PhxOembed.{Endpoint, TestUtils}
+  alias PhxOembed.{Endpoint, Card, TestUtils}
+  require IEx
 
   setup %{conn: conn} do
     user = build(:user) |> set_password("password") |> create()
@@ -42,7 +43,6 @@ defmodule PhxOembed.Api.CardControllerTest do
     create(:card, site: site)
     create(:card, site: site)
 
-    # IEx.pry
     resp = conn
     |> put_req_header("authorization", token)
     |> get(site_card_path(Endpoint, :index, site))
@@ -50,4 +50,36 @@ defmodule PhxOembed.Api.CardControllerTest do
 
     assert(Enum.count(resp) == 2)
   end
+
+  test "UPDATE - not signed in", %{conn: conn, site: site} do
+    card = create(:card, site: site)
+    conn
+    |> patch(site_card_path(Endpoint, :update, site, card))
+    |> json_response(:forbidden)
+  end
+
+  test "UPDATE - signed in, not authorized", %{conn: conn, user: user, site: site} do
+    token = TestUtils.get_user_token(user)
+    card = create(:card)
+
+    conn
+    |> put_req_header("authorization", token)
+    |> patch(site_card_path(Endpoint, :update, site, card, card: %{path: "/ponies!1"}))
+    |> json_response(:forbidden)
+  end
+
+  test "UPDATE - signed in, authorized", %{conn: conn, user: user, site: site} do
+    token = TestUtils.get_user_token(user)
+    card = create(:card, site: site)
+    resp = conn
+    |> put_req_header("authorization", token)
+    |> patch(site_card_path(Endpoint, :update, site, card, card: %{path: "/ponies!1"}))
+    |> json_response(:ok)
+
+    assert resp["path"] == "/ponies!1"
+
+    updated_card = Repo.get(Card, card.id)
+    assert updated_card.path == "/ponies!1"
+  end
+
 end

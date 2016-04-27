@@ -50,4 +50,32 @@ defmodule PhxOembed.Api.CardController do
         |> render(PhxOembed.Api.CardView, "error.json", error: "Not authorized")
     end
   end
+
+  def update(conn, %{"id" => c_id, "site_id" => s_id, "card" => card_params }) do
+    user = Guardian.Plug.current_resource(conn)
+    site = Repo.get(Site, s_id)
+    existing_card = Repo.get(Card, c_id)
+
+    case Authorization.authorize(:card, :update, user, site, existing_card) do
+      true ->
+        changeset = Card.changeset(existing_card, card_params)
+        case Repo.update(changeset) do
+          {:ok, card} ->
+            conn
+            |> put_status(:ok)
+            |> render("show.json", card: card)
+
+          {:error, _} ->
+            conn
+            |> put_status(:unprocessable_entity)
+            |> render("error.json", error: "Problem updaging card")
+        end
+
+      false ->
+        conn
+        |> put_status(:forbidden)
+        |> render(PhxOembed.Api.CardView, "error.json", error: "Not authorized")
+    end
+
+  end
 end
