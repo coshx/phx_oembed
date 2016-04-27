@@ -107,10 +107,10 @@ const cardActions = {
   },
 
   updateCard: function(siteId, cardId, newAttributes) {
-    console.log("thunk updateCard")
-    console.log("siteId: ", siteId);
-    console.log("cardId: ", cardId);
-    console.log("newAttributes: ", newAttributes)
+    console.log("updateCard")
+    console.log(siteId)
+    console.log(cardId)
+    console.log(newAttributes)
     return function(dispatch) {
       dispatch(requestActions.requestStart(Constants.ACTIONS.UPDATE_CURRENT_CARD));
 
@@ -119,7 +119,6 @@ const cardActions = {
 
       fetch(url, requestOpts)
       .then((response) => {
-        console.log("thunk response is", response)
         if(response.status == 200)
           return response.json();
         else
