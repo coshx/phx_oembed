@@ -4,8 +4,18 @@ defmodule PhxOembed.AuthorizationTest do
   import PhxOembed.Factory
   require IEx
 
-  test "default" do
+  test "default with 3 params" do
+    auth = Authorization.authorize(%{}, %{}, %{})
+    assert auth == false
+  end
+
+  test "default with 4 params" do
     auth = Authorization.authorize(%{}, %{}, %{}, %{})
+    assert auth == false
+  end
+
+  test "default with 5 params" do
+    auth = Authorization.authorize(%{}, %{}, %{}, %{}, %{})
     assert auth == false
   end
 
@@ -39,6 +49,33 @@ defmodule PhxOembed.AuthorizationTest do
     auth = Authorization.authorize(:card, :create, user, site)
 
     assert auth == false
+  end
+
+  test "Card UPDATE when the user does not own the site" do
+    user = build(:user) |> set_password("password") |> create()
+    site = create(:site)
+    card = create(:card, site: site)
+    auth = Authorization.authorize(:card, :update, user, site, card)
+
+    assert auth == false
+  end
+
+  test "Card UPDATE when the user owns the site but the card is wrong" do
+    user = build(:user) |> set_password("password") |> create()
+    site = create(:site, user: user)
+    card = create(:card)
+    auth = Authorization.authorize(:card, :update, user, site, card)
+
+    assert auth == false
+  end
+
+  test "Card UPDATE when the user owns the site and the card is right" do
+    user = build(:user) |> set_password("password") |> create()
+    site = create(:site, user: user)
+    card = create(:card, site: site)
+    auth = Authorization.authorize(:card, :update, user, site, card)
+
+    assert auth == true
   end
 
   test "Site CREATE" do

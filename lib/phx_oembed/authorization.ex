@@ -8,13 +8,8 @@ defmodule PhxOembed.Authorization do
     true
   end
 
-  def authorize(:card, :index, user, site) do
-    # site is the parent record in this case
-    site.user_id == user.id
-  end
-
-  def authorize(:card, :create, user, site) do
-    site.user_id == user.id
+  def authorize(_, _, _) do
+    false
   end
 
   def authorize(:site, :show, user, site) do
@@ -29,8 +24,25 @@ defmodule PhxOembed.Authorization do
     site.user_id == user.id
   end
 
-  # Default response is false, only explicitly matched actions can return true
+  def authorize(:card, :index, user, site) do
+    # site is the parent record in this case
+    site.user_id == user.id
+  end
+
+  def authorize(:card, :create, user, site) do
+    site.user_id == user.id
+  end
+
   def authorize(_, _, _, _) do
     false
   end
+
+  def authorize(:card, :update, user, site, card) do
+    card.site_id == site.id && site.user_id == user.id
+  end
+
+  def authorize(_, _, _, _, _) do
+    false
+  end
+
 end
