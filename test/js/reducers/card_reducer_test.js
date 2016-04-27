@@ -3,7 +3,7 @@ import Constants                from "../../../web/static/js/constants";
 import cardReducer              from "../../../web/static/js/reducers/card_reducer";
 import * as cardActions         from "../../../web/static/js/actions/cards";
 
-describe("cardRecuer", () => {
+describe("cardReducer", () => {
 
   it("should return the default state with no match", () => {
     const returnedState = cardReducer(undefined, {});
@@ -49,6 +49,21 @@ describe("cardRecuer", () => {
     expect(returnedState).toEqual({
       cardList: cardList,
       currentCard: card
+    })
+  })
+
+  it("should handle UPDATE_CURRENT_CARD", () => {
+    const newAttributes = {path: "/foo", card_type: "twitter"}
+    const existingCard = {id: 3, path: "/bar", card_type: "facebook"};
+    const updatedCard = {id:3, path: "/foo", card_type: "twitter"};
+
+    const returnedState = cardReducer(
+                            {currentCard: existingCard},
+                            cardActions.updateCurrentCard(newAttributes)
+    );
+
+    expect(returnedState).toEqual({
+      currentCard: updatedCard
     })
   })
 })

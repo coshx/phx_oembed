@@ -13,6 +13,11 @@ const mapDispatchToProps = (dispatch) => {
   return({
     setCurrentCard: (cardId) => {
       dispatch(cardActions.setCurrentCard(cardId))
+    },
+    updateCard: (fieldName, newValue) => {
+      console.log("updateCard in container");
+      console.log("field: ", fieldName)
+      console.log("newValue: ", newValue)
     }
   });
 };
@@ -25,7 +30,10 @@ class CardContainer extends React.Component {
 
   render() {
     return(
-      <div><CardView card={this.props.currentCard}/></div>
+      <div>
+        <CardView card={this.props.currentCard}
+                  updateCard={this.props.updateCard} />
+      </div>
     );
   }
 }

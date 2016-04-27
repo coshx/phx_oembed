@@ -30,6 +30,17 @@ function cardReducer(state = {}, action) {
         currentCard: currentCard
       })
 
+    case Constants.ACTIONS.UPDATE_CURRENT_CARD:
+      const updatedCard = state.currentCard;
+
+      for(let fieldName in action.newAttributes) {
+        updatedCard[fieldName] = action.newAttributes[fieldName]
+      }
+
+      return Object.assign({}, state, {
+        currentCard: updatedCard
+      })
+
     default:
       return state
   }
