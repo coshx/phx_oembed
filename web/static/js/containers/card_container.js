@@ -1,23 +1,23 @@
 import React            from "react";
 import { connect }      from "react-redux";
+import cardThunks       from "../actions/cards";
 import * as cardActions from "../actions/cards";
 import CardView         from "../components/card_view";
 
 const mapStateToProps = (state) => {
   return({
-    currentCard: state.cards.currentCard
+    currentCard: state.cards.currentCard,
+    currentSite: state.sites.currentSite
   });
 };
 
 const mapDispatchToProps = (dispatch) => {
   return({
     setCurrentCard: (cardId) => {
-      dispatch(cardActions.setCurrentCard(cardId))
+      dispatch(cardActions.setCurrentCard(cardId));
     },
-    updateCard: (fieldName, newValue) => {
-      console.log("updateCard in container");
-      console.log("field: ", fieldName)
-      console.log("newValue: ", newValue)
+    updateCard: (newAttributes) => {
+      dispatch(cardThunks.updateCard(newAttributes));
     }
   });
 };
@@ -32,7 +32,7 @@ class CardContainer extends React.Component {
     return(
       <div>
         <CardView card={this.props.currentCard}
-                  updateCard={this.props.updateCard} />
+                  updateCard={this.props.updateCard.bind(this, this.props.currentSite.id, this.props.currentCard.id)} />
       </div>
     );
   }

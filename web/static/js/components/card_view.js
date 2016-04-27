@@ -4,7 +4,9 @@ import InlineEdit from "./inline_edit";
 export default class CardView extends React.Component {
 
   updateValue(fieldName, newValue) {
-    this.props.updateCard(fieldName, newValue)
+    const newAttributes = {};
+    newAttributes[fieldName] = newValue;
+    this.props.updateCard(newAttributes);
   }
 
   buildCardTableRows() {
@@ -15,7 +17,7 @@ export default class CardView extends React.Component {
           <td>{key}</td>
           <td>
             <InlineEdit
-              value={this.props.card[key]} 
+              value={this.props.card[key]}
               updateValue={this.updateValue.bind(this, key)} />
           </td>
         </tr>

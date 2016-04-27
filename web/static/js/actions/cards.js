@@ -104,6 +104,34 @@ const cardActions = {
         dispatch(newCardFailure());
       })
     }
+  },
+
+  updateCard: function(siteId, cardId, newAttributes) {
+    console.log("thunk updateCard")
+    console.log("siteId: ", siteId);
+    console.log("cardId: ", cardId);
+    console.log("newAttributes: ", newAttributes)
+    return function(dispatch) {
+      dispatch(requestActions.requestStart(Constants.ACTIONS.UPDATE_CURRENT_CARD));
+
+      const requestOpts = Utils.makeRequestOptions("PATCH", newAttributes);
+      const url = Routes.card(siteId, cardId)
+
+      fetch(url, requestOpts)
+      .then((response) => {
+        console.log("thunk response is", response)
+        if(response.status == 200)
+          return response.json();
+        else
+          throw "Problem updating card";
+      })
+      .then((json) => {
+        console.log("thunk json is ", json)
+      })
+      .catch((message) => {
+        console.log("thunk message is", message)
+      })
+    }
   }
 }
 
