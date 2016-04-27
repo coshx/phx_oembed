@@ -20,4 +20,10 @@ describe("Routes", () => {
     expect(Routes.cards(siteId)).toEqual("/api/v1/sites/" + siteId + "/cards");
   })
 
+  it("should return the proper card route", () => {
+    const siteId = 4;
+    const cardId = 5;
+    const expectedPath = "/api/v1/sites/" + siteId + "/cards/" + cardId
+    expect(Routes.card(siteId, cardId)).toEqual(expectedPath);
+  })
 })
