@@ -106,14 +106,10 @@ const cardActions = {
     }
   },
 
-  updateCard: function(siteId, cardId, newAttributes) {
-    console.log("updateCard")
-    console.log(siteId)
-    console.log(cardId)
-    console.log(newAttributes)
+  updateCard: function(siteId, cardId, data) {
     return function(dispatch) {
       dispatch(requestActions.requestStart(Constants.ACTIONS.UPDATE_CURRENT_CARD));
-
+      const newAttributes = {card: data};
       const requestOpts = Utils.makeRequestOptions("PATCH", newAttributes);
       const url = Routes.card(siteId, cardId)
 
@@ -125,10 +121,12 @@ const cardActions = {
           throw "Problem updating card";
       })
       .then((json) => {
-        console.log("thunk json is ", json)
+        dispatch(requestActions.requestEnd());
+        dispatch(updateCurrentCard(json));
       })
       .catch((message) => {
-        console.log("thunk message is", message)
+        dispatch(requestActions.requestEnd());
+        dispatch(flashActions.flashError("Problem updating card: " + message));
       })
     }
   }
