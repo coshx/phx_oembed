@@ -42,13 +42,37 @@ export function setCurrentCard(cardId) {
   });
 }
 
-export function updateCurrentCard(newAttributes) {
+export function updateCurrentCardSuccess(newAttributes) {
   return({
-    type: Constants.ACTIONS.UPDATE_CURRENT_CARD,
+    type: Constants.ACTIONS.UPDATE_CURRENT_CARD_SUCCESS,
     newAttributes: newAttributes,
     sentAt: Date.now()
   });
 }
+
+export function updateCurrentCardFailure() {
+  return({
+    type: Constants.ACTIONS.UPDATE_CURRENT_CARD_FAILURE,
+    sentAt: Date.now()
+  });
+}
+
+export function deleteCardSuccess(cardId) {
+  return({
+    type: Constants.ACTIONS.DELETE_CARD_SUCCESS,
+    cardId: cardId,
+    sentAt: Date.now()
+  });
+}
+
+export function deleteCardFailure() {
+  return({
+    type: Constants.ACTIONS.DELETE_CARD_FAILURE,
+    sentAt: Date.now()
+  });
+}
+
+
 
 /* Thunks */
 const cardActions = {
@@ -122,10 +146,11 @@ const cardActions = {
       })
       .then((json) => {
         dispatch(requestActions.requestEnd());
-        dispatch(updateCurrentCard(json));
+        dispatch(updateCurrentCardSuccess(json));
       })
       .catch((message) => {
         dispatch(requestActions.requestEnd());
+        dispatch(requestActions.upcateCurrentCardFailure());
         dispatch(flashActions.flashError("Problem updating card: " + message));
       })
     }

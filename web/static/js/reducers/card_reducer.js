@@ -30,7 +30,7 @@ function cardReducer(state = {}, action) {
         currentCard: currentCard
       })
 
-    case Constants.ACTIONS.UPDATE_CURRENT_CARD:
+    case Constants.ACTIONS.UPDATE_CURRENT_CARD_SUCCESS:
       const updatedCard = state.currentCard;
 
       for(let fieldName in action.newAttributes) {
@@ -40,6 +40,21 @@ function cardReducer(state = {}, action) {
       return Object.assign({}, state, {
         currentCard: updatedCard
       })
+
+    case Constants.ACTIONS.UPDATE_CURRENT_CARD_FAILURE:
+      return state
+
+    case Constants.ACTIONS.DELETE_CARD_SUCCESS:
+      const updatedList = state.cardList.filter(function(card) {
+        return parseInt(card.id) != parseInt(action.cardId);
+      })
+
+      return Object.assign({}, state, {
+        cardList: updatedList
+      })
+
+    case Constants.ACTIONS.DELETE_CARD_FAILURE:
+      return state
 
     default:
       return state
