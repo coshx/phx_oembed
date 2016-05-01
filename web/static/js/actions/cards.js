@@ -132,7 +132,7 @@ const cardActions = {
 
   updateCard: function(siteId, cardId, data) {
     return function(dispatch) {
-      dispatch(requestActions.requestStart(Constants.ACTIONS.UPDATE_CURRENT_CARD));
+      dispatch(requestActions.requestStart("UPDATE_CARD"));
       const newAttributes = {card: data};
       const requestOpts = Utils.makeRequestOptions("PATCH", newAttributes);
       const url = Routes.card(siteId, cardId)
@@ -150,8 +150,31 @@ const cardActions = {
       })
       .catch((message) => {
         dispatch(requestActions.requestEnd());
-        dispatch(requestActions.upcateCurrentCardFailure());
+        dispatch(requestActions.updateCurrentCardFailure());
         dispatch(flashActions.flashError("Problem updating card: " + message));
+      })
+    }
+  },
+
+  deleteCard: function(siteId, cardId) {
+    return function (dispatch) {
+      dispatch(requestActions.requestStart("DELETE_CARD"));
+      const requestOpts = Utils.makeRequestOptions("DELETE");
+      const url = Routes.card(siteId, cardId);
+
+      fetch(url, requestOpts)
+      .then((response) => {
+        if(response.status == 200) {
+          dispatch(requestActions.requestEnd());
+          dispatch(deleteCardSuccess());
+        }
+        else
+          throw "Problem deleting card";
+      })
+      .catch((message) => {
+        dispatch(requestActions.requestEnd());
+        dispatch(deleteCardFailure());
+        dispatch(flashActions.flashError("Problem deleting card: " + message));
       })
     }
   }

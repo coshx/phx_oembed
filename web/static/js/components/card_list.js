@@ -6,10 +6,12 @@ export default class CardList extends React.Component {
 
   buildCardList() {
     const currentSite = this.props.currentSite;
-    return(this.props.cards.cardList.map(function(card) {
+    const siteId = currentSite.id;
+    return(this.props.cards.cardList.map((card) => {
       return(<CardListing key={card.id}
-                          card={card}
-                          currentSite={currentSite}/>);
+                  card={card}
+                  currentSite={currentSite}
+                  deleteCard={this.props.deleteCard.bind(this, siteId, card.id)} />);
     }));
   }
 
@@ -26,5 +28,6 @@ export default class CardList extends React.Component {
 }
 
 CardList.propTypes = {
+  deleteCard: React.PropTypes.func.isRequired,
   cards: React.PropTypes.object.isRequired
 }

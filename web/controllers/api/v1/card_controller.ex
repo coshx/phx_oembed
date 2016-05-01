@@ -76,6 +76,5 @@ defmodule PhxOembed.Api.CardController do
         |> put_status(:forbidden)
         |> render(PhxOembed.Api.CardView, "error.json", error: "Not authorized")
     end
-
   end
 end

@@ -17,11 +17,17 @@ const mapDispatchToProps = (dispatch) => {
     getCards: (siteId) => {
       dispatch(cardActions.getCards(siteId));
     },
+
     setCurrentSite: (siteId) => {
       dispatch(siteActions.setCurrentSite(siteId));
     },
+
     addNewCard: (siteId, newCard) => {
       dispatch(cardActions.addCard(siteId, newCard));
+    },
+
+    deleteCard: (siteId, cardId) => {
+      dispatch(cardActions.deleteCard(siteId, cardId));
     }
   }
 }
@@ -38,6 +44,7 @@ class SiteContainer extends React.Component {
       <div>
         <SiteView site={this.props.currentSite} />
         <CardList addNewCard={this.props.addNewCard.bind(this, this.props.currentSite.id)}
+                  deleteCard={this.props.deleteCard }
                   currentSite={this.props.currentSite}
                   cards={this.props.cards} />
       </div>

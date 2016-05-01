@@ -11,12 +11,17 @@ export default class CardListing extends React.Component {
           className="card-link">
           {this.props.card.path}
         </Link>
+        <a href="javascript:void(0)"
+          onClick={this.props.deleteCard} >
+          Delete
+        </a>
       </div>
     );
   }
 }
 
 CardListing.propTypes = {
+  deleteCard: React.PropTypes.func.isRequired,
   card: React.PropTypes.object.isRequired,
   currentSite: React.PropTypes.object.isRequired
 };
