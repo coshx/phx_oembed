@@ -41,8 +41,11 @@ defmodule PhxOembed.Authorization do
     card.site_id == site.id && site.user_id == user.id
   end
 
+  def authorize(:card, :delete, user, site, card) do
+    card.site_id == site.id && site.user_id == user.id
+  end
+
   def authorize(_, _, _, _, _) do
     false
   end
-
 end

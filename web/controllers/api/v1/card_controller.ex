@@ -1,7 +1,6 @@
 defmodule PhxOembed.Api.CardController do
   use PhxOembed.Web, :controller
   alias PhxOembed.{Site, Card, Authorization}
-  require IEx
 
   plug Guardian.Plug.EnsureAuthenticated, handler: PhxOembed.Api.SessionController
   plug :scrub_params, "card" when action in [:create, :update]
@@ -70,6 +69,24 @@ defmodule PhxOembed.Api.CardController do
             |> put_status(:unprocessable_entity)
             |> render("error.json", error: "Problem updaging card")
         end
+
+      false ->
+        conn
+        |> put_status(:forbidden)
+        |> render(PhxOembed.Api.CardView, "error.json", error: "Not authorized")
+    end
+  end
+
+  def delete(conn, %{"id" => c_id, "site_id" => s_id}) do
+    user = Guardian.Plug.current_resource(conn)
+    site = Repo.get(Site, s_id)
+    card = Repo.get(Card, c_id)
+
+    case Authorization.authorize(:card, :delete, user, site, card) do
+      true ->
+        Repo.delete!(card)
+        conn
+        |> put_status(:ok)
 
       false ->
         conn

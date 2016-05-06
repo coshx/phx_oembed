@@ -78,6 +78,25 @@ defmodule PhxOembed.AuthorizationTest do
     assert auth == true
   end
 
+  test "Card DELETE when the user owns the associated site" do
+    user = build(:user) |> set_password("password") |> create()
+    site = create(:site, user: user)
+    card = create(:card, site: site)
+
+    auth = Authorization.authorize(:card, :delete, user, site, card)
+    assert auth == true
+  end
+
+  @tag :skip
+  test "Site DELETE when the user does not own the associated site" do
+    user = build(:user) |> set_password("password") |> create()
+    site = create(:site)
+    card = create(:card, site: site)
+
+    auth = Authorization.authorize(:card, :delete, user, site, card)
+    assert auth == false
+  end
+
   test "Site CREATE" do
     user = build(:user) |> set_password("password") |> create()
 
