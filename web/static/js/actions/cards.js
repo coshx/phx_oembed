@@ -166,7 +166,7 @@ const cardActions = {
       .then((response) => {
         if(response.status == 200) {
           dispatch(requestActions.requestEnd());
-          dispatch(deleteCardSuccess());
+          dispatch(deleteCardSuccess(cardId));
         }
         else
           throw "Problem deleting card";
