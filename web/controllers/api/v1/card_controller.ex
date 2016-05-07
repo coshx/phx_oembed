@@ -87,6 +87,7 @@ defmodule PhxOembed.Api.CardController do
         Repo.delete!(card)
         conn
         |> put_status(:ok)
+        |> render(PhxOembed.Api.CardView, "success.json", msg: "Deleted card")
 
       false ->
         conn

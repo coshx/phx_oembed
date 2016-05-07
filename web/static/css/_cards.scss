@@ -7,11 +7,12 @@
   border-bottom: 1px solid $medium-gray;
 }
 
-.card-list .card a {
+.card-list .card {
   &:hover {background-color: $light-gray;}
   padding: 1.5% 1%;
-  display: block;
+  @include display(flex);
   color: $dark-gray;
+  @include justify-content(space-between);
 }
 
 a.new-card-form-expander {

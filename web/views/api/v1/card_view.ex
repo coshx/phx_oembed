@@ -26,6 +26,10 @@ defmodule PhxOembed.Api.CardView do
      }
   end
 
+  def render("success.json", %{msg: msg}) do
+    %{message: msg}
+  end
+
   def render("error.json", %{error: error}) do
     %{error: error}
   end

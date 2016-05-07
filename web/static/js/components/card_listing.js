@@ -11,7 +11,7 @@ export default class CardListing extends React.Component {
           className="card-link">
           {this.props.card.path}
         </Link>
-        <a href="javascript:void(0)"
+        <a href="javascript:void(0)" className="delete"
           onClick={this.props.deleteCard} >
           Delete
         </a>
