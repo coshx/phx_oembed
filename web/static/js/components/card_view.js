@@ -11,7 +11,11 @@ export default class CardView extends React.Component {
 
   buildCardTableRows() {
     const rows = [];
-    for(let key in this.props.card) {
+    let card = this.props.card;
+    console.log("card is ", card)
+    delete(card.id);
+
+    for(let key in card) {
       rows.push(
         <tr key={key}>
           <td>{key}</td>

@@ -31,15 +31,18 @@ export default class InlineEdit extends React.Component {
   renderField() {
     if(this.state.inputActive) {
       return(
-        <input
-          onChange={this.trackValueChange.bind(this)}
-          onBlur={this.updateCard.bind(this)}
-          value={this.state.value} />
+        <input onChange={this.trackValueChange.bind(this)}
+               onBlur={this.updateCard.bind(this)}
+               value={this.state.value} />
       );
 
     } else {
       return(
-        <span onClick={this.toggleField.bind(this)}>{this.state.value}</span>
+        <span onClick={this.toggleField.bind(this)}
+              className="inline-edit"
+              style={{display: "inline-block", width: "100%", height: "1.5em"}} >
+          {this.state.value || ""}
+        </span>
       );
     }
   }
