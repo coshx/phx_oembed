@@ -3,6 +3,9 @@ defmodule PhxOembed.Api.CardController do
   alias PhxOembed.{Site, Card, Authorization}
 
   plug Guardian.Plug.EnsureAuthenticated, handler: PhxOembed.Api.SessionController
+  plug PhxOembed.Plugs.AssignAuthorizingResource, %{resource: Site, resource_id: "site_id"}
+  #plug PhxOembed.Plugs.Authorization
+
   plug :scrub_params, "card" when action in [:create, :update]
 
   def create(conn, %{"site_id" => site_id, "card" => card}) do

@@ -1,9 +1,13 @@
 defmodule PhxOembed.Api.SiteController do
   use PhxOembed.Web, :controller
   alias PhxOembed.{Site, Authorization}
+  require Logger
 
   plug Guardian.Plug.EnsureAuthenticated, handler: PhxOembed.Api.SessionController
+  #plug PhxOembed.Plugs.AssignAuthorizingResource, %{resource: Site, resource_id: "site_id"}
+  #plug PhxOembed.Plugs.Authorization
   plug :scrub_params, "site" when action in [:create]
+
 
   def show(conn, %{"id" => id}) do
     site = Repo.get(Site, id)
