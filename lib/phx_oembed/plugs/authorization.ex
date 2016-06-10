@@ -1,5 +1,4 @@
 defmodule PhxOembed.Plugs.Authorization do
-  require Logger
   import Plug.Conn
 
   def init(default), do: default
@@ -39,7 +38,7 @@ defmodule PhxOembed.Plugs.Authorization do
   defp authorize(conn, _, _) do
     conn
     |> assign(:authorization_performed, true)
-    |> put_status(:forbidden)
+    |> send_resp(403, "Forbidden.")
     |> halt
   end
 
@@ -49,7 +48,7 @@ defmodule PhxOembed.Plugs.Authorization do
     else
       conn
       |> assign(:authorization_performed, true)
-      |> put_status(:forbidden)
+      |> send_resp(403, "Forbidden.")
       |> halt
     end
   end

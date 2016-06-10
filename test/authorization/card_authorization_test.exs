@@ -26,7 +26,7 @@ defmodule PhxOembed.CardAuthorizationTest do
     assert(conn.status != 403)
   end
 
-  test "create for a card for a site not owned by the user", %{conn: conn, user: user} do
+  test "create for a card for a site not owned by the user", %{conn: conn} do
     private = Map.merge(conn.private, %{phoenix_action: :create})
 
     conn = conn
