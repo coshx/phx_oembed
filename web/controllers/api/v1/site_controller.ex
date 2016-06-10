@@ -1,10 +1,11 @@
 defmodule PhxOembed.Api.SiteController do
   use PhxOembed.Web, :controller
   alias PhxOembed.{Site, Authorization}
-  require Logger
 
-  plug Guardian.Plug.EnsureAuthenticated, handler: PhxOembed.Api.SessionController
-  #plug PhxOembed.Plugs.AssignAuthorizingResource, %{resource: Site, resource_id: "site_id"}
+  plug Guardian.Plug.EnsureAuthenticated,
+       handler: PhxOembed.Api.SessionController
+  plug PhxOembed.Plugs.AssignAuthorizingResource,
+       %{resource: Site, resource_id: "id"}
   #plug PhxOembed.Plugs.Authorization
   plug :scrub_params, "site" when action in [:create]
 
@@ -69,7 +70,6 @@ defmodule PhxOembed.Api.SiteController do
         conn
         |> put_status(:forbidden)
         |> render("error.json", error: "Not authorized")
-
     end
   end
 end

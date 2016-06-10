@@ -9,14 +9,7 @@ defmodule PhxOembed.Plugs.Authorization do
   end
 
   defp authorize(conn, PhxOembed.Api.SiteController, :show) do
-    if (conn.assigns[:user].id == conn.assigns[:authorizing_resource].user_id) do
-      assign(conn, :authorization_performed, true)
-    else
-      conn
-      |> assign(:authorization_performed, true)
-      |> put_status(:forbidden)
-      |> halt
-    end
+    conn |> authorize_by_resource
   end
 
   defp authorize(conn, PhxOembed.Api.SiteController, :index) do
@@ -28,47 +21,19 @@ defmodule PhxOembed.Plugs.Authorization do
   end
 
   defp authorize(conn, PhxOembed.Api.CardController, :create) do
-    if (conn.assigns[:user].id == conn.assigns[:authorizing_resource].user_id) do
-      assign(conn, :authorization_performed, true)
-    else
-      conn
-      |> assign(:authorization_performed, true)
-      |> put_status(:forbidden)
-      |> halt
-    end
+    conn |> authorize_by_resource
   end
 
   defp authorize(conn, PhxOembed.Api.CardController, :index) do
-    if (conn.assigns[:user].id == conn.assigns[:authorizing_resource].user_id) do
-      assign(conn, :authorization_performed, true)
-    else
-      conn
-      |> assign(:authorization_performed, true)
-      |> put_status(:forbidden)
-      |> halt
-    end
+    conn |> authorize_by_resource
   end
 
   defp authorize(conn, PhxOembed.Api.CardController, :update) do
-    if (conn.assigns[:user].id == conn.assigns[:authorizing_resource].user_id) do
-      assign(conn, :authorization_performed, true)
-    else
-      conn
-      |> assign(:authorization_performed, true)
-      |> put_status(:forbidden)
-      |> halt
-    end
+    conn |> authorize_by_resource
   end
 
   defp authorize(conn, PhxOembed.Api.CardController, :delete) do
-    if (conn.assigns[:user].id == conn.assigns[:authorizing_resource].user_id) do
-      assign(conn, :authorization_performed, true)
-    else
-      conn
-      |> assign(:authorization_performed, true)
-      |> put_status(:forbidden)
-      |> halt
-    end
+    conn |> authorize_by_resource
   end
 
   defp authorize(conn, _, _) do
@@ -76,5 +41,16 @@ defmodule PhxOembed.Plugs.Authorization do
     |> assign(:authorization_performed, true)
     |> put_status(:forbidden)
     |> halt
+  end
+
+  defp authorize_by_resource(conn) do
+    if (conn.assigns[:user].id == conn.assigns[:authorizing_resource].user_id) do
+      assign(conn, :authorization_performed, true)
+    else
+      conn
+      |> assign(:authorization_performed, true)
+      |> put_status(:forbidden)
+      |> halt
+    end
   end
 end
