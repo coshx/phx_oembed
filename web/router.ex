@@ -17,6 +17,7 @@ defmodule PhxOembed.Router do
     plug :accepts, ["json"]
     plug Guardian.Plug.VerifyHeader
     plug Guardian.Plug.LoadResource
+    plug PhxOembed.Plugs.AssignGuardianUser
   end
 
   scope "/oembed", PhxOembed do
