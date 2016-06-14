@@ -26,7 +26,7 @@ defmodule PhxOembed.Card do
                       height width html)
 
   @doc """
-  Card changeset. Fields 'url' and 'card_type required'
+  Card changeset. Fields 'url' and 'card_type' required
   """
   def changeset(model, params \\ :empty) do
     model
