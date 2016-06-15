@@ -3,7 +3,6 @@ defmodule PhxOembed.Url do
 
   schema "urls" do
     belongs_to :site, PhxOembed.Site
-
     field :path,    :string,  null: false
     field :crawled, :boolean, default: false
     timestamps

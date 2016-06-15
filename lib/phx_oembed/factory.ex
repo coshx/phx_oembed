@@ -1,7 +1,7 @@
 defmodule PhxOembed.Factory do
 
   use ExMachina.Ecto, repo: PhxOembed.Repo
-  alias PhxOembed.{User, Site, Card}
+  alias PhxOembed.{User, Site, Card, Url}
 
   def site_factory do
     %Site{domain: "example.com"}
@@ -17,6 +17,10 @@ defmodule PhxOembed.Factory do
     # Ex Machina factories bypass custom changesets, so we set the encrypted
     # password field here to avoid not_null_violation db errors.
     %User{email: sequence(:email, &"email-#{&1}@example.com")}
+  end
+
+  def factory(:url) do
+    %Url{path: "foo"}
   end
 
   # https://github.com/thoughtbot/ex_machina/issues/82
