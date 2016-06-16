@@ -7,6 +7,7 @@ defmodule PhxOembed.Api.CardController do
   plug PhxOembed.Plugs.AssignAuthorizingResource,
        %{resource: Site, resource_id: "site_id"}
   plug PhxOembed.Plugs.Authorization
+  plug PhxOembed.Plugs.VerifyAuthorized
 
   plug :scrub_params, "card" when action in [:create, :update]
 

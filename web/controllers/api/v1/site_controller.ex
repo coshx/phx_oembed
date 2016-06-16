@@ -7,6 +7,8 @@ defmodule PhxOembed.Api.SiteController do
   plug PhxOembed.Plugs.AssignAuthorizingResource,
        %{resource: Site, resource_id: "id"}
   plug PhxOembed.Plugs.Authorization
+  plug PhxOembed.Plugs.VerifyAuthorized
+
   plug :scrub_params, "site" when action in [:create]
 
 
