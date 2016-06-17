@@ -11,7 +11,7 @@ defmodule PhxOembed.Crawler do
   end
 
   defp already_exists?(path) do
-    url = Repo.get(Url, %{path: path})
+    url = Repo.get_by(Url, %{path: path})
   end
 
   defp save_new_url(path) do
