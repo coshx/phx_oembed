@@ -4,6 +4,7 @@ defmodule PhxOembed.Site do
   schema "sites" do
     belongs_to :user, PhxOembed.User
     has_many :cards, PhxOembed.Card
+    has_many :urls, PhxOembed.Url
     field :domain,        :string, null: false
     field :protocol,      :string, null: false, default: "http"
     timestamps
