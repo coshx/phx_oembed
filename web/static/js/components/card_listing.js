@@ -15,12 +15,12 @@ export default class CardListing extends React.Component {
           </Link>
         </td>
         <td>
-          <button>
-            <a href="javascript:void(0)" className="delete"
-              onClick={this.props.deleteCard}>
+          <a href="javascript:void(0)" className="delete"
+            onClick={this.props.deleteCard}>
+            <button>
               Delete
-            </a>
-          </button>
+            </button>
+          </a>
         </td>
       </tr>
     );
