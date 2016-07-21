@@ -19,9 +19,17 @@ export default class CardList extends React.Component {
     return(
       <div>
         <NewCardForm onSubmit={this.props.addNewCard}/>
-        <div className="card-list">
-          {this.buildCardList()}
-        </div>
+        <table className="table-minimal card-list">
+          <thead>
+            <tr>
+              <th>Path</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.buildCardList()}
+          </tbody>
+        </table>
       </div>
     )
   }

@@ -1,18 +1,3 @@
-.site-list {
-  clear: both;
-  margin-top: 3%;
-}
-
-.site-list .site {
-  border-bottom: 1px solid $medium-gray;
-}
-
-.site-list .site a {
-  &:hover {background-color: $light-gray;}
-  padding: 1.5% 1%;
-  display: block;
-  color: $dark-gray;
-}
 
 a.new-site-form-expander {
   float: right;

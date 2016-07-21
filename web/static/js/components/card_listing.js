@@ -5,17 +5,24 @@ import { Link }   from "react-router";
 export default class CardListing extends React.Component {
   render() {
     return(
-      <div className="card">
-        <Link
-          to={Pages.card(this.props.currentSite.id, this.props.card.id)}
-          className="card-link">
-          {this.props.card.path}
-        </Link>
-        <a href="javascript:void(0)" className="delete"
-          onClick={this.props.deleteCard} >
-          Delete
-        </a>
-      </div>
+      <tr className="card">
+        <td>{this.props.card.path}</td>
+        <td>
+          <Link
+            to={Pages.card(this.props.currentSite.id, this.props.card.id)}
+            className="card-link">
+            <button>Details</button>
+          </Link>
+        </td>
+        <td>
+          <a href="javascript:void(0)" className="delete"
+            onClick={this.props.deleteCard}>
+            <button>
+              Delete
+            </button>
+          </a>
+        </td>
+      </tr>
     );
   }
 }

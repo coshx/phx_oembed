@@ -18,10 +18,18 @@ export default class SiteList extends React.Component {
   render() {
     return(
       <div>
+        <h1>Sites</h1>
         <NewSiteForm onSubmit={this.props.addNewSite} />
-        <div className="site-list">
-          {this.buildSiteList()}
-        </div>
+        <table className="site-list table-minimal">
+          <tr>
+            <th>Site</th>
+            <th>Protocol</th>
+            <th></th>
+          </tr>
+          <tbody>
+            {this.buildSiteList()}
+          </tbody>
+        </table>
       </div>
     );
   }
