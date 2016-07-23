@@ -23,8 +23,8 @@ defmodule PhxOembed.CardTest do
   end
 
   test "site relationship" do
-    site = create(:site)
-    card = create(:card, site: site)
+    site = insert(:site)
+    card = insert(:card, site: site)
 
     card = Card
     |> Repo.get(card.id)

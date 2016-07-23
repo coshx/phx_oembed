@@ -3,7 +3,7 @@ defmodule PhxOembed.AssignGuardianUserTest do
   alias PhxOembed.Plugs.AssignGuardianUser
 
   setup %{conn: conn} do
-    user = build(:user) |> set_password("password") |> create()
+    user = build(:user) |> set_password("password") |> insert()
     private = Map.merge(conn.private, %{guardian_default_resource: user})
     conn = Map.merge(conn, %{private: private})
 

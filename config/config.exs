@@ -37,3 +37,5 @@ config :guardian, Guardian,
   verify_issuer: true, # optional
   secret_key: "123456",
   serializer: PhxOembed.GuardianSerializer
+
+config :phx_oembed, ecto_repos: [PhxOembed.Repo]

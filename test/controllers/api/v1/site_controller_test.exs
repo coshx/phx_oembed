@@ -3,7 +3,7 @@ defmodule PhxOembed.Api.SiteControllerTest do
   alias PhxOembed.{Endpoint, TestUtils}
 
   setup %{conn: conn} do
-    user = build(:user) |> set_password("password") |> create()
+    user = build(:user) |> set_password("password") |> insert()
     {:ok,
      user: user,
      conn: put_req_header(conn, "accept", "application/json")}
@@ -23,7 +23,7 @@ defmodule PhxOembed.Api.SiteControllerTest do
   end
 
   test "SHOW", %{conn: conn, user: user} do
-    site = create(:site, user: user)
+    site = insert(:site, user: user)
     token = TestUtils.get_user_token(user)
     resp = conn
     |> put_req_header("authorization", token)
@@ -36,8 +36,8 @@ defmodule PhxOembed.Api.SiteControllerTest do
 
   test "INDEX", %{conn: conn, user: user} do
     token = TestUtils.get_user_token(user)
-    create(:site, user: user)
-    create(:site, user: user)
+    insert(:site, user: user)
+    insert(:site, user: user)
 
     resp = conn
     |> put_req_header("authorization", token)

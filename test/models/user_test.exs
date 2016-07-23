@@ -8,9 +8,9 @@ defmodule PhxOembed.UserTest do
                  password_confirmation: "password"}
 
   test "sites relationship" do
-    user = build(:user) |> set_password("password") |> create()
-    create(:site, user: user)
-    create(:site, user: user)
+    user = build(:user) |> set_password("password") |> insert()
+    insert(:site, user: user)
+    insert(:site, user: user)
 
     user = User
     |> Repo.get(user.id)
@@ -63,7 +63,7 @@ defmodule PhxOembed.UserTest do
   end
 
   test "unique emails" do
-    user = build(:user) |> set_password("password") |> create()
+    user = build(:user) |> set_password("password") |> insert()
     changeset = User.changeset(%User{}, %{email: user.email, password: "password",
                                           password_confirmation: "password"})
     catch_error Repo.insert!(changeset)

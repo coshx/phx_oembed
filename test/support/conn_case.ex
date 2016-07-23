@@ -35,10 +35,13 @@ defmodule PhxOembed.ConnCase do
   end
 
   setup tags do
+
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PhxOembed.Repo)
+
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(PhxOembed.Repo, [])
+      Ecto.Adapters.SQL.Sandbox.mode(PhxOembed.Repo, {:shared, self()})
     end
 
-    {:ok, conn: Phoenix.ConnTest.conn()}
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

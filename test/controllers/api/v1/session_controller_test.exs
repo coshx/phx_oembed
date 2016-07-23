@@ -3,7 +3,7 @@ defmodule PhxOembed.Api.SessionControllerTest do
   alias PhxOembed.{Endpoint, TestUtils}
 
   setup %{conn: conn} do
-    user = build(:user) |> set_password("password") |> create()
+    user = build(:user) |> set_password("password") |> insert()
     {:ok, user: user, conn: put_req_header(conn, "accept", "application/json")}
   end
 

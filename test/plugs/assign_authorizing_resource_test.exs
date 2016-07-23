@@ -3,7 +3,7 @@ defmodule PhxOembed.AssignAuthorizingResourceTest do
   alias PhxOembed.{Site, Plugs.AssignAuthorizingResource}
 
   setup %{conn: conn} do
-    site = create(:site)
+    site = insert(:site)
     conn = Map.merge(conn, %{params: %{"site_id" => Integer.to_string(site.id)}})
     {:ok, conn: conn, site: site}
   end

@@ -2,7 +2,7 @@ defmodule PhxOembed.SiteAuthorizationTest do
   use PhxOembed.ConnCase
 
   setup %{conn: conn} do
-    user = build(:user) |> set_password("password") |> create()
+    user = build(:user) |> set_password("password") |> insert()
 
     private = conn.private
     |> Map.merge(%{phoenix_controller: PhxOembed.Api.SiteController})
@@ -19,7 +19,7 @@ defmodule PhxOembed.SiteAuthorizationTest do
 
     conn = conn
     |> Map.merge(%{private: private})
-    |> assign(:authorizing_resource, create(:site))
+    |> assign(:authorizing_resource, insert(:site))
     |> PhxOembed.Plugs.Authorization.call(%{})
 
     assert(conn.assigns[:authorization_performed] == true)
@@ -31,7 +31,7 @@ defmodule PhxOembed.SiteAuthorizationTest do
 
     conn = conn
     |> Map.merge(%{private: private})
-    |> assign(:authorizing_resource, create(:site, user: user))
+    |> assign(:authorizing_resource, insert(:site, user: user))
     |> PhxOembed.Plugs.Authorization.call(%{})
 
     assert(conn.assigns[:authorization_performed] == true)

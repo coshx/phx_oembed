@@ -4,7 +4,7 @@ defmodule PhxOembed.Mixfile do
   def project do
     [app: :phx_oembed,
      version: "0.0.1",
-     elixir: "~> 1.0",
+     elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -30,17 +30,17 @@ defmodule PhxOembed.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.3"},
-     {:phoenix_ecto, "~> 2.0"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.3"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:gettext, "~> 0.9"},
+    [{:phoenix, "~> 1.2.0"},
+     {:phoenix_ecto, "~> 3.0"},
+     {:postgrex, ">= 0.11.2"},
+     {:phoenix_html, "~> 2.6.1"},
+     {:phoenix_live_reload, "~> 1.0.5", only: :dev},
+     {:gettext, "~> 0.11.0"},
      {:cowboy, "~> 1.0"},
-     {:ex_machina, "~> 0.6.1"},
-     {:xml_builder, "~> 0.0.6"},
-     {:comeonin, "~> 2.1"},
-     {:guardian, "~> 0.10.0"}]
+     {:ex_machina, "~> 1.0.2"},
+     {:xml_builder, "~> 0.0.7"},
+     {:comeonin, "~> 2.4.0"},
+     {:guardian, "~> 0.12.0"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
@@ -51,6 +51,7 @@ defmodule PhxOembed.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
   end
 end

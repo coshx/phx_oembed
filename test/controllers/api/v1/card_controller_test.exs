@@ -3,10 +3,10 @@ defmodule PhxOembed.Api.CardControllerTest do
   alias PhxOembed.{Endpoint, Card, TestUtils}
 
   setup %{conn: conn} do
-    user = build(:user) |> set_password("password") |> create()
+    user = build(:user) |> set_password("password") |> insert()
     {:ok,
      user: user,
-     site: create(:site, user: user),
+     site: insert(:site, user: user),
      conn: put_req_header(conn, "accept", "application/json")}
   end
 
@@ -24,8 +24,8 @@ defmodule PhxOembed.Api.CardControllerTest do
 
   test "INDEX", %{conn: conn, user: user, site: site} do
     token = TestUtils.get_user_token(user)
-    create(:card, site: site)
-    create(:card, site: site)
+    insert(:card, site: site)
+    insert(:card, site: site)
     resp = conn
     |> put_req_header("authorization", token)
     |> get(site_card_path(Endpoint, :index, site))
@@ -36,7 +36,7 @@ defmodule PhxOembed.Api.CardControllerTest do
 
   test "UPDATE - signed in, authorized", %{conn: conn, user: user, site: site} do
     token = TestUtils.get_user_token(user)
-    card = create(:card, site: site)
+    card = insert(:card, site: site)
     resp = conn
     |> put_req_header("authorization", token)
     |> patch(site_card_path(Endpoint, :update, site, card, card: %{path: "/ponies!1"}))
@@ -50,7 +50,7 @@ defmodule PhxOembed.Api.CardControllerTest do
 
   test "DELETE - signed in, authorized", %{conn: conn, user: user, site: site} do
     token = TestUtils.get_user_token(user)
-    card = create(:card, site: site)
+    card = insert(:card, site: site)
     resp = conn
     |> put_req_header("authorization", token)
     |> delete(site_card_path(Endpoint, :delete, site, card))

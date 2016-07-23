@@ -1,5 +1,5 @@
 defmodule PhxOembed.GuardianSerializer do
-  @behavior Guardian.Serializer
+  @behaviour Guardian.Serializer
 
   alias PhxOembed.{Repo, User}
 

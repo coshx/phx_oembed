@@ -22,13 +22,13 @@ defmodule PhxOembed.SiteTest do
   end
 
   test "default protocol" do
-    site = create(:site)
+    site = insert(:site)
     assert site.protocol == "http"
   end
 
   test "user relationship" do
-    user = build(:user) |> set_password("password") |> create()
-    site = create(:site, user: user)
+    user = build(:user) |> set_password("password") |> insert()
+    site = insert(:site, user: user)
  
     site = Site
     |> Repo.get(site.id)
@@ -38,10 +38,10 @@ defmodule PhxOembed.SiteTest do
   end
 
   test "cards relationship" do
-    site = create(:site)
-    create(:card, site: site)
-    create(:card, site: site)
-    create(:card)
+    site = insert(:site)
+    insert(:card, site: site)
+    insert(:card, site: site)
+    insert(:card)
 
     site = Site
     |> Repo.get(site.id)
