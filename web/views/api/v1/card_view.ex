@@ -1,6 +1,5 @@
 defmodule PhxOembed.Api.CardView do
   use PhxOembed.Web, :view
-  alias PhxOembed.Repo
 
   def render("index.json", %{cards: cards}) do
     render_many(cards, PhxOembed.Api.CardView, "show.json")

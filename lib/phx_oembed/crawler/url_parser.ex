@@ -19,7 +19,6 @@ defmodule PhxOembed.UrlParser do
             |> find_links
             |> find_meta_tags
         end
-
     end
   end
 
@@ -71,5 +70,5 @@ defmodule PhxOembed.UrlParser do
   defp parse_and_store_meta_tags(tag) do
     # parse the meta tag and make a Card record for it
   end
-  
+
 end
