@@ -4,7 +4,7 @@ defmodule PhxOembed.Mixfile do
   def project do
     [app: :phx_oembed,
      version: "0.0.1",
-     elixir: "~> 1.3",
+     elixir: "~> 1.3.4",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -31,16 +31,16 @@ defmodule PhxOembed.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:phoenix, "~> 1.2.0"},
-     {:phoenix_ecto, "~> 3.0"},
-     {:postgrex, ">= 0.11.2"},
-     {:phoenix_html, "~> 2.6.1"},
+     {:phoenix_ecto, "~> 3.0.1"},
+     {:postgrex, ">= 0.12.1"},
+     {:phoenix_html, "~> 2.7.0"},
      {:phoenix_live_reload, "~> 1.0.5", only: :dev},
-     {:gettext, "~> 0.11.0"},
-     {:cowboy, "~> 1.0"},
+     {:gettext, "~> 0.12.1"},
+     {:cowboy, "~> 1.0.4"},
      {:ex_machina, "~> 1.0.2"},
-     {:xml_builder, "~> 0.0.7"},
-     {:comeonin, "~> 2.4.0"},
-     {:guardian, "~> 0.12.0"}]
+     {:xml_builder, "~> 0.0.8"},
+     {:comeonin, "~> 2.6.0"},
+     {:guardian, "~> 0.13.0"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
