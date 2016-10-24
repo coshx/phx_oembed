@@ -21,7 +21,7 @@ export default class Nav extends React.Component {
       <nav>
         <div className="app-logo">PhxOembed</div>
         <div className="user-menu">
-          <div className="menu-item"><a href={Pages.sites()}>Sites</a></div>
+          <div className="menu-item"><Link to={Pages.sites()}>Sites</Link></div>
           <div className="menu-item">{this.sessionMenu()}</div>
         </div>
       </nav>
