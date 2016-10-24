@@ -5,7 +5,7 @@ import Pages      from "../pages";
 
 export default class Nav extends React.Component {
 
-  userMenu() {
+  sessionMenu() {
     const signInPath = Pages.signIn();
 
     if (this.props.signedIn == true)
@@ -20,7 +20,10 @@ export default class Nav extends React.Component {
     return(
       <nav>
         <div className="app-logo">PhxOembed</div>
-        <div className="user-menu">{this.userMenu()}</div>
+        <div className="user-menu">
+          <div className="menu-item"><a href={Pages.sites()}>Sites</a></div>
+          <div className="menu-item">{this.sessionMenu()}</div>
+        </div>
       </nav>
     );
   }

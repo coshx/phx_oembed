@@ -6,6 +6,7 @@
 @import "sites";
 @import "cards";
 @import "tables";
+@import "nav";
 
 #main-container {
   @include outer-container(85%);
@@ -15,18 +16,6 @@ main {
   @include span-columns(12);
 }
 
-nav {
-  @include display(flex);
-  margin-bottom: 5%;
-}
-
-nav .user-menu {
-  margin-left: auto;
-}
-
-nav .app-logo {
-  font-size: 1.5em;
-}
 
 /* Sign in form */
 @media screen and (min-width: $medium-screen) {
