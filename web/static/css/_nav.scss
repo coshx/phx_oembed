@@ -11,7 +11,7 @@ nav .user-menu .menu-item {
 nav .user-menu {
   @include flex-grow(2);
   @include display(flex);
-  @include flex-direction(row-reverse);
+  @include justify-content(flex-end);
 }
 
 nav .app-logo {
