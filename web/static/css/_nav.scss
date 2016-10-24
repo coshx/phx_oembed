@@ -1,7 +1,12 @@
 nav {
+  margin-bottom: 3%;
+  padding-bottom: 1%;
+  padding-left: 5%;
+  padding-right: 5%;
+  border-bottom: $base-border;
   @include display(flex);
   @include justify-content(space-between);
-  margin-bottom: 5%;
+  @include align-items(baseline);
 }
 
 nav .user-menu .menu-item {

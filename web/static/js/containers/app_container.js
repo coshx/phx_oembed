@@ -35,11 +35,14 @@ class AppContainer extends React.Component {
         <Nav signedIn={this.props.signedIn}
              signOutUser={this.props.signOutUser}/>
 
-        <div id="app-main">
-          <Flash flashType={this.props.flashType}
-                 message={this.props.flashMsg}
-                 closeFlash={this.props.closeFlash}/>
-          {this.props.children}
+        <div id="main-container">
+          <div id="app-main">
+            <Flash flashType={this.props.flashType}
+                  message={this.props.flashMsg}
+                  closeFlash={this.props.closeFlash}/>
+            {this.props.children}
+          </div>
+
         </div>
       </div>
     )
