@@ -19,7 +19,7 @@ export default class Nav extends React.Component {
   render() {
     return(
       <nav>
-        <div className="app-logo">PhxOembed</div>
+        <div className="app-logo">PhoEmbed</div>
         <div className="user-menu">
           <div className="menu-item"><Link to={Pages.sites()}>Sites</Link></div>
           <div className="menu-item">{this.sessionMenu()}</div>

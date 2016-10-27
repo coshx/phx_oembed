@@ -9,6 +9,11 @@ nav {
   @include align-items(baseline);
 }
 
+nav a, a:hover {
+  color: $dark-gray;
+}
+
+
 nav .user-menu .menu-item {
   margin-left: 5%;
 }
