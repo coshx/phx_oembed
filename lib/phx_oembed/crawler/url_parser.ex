@@ -22,6 +22,9 @@ defmodule PhxOembed.UrlParser do
     end
   end
 
+  # do not save the url here. save urls when new ones are discovered. this
+  # process should assume the url db record has already by created, and it has
+  # not been parsed
   defp save_new_url(site_id, path) do
     site = Repo.get(Site, site_id)
 
@@ -42,7 +45,7 @@ defmodule PhxOembed.UrlParser do
 
   defp find_links({site, html}) do
     Enum.each Floki.find(html, "a"), fn(link) ->
-      # figure out if the link is in our domain or not. if it is, 
+      # figure out if the link is in our domain or not. if it is,
       # call crawl_link/1
       {_, element, _} = link
       element = List.last(element)
@@ -55,20 +58,10 @@ defmodule PhxOembed.UrlParser do
     end
   end
 
-  defp crawl_link(link) do
-    # re-crawl this link, since we know it's in our domain
-    # call listen_for_url somehow ? self returns the current PID
-  end
-
-
-  defp find_meta_tags(html) do
+  defp find_meta_tags({site, html}) do
     #Enum.each Floki.find(html, "meta"), fn(meta) ->
       # find the meta tags
     #end
-  end
-
-  defp parse_and_store_meta_tags(tag) do
-    # parse the meta tag and make a Card record for it
   end
 
 end

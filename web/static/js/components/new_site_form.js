@@ -28,11 +28,11 @@ export default class NewSiteForm extends React.Component {
   render() {
     return(
       <div className="expander">
-        <a href="javascript:void(0)"
+        <button
           onClick={this.toggleExpander.bind(this)}
           className={this.expanderClassName()}>
-          Add Site
-        </a>
+          + Add Site
+        </button>
         <div className="form fieldset new-site-form expander-content">
           <form onSubmit={this.onSubmit.bind(this) }>
             <label htmlFor="domain">Domain</label>

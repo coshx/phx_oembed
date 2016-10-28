@@ -12,14 +12,14 @@
     display: block;
     font-size: $expander-toggle-size;
     margin-bottom: $expander-toggle-size;
-    padding-bottom: $expander-toggle-size / 4;
+    //padding-bottom: $expander-toggle-size / 4;
     text-decoration: none;
 
-    &::before {
-      content: "\25BC";
-      font-size: $expander-arrow-width;
-      margin-right: 0.5em;
-    }
+    //&::before {
+    //  content: "\25BC";
+    //  font-size: $expander-arrow-width;
+    //  margin-right: 0.5em;
+    // }
   }
 
   .expander-content p {
@@ -28,10 +28,10 @@
   }
 
   .expander-hidden {
-    &::before {
-      content: "\25BA";
-      font-size: $expander-arrow-width;
-    }
+    //&::before {
+    //  content: "\25BA";
+    //  font-size: $expander-arrow-width;
+    // }
   }
 
   .expander-hidden + .expander-content {

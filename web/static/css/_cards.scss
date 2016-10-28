@@ -1,4 +1,6 @@
-a.new-card-form-expander {
+button.new-card-form-expander {
+  color: white !important;
   float: right;
   display: inline-block;
-}
+  font-weight: normal;
+  background-color: $green;}

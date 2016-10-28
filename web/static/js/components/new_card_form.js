@@ -46,11 +46,11 @@ export default class NewCardForm extends React.Component {
   render() {
     return(
       <div className="expander">
-        <a href="javascript:void(0)"
+        <button
           onClick={this.toggleExpander.bind(this)}
           className={this.expanderClassName()}>
-          Add Card
-        </a>
+          + Add Card
+        </button>
         <div className="form fieldset new-card-form expander-content">
           <form onSubmit={this.onSubmit.bind(this) }>
             <label htmlFor="path">Path</label>

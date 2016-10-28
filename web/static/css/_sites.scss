@@ -1,5 +1,8 @@
 
-a.new-site-form-expander {
+button.new-site-form-expander {
+  color: white !important;
   float: right;
   display: inline-block;
+  font-weight: normal;
+  background-color: $green;
 }
