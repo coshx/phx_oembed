@@ -19,8 +19,8 @@ defmodule PhxOembed.Factory do
     %User{email: sequence(:email, &"email-#{&1}@example.com")}
   end
 
-  def factory(:url) do
-    %Url{path: "foo"}
+  def url_factory do
+    %Url{path: "foo", site: build(:site)}
   end
 
   # https://github.com/thoughtbot/ex_machina/issues/82

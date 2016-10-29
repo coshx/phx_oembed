@@ -1,5 +1,5 @@
-defmodule PhxOembed.UrlCrawler do
-  alias PhxOembed.{Repo, Site, Url}
+defmodule PhxOembed.Crawler do
+  alias PhxOembed.{Repo, Url}
 
   import Ecto
   require Logger
@@ -7,34 +7,31 @@ defmodule PhxOembed.UrlCrawler do
 
   def parse_url do
     receive do
-      {site_id, path} ->
+      url_id ->
 
-        case Repo.get_by(Url, %{site_id: site_id, path: path}) do
-          %Url{path: path} ->
-            Logger.info("already know about path " <> path)
+        # look up the url and the site in the db
+        url = Repo.get(Url, url_id) |> Repo.preload(:site)
 
-          _ ->
-            save_new_url(site_id, path)
-            |> fetch_url
+        case url.crawled do
+          false ->
+            # fetch the html
+
+            # parse the html for meta tags we don't already know about.
+            # If it finds them, make Card records
+
+            # parse the html for local links we don't already know about. create Url
+            # records for them
+
+            # mark the url as crawled
+            fetch_url({url.site, url})
             |> find_links
-            |> find_meta_tags
+            
+          true ->
+            IO.puts "This url has already been crawled."
         end
     end
   end
 
-  # do not save the url here. save urls when new ones are discovered. this
-  # process should assume the url db record has already by created, and it has
-  # not been parsed
-  defp save_new_url(site_id, path) do
-    site = Repo.get(Site, site_id)
-
-    path = site
-    |> build_assoc(:urls)
-    |> Url.changeset(%{path: path})
-    |> Repo.insert!
-
-    {site, path}
-  end
 
   defp fetch_url({site, url}) do
     HTTPoison.start
@@ -45,15 +42,12 @@ defmodule PhxOembed.UrlCrawler do
 
   defp find_links({site, html}) do
     Enum.each Floki.find(html, "a"), fn(link) ->
-      # figure out if the link is in our domain or not. if it is,
-      # call crawl_link/1
       {_, element, _} = link
       element = List.last(element)
       {_, url} = element
       uri = URI.parse(url)
       if uri.host == nil || uri.host == site.domain do
-        pid = spawn(PhxOembed.UrlParser, :parse_url, [])
-        send(pid, {site.id, uri.path})
+        # this is a link in our domain, so make a new Url record
       end
     end
   end

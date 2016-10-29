@@ -3,7 +3,7 @@ defmodule PhxOembed.PageControllerTest do
   alias PhxOembed.Endpoint
 
   test "renders the front end container" do
-    conn = get conn, page_path(Endpoint, :index)
+    conn = get build_conn, page_path(Endpoint, :index)
     assert html_response(conn, 200) =~ "PhoEmbed"
   end
 end

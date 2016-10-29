@@ -19,7 +19,8 @@ defmodule PhxOembed.Mixfile do
   def application do
     [mod: {PhxOembed, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :ex_machina, :comeonin]]
+                    :phoenix_ecto, :postgrex, :ex_machina, :comeonin,
+                    :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,7 +41,9 @@ defmodule PhxOembed.Mixfile do
      {:ex_machina, "~> 1.0.2"},
      {:xml_builder, "~> 0.0.8"},
      {:comeonin, "~> 2.6.0"},
-     {:guardian, "~> 0.13.0"}]
+     {:guardian, "~> 0.13.0"},
+     {:httpoison, "~> 0.9.0"},
+     {:floki, "~> 0.11.0"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
@@ -52,6 +55,6 @@ defmodule PhxOembed.Mixfile do
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
      "ecto.reset": ["ecto.drop", "ecto.setup"],
-     "test": ["ecto.create --quiet", "ecto.migrate", "test"]]
+     "test": ["ecto.create", "ecto.migrate", "test"]]
   end
 end

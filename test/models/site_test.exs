@@ -29,7 +29,7 @@ defmodule PhxOembed.SiteTest do
   test "user relationship" do
     user = build(:user) |> set_password("password") |> insert()
     site = insert(:site, user: user)
- 
+
     site = Site
     |> Repo.get(site.id)
     |> Repo.preload(:user)

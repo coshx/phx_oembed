@@ -1,30 +1,17 @@
 defmodule PhxOembed.CrawlerTest do
   use ExUnit.Case
-  import Ecto.Query
+  use PhxOembed.ModelCase
   import PhxOembed.Factory
   alias PhxOembed.{Repo, Url, Crawler}
-  require IEx
+  #require IEx
 
-  setup do
-    {:ok, site: create(:site)}
-  end
-
-  @tag :skip #not working, this is synchronous test code
-  test "receiving a new url that has not already been crawled", %{site: site} do
-    crawler = spawn Crawler, :listen_for_url, []
-    initial_count = Repo.one(from u in Url, select: count("*"))
-    send crawler, {:ok, site.id, "foo"}
-    final_count = Repo.one(from u in Url, select: count("*"))
-    assert (final_count - initial_count) == 1
-  end
-
-  @tag :skip
-  test "receiving a new url that has already been crawled", %{site: site} do
-    create(:url, site: site, path: "foo")
-    crawler = spawn Crawler, :listen_for_url, []
-    initial_count = Repo.one(from u in Url, select: count("*"))
-    send crawler, {:ok, site.id, "foo"}
-    final_count = Repo.one(from u in Url, select: count("*"))
-    assert final_count == initial_count
+  test "mark urls as crawled" do
+    url = insert(:url)
+    crawler = spawn Crawler, :parse_url, []
+    ref  = Process.monitor(crawler)
+    send(crawler, url.id)
+    assert_receive {:DOWN, ^ref, :process, _, :normal}, 6000
+    url = Repo.get(Url, url.id)
+    assert true == url.crawled
   end
 end
