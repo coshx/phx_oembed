@@ -23,21 +23,11 @@ defmodule PhxOembed.Crawler do
             # records for them
 
             # mark the url as crawled
-            fetch_url({url.site, url})
-            |> find_links
-            
+            IO.puts "foo"
           true ->
             IO.puts "This url has already been crawled."
         end
     end
-  end
-
-
-  defp fetch_url({site, url}) do
-    HTTPoison.start
-    full_path = site.protocol <> "://" <> site.domain <> "/" <> url.path
-    {:ok, resp} = HTTPoison.get full_path
-    {site, resp.body}
   end
 
   defp find_links({site, html}) do
